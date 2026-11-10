@@ -12,7 +12,7 @@ Open `board.html` in any browser. No build step. It loads the Poppins font from 
 
 ## Miro board
 
-Set `MIRO_DEFAULT` near the top of the script in `board.html` to your public Miro board link, or paste the link on the Brainstorm page (saved in that browser). On GitHub Pages the board is also embedded live.
+The shared brainstorm board is https://miro.com/app/board/uXjVEP4jFNc=/ (set as `MIRO_DEFAULT` near the top of the script in `board.html`). You can also paste a different link on the Brainstorm page; it is saved in that browser. On GitHub Pages the board is also embedded live.
 
 ## Publishing with GitHub Pages
 
