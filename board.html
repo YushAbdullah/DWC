@@ -296,6 +296,65 @@ body.present{zoom:1.12}
 body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));gap:8px;z-index:40}
 .pnav button{width:48px;height:48px;border-radius:50%;border:0;background:var(--ink);color:#fff;font-size:1.25rem;cursor:pointer;box-shadow:var(--sh2)}
 .fbl2{color:#fff;font-size:.875rem;opacity:.85}
+
+/* lego game */
+[hidden]{display:none!important}
+.hiddenkey{background:var(--tint);border-radius:16px;padding:20px;display:grid;gap:12px;justify-items:start}
+.hiddenkey p{margin:0}
+.bk.small{width:26px;margin-left:9px}.bk.small::after{display:none}.bk.small::before{left:8px}
+.game{margin:8px 0 24px}
+.lvtabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px}
+.lvtabs button{flex:0 0 auto;font:600 .875rem var(--font);border:0;cursor:pointer;height:44px;padding:0 16px;border-radius:9999px;background:var(--sur);color:var(--tm);box-shadow:var(--sh1);display:flex;gap:8px;align-items:center}
+.lvtabs button i{font-style:normal;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--tint);color:var(--ok);font-size:.8125rem}
+.lvtabs button[aria-selected="true"]{background:var(--ink);color:#fff}
+.lvtabs button[aria-selected="true"] i{background:var(--yel);color:var(--onyel)}
+.lvtabs button.done i{background:var(--m2);color:#fff}
+.lvl{background:var(--sur);border-radius:28px;box-shadow:var(--sh2);padding:32px;display:grid;gap:24px;border-top:6px solid var(--lc,var(--m1))}
+@media(min-width:960px){.lvl{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}}
+.lvl .lt{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.lvl .ln{font-size:.8125rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ok)}
+.lvl h2{font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin:4px 0 0}
+.lvl .do{font-size:1.1875rem;line-height:1.55;color:var(--tx);margin:16px 0 0}
+.lvl .say{font-size:1.0625rem;margin-top:16px}
+.lvl .lesson{background:var(--tint);border-radius:14px;padding:14px 16px;margin-top:16px;font-size:.9375rem;color:var(--tx)}
+.lvl .lesson b{color:var(--ok)}
+.lvl ul{margin:12px 0 0;padding-left:20px;color:var(--tx);font-size:1.0625rem;display:grid;gap:6px}
+.lvside{display:flex;flex-direction:column;gap:16px}
+.ptsbig{background:var(--ink);color:#fff;border-radius:20px;padding:20px;display:flex;gap:16px;align-items:center}
+.ptsbig b{font-size:2.5rem;line-height:1;color:var(--yel);font-variant-numeric:tabular-nums}
+.ptsbig span{font-size:.9375rem}
+.ptsbig span em{display:block;font-style:normal;color:#c5d0e6;font-size:.8125rem}
+.twist{border-radius:20px;padding:20px;background:var(--m3t);color:var(--tx);display:grid;gap:10px}
+.twist small{font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--m3x)}
+.twist b{font-size:1.125rem;line-height:1.4}
+.twist[data-hid="1"] b{filter:blur(7px);user-select:none}
+.twist button{justify-self:start;font:600 .875rem var(--font);height:40px;padding:0 16px;border-radius:8px;border:0;cursor:pointer;background:var(--ink);color:#fff}
+.lvl .tmr{background:var(--mut);border-radius:16px;padding:14px 16px;margin:0}
+.lvl .tv{font-size:2.75rem}
+.lvnav{display:flex;gap:10px;justify-content:space-between}
+.lvnav .btn{flex:1}
+.score .sbh{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.link{background:none;border:0;color:var(--ok);font:600 .875rem var(--font);cursor:pointer;padding:8px 0}
+.sr{position:absolute;left:-9999px}
+.sbd{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px;counter-reset:s}
+.sbd li{counter-increment:s;display:grid;grid-template-columns:36px minmax(0,1fr) auto auto;gap:10px;align-items:center;background:var(--mut);border-radius:12px;padding:8px 10px}
+.sbd li::before{content:counter(s);width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.875rem;background:var(--tint);color:var(--ok)}
+.sbd li:nth-child(1)::before{background:var(--yel);color:var(--onyel)}
+.sbd li:nth-child(2)::before{background:#C9D2E3;color:#1d2a44}
+.sbd li:nth-child(3)::before{background:#E2B07A;color:#3b2205}
+.sbd .nm{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sbd .tot{font-size:1.375rem;font-weight:700;font-variant-numeric:tabular-nums;min-width:2ch;text-align:right}
+.sbd .pts{display:flex;gap:4px}
+.sbd .pts button{font:600 .8125rem var(--font);height:32px;min-width:36px;border-radius:8px;border:0;cursor:pointer;background:var(--sur);color:var(--tx);box-shadow:inset 0 0 0 1px var(--bd)}
+.sbd .pts button.p{background:var(--pri);color:var(--onpri);box-shadow:none}
+@media(max-width:560px){.sbd li{grid-template-columns:32px minmax(0,1fr) auto}.sbd .pts{grid-column:1/-1}}
+.badges2{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.badges2 li{display:grid;grid-template-columns:48px 1fr;gap:2px 12px;align-items:center}
+.badges2 span{grid-row:span 2;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:700}
+.badges2 .pt1{background:var(--m1t);color:var(--m1x)}.badges2 .pt2{background:var(--m2t);color:var(--m2x)}.badges2 .pt3{background:var(--yel);color:var(--onyel)}
+.badges2 em{font-style:normal;font-size:.875rem;color:var(--tm)}
+.prep{margin:0 0 12px;padding-left:20px;color:var(--tm);display:grid;gap:6px}
+#pg-lego .lg2:last-child{margin-bottom:80px}
 </style>
 
 </head><body>
@@ -308,10 +367,10 @@ body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-i
   <a class="logo" href="#board" aria-label="Dashboards Without Code, session board">
    <svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true"><rect x="2" y="2" width="36" height="24" rx="6" fill="#0A2350"/><rect x="9" y="14" width="5" height="7" rx="1.2" fill="#1677FF"/><rect x="17.5" y="10" width="5" height="11" rx="1.2" fill="#5A9DFF"/><rect x="26" y="6" width="5" height="15" rx="1.2" fill="#F2C811"/></svg>
    <span>Dashboards Without Code<small>Aventra Group · Session board</small></span></a>
-  <nav class="links" aria-label="Main"><a href="#board" data-p="board">Board</a><a href="#ground-rules" data-p="ground-rules">Ground rules</a><a href="#lego" data-p="lego">Lego case</a><a href="#brainstorm" data-p="brainstorm">Brainstorm</a><a href="#feedback" data-p="feedback">Feedback</a><a href="#run-sheet" data-p="run-sheet">Run sheet</a></nav>
+  <nav class="links" aria-label="Main"><a href="#board" data-p="board">Board</a><a href="#ground-rules" data-p="ground-rules">Ground rules</a><a href="#lego" data-p="lego">Lego game</a><a href="#brainstorm" data-p="brainstorm">Brainstorm</a><a href="#feedback" data-p="feedback">Feedback</a><a href="#run-sheet" data-p="run-sheet">Run sheet</a></nav>
   <button class="btn dk" type="button" id="present" aria-pressed="false">Present</button>
  </div>
- <nav class="mn" aria-label="Main mobile"><a href="#board" data-p="board">Board</a><a href="#ground-rules" data-p="ground-rules">Ground rules</a><a href="#lego" data-p="lego">Lego case</a><a href="#brainstorm" data-p="brainstorm">Brainstorm</a><a href="#feedback" data-p="feedback">Feedback</a><a href="#run-sheet" data-p="run-sheet">Run sheet</a></nav>
+ <nav class="mn" aria-label="Main mobile"><a href="#board" data-p="board">Board</a><a href="#ground-rules" data-p="ground-rules">Ground rules</a><a href="#lego" data-p="lego">Lego game</a><a href="#brainstorm" data-p="brainstorm">Brainstorm</a><a href="#feedback" data-p="feedback">Feedback</a><a href="#run-sheet" data-p="run-sheet">Run sheet</a></nav>
 </div></header>
 
 <main>
@@ -324,7 +383,7 @@ body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-i
     <h1 class="pt">Dashboards <span>Without Code</span></h1>
     <p class="ptsub"><b>Using Microsoft Power BI:</b> From Data to Decisions.</p>
     <p class="lead"><span class="dt">Saturday 28 Nov 2026</span>, 9:00 AM to 1:00 PM, physical training. Led by Yusri Abdullah. Everything for the session lives on this board.</p>
-    <div class="cta"><a class="btn" href="#columns">Open the board</a><a class="btn gh" href="#ground-rules">Ground rules</a><a class="btn gh" href="#lego">Lego case study</a></div>
+    <div class="cta"><a class="btn" href="#columns">Open the board</a><a class="btn gh" href="#ground-rules">Ground rules</a><a class="btn gh" href="#lego">Lego game</a></div>
    </div>
    <div class="stack" id="stack" role="img" aria-label="Session status cards: current block, next block and overall progress">
     <div class="pc a"><small>Session progress</small><strong class="pct" id="cP">0%</strong><div class="pbar dkb"><i id="cBar"></i></div><div class="foot" id="cF">0 of 240 minutes</div></div>
@@ -386,95 +445,87 @@ body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-i
 
 <section class="pg" id="pg-lego">
  <div class="w">
-  <div class="pgh"><div><div class="eyebrow m1e">Module 1 · Case study · 15 min · teams of 4</div><h1>The December staffing call</h1><p>Why is data so important, and why don't we build the dashboard straight away? Teams find out with a bag of Lego bricks.</p></div></div>
+  <div class="pgh"><div><div class="eyebrow m1e">Module 1 · Lego game · 15 min · everyone builds</div><h1>The Data Brick Challenge</h1><p>Every participant grabs their own bricks. Seven short levels show why data matters, and why we never build the dashboard first.</p></div></div>
 
   <div class="lg2">
    <article class="card scen">
     <div class="k">The scenario</div>
-    <h3>Aventra Mart has one extra staff member for December</h3>
-    <p>Aventra Mart runs three convenience stores in the Klang Valley: <b>Store A</b> in Shah Alam, <b>Store B</b> in Petaling Jaya and <b>Store C</b> in Cheras. December is the busiest month of the year.</p>
-    <p>Head office can fund <b>one extra full-time staff member, for one store only</b>. The regional manager, Puan Aina, needs an answer by lunch.</p>
-    <p>You are the analytics team. Last month's data has just arrived from three store systems, and it came as a bag of bricks.</p>
-    <div class="qcard"><small>The manager's question (revealed after Round 1)</small><b>Which store should get the extra staff member in December?</b></div>
+    <h3>Kak Mira has RM 20,000 and three outlets</h3>
+    <p>Kak Mira owns <b>Kopi Kita</b>, a small café with three outlets: <b>Bangsar</b>, <b>Subang</b> and <b>Cheras</b>. Next month she can invest <b>RM 20,000 in one outlet only</b>.</p>
+    <p>Her sales data comes from three different till systems, and nobody has checked it. Today, your bricks are her data.</p>
+    <div class="qcard" id="qcard"><small>Kak Mira's question</small><b id="qText">Hidden until Level 2</b></div>
    </article>
-   <article class="card">
+   <article class="card" id="keyCard">
     <div class="k">The data key</div>
     <h3>Every brick is a record</h3>
-    <ul class="key">
-     <li><i class="bk red"></i><span><b>Red brick</b> = 10 sales transactions</span></li>
-     <li><i class="bk blue"></i><span><b>Blue brick</b> = 10 staff hours worked</span></li>
-     <li><i class="bk yel"></i><span><b>Yellow brick</b> = 1 customer complaint</span></li>
-     <li><i class="bk wht"></i><span><b>White brick</b> = a record with no store label (unknown)</span></li>
-     <li><i class="bk red pair"></i><span><b>Two bricks stuck together</b> = the same record entered twice (duplicate)</span></li>
-     <li><i class="bk tiny"></i><span><b>Tiny 1×1 pieces</b> = noise: test entries and system logs</span></li>
+    <div id="keyHidden" class="hiddenkey"><p>The key stays hidden until Level 2. In Level 1, people build without knowing what the bricks mean.</p><button type="button" class="btn" id="keyReveal">Reveal the data key</button></div>
+    <ul class="key" id="keyList" hidden>
+     <li><i class="bk red"></i><span><b>Red</b> = Bangsar · <b>Blue</b> = Subang · <b>Yellow</b> = Cheras</span></li>
+     <li><i class="bk blue"></i><span><b>2×4 brick</b> = 10 cups sold</span></li>
+     <li><i class="bk yel small"></i><span><b>2×2 brick</b> = 5 cups sold</span></li>
+     <li><i class="bk wht"></i><span><b>White brick</b> = a sale with no outlet recorded</span></li>
+     <li><i class="bk red pair"></i><span><b>Two bricks stuck together</b> = the same sale entered twice</span></li>
+     <li><i class="bk tiny"></i><span><b>1×1 piece</b> = a test entry, not a real sale</span></li>
     </ul>
    </article>
   </div>
 
-  <h2 class="sh">Four rounds</h2>
-  <div class="rounds">
-   <article class="round" data-sec="180"><div class="rh"><span class="rn">1</span><div><b>Build it now</b><em>3 min</em></div></div>
-    <p>Hand each team the three store bags. Say only: <i>"Head office wants a dashboard. Build one."</i> Don't give the question.</p>
-    <p class="why">Teams build something tall and colourful. It looks like a dashboard, but nobody asked what decision it supports.</p>
-    <div class="tmr"><span class="tv">3:00</span><button type="button" class="tbtn">Start</button><button type="button" class="treset">Reset</button></div></article>
-   <article class="round" data-sec="300"><div class="rh"><span class="rn">2</span><div><b>Ask, sort and clean</b><em>5 min</em></div></div>
-    <p>Reveal the question card. Ask: <i>"Does your build answer it?"</i> Then teams agree the KPI, sort by store and colour, and clean.</p>
-    <ul><li>Pull apart stuck pairs and keep one (duplicates)</li><li>Set white bricks aside (unknown store)</li><li>Drop the 1×1 pieces (noise)</li><li>Count red, blue and yellow for each store</li></ul>
-    <div class="tmr"><span class="tv">5:00</span><button type="button" class="tbtn">Start</button><button type="button" class="treset">Reset</button></div></article>
-   <article class="round" data-sec="240"><div class="rh"><span class="rn">3</span><div><b>Build the story</b><em>4 min</em></div></div>
-    <p>One tower pair per store: red tower for sales next to a blue tower for staff hours, with yellow complaints on top.</p>
-    <p>Write one sentence for Puan Aina: <i>the store, the number, the reason.</i></p>
-    <div class="tmr"><span class="tv">4:00</span><button type="button" class="tbtn">Start</button><button type="button" class="treset">Reset</button></div></article>
-   <article class="round" data-sec="180"><div class="rh"><span class="rn">4</span><div><b>Debrief</b><em>3 min</em></div></div>
-    <ul><li>What did you build in Round 1? Did it answer the question?</li><li>What changed once you had the question first?</li><li>Which bricks did you remove, and why?</li><li>Which store looked biggest before you cleaned the data?</li></ul>
-    <div class="tmr"><span class="tv">3:00</span><button type="button" class="tbtn">Start</button><button type="button" class="treset">Reset</button></div></article>
+  <div class="game">
+   <div class="lvtabs" role="tablist" aria-label="Game levels" id="lvTabs"></div>
+   <article class="lvl" id="lvl" aria-live="polite"></article>
+  </div>
+
+  <div class="lg2">
+   <article class="card score">
+    <div class="sbh"><div><div class="k">Scoreboard</div><h3>Who's leading?</h3></div><button type="button" class="link" id="sbReset">Reset scores</button></div>
+    <form class="row3" id="sbForm" autocomplete="off"><label for="sbName" class="sr">Participant name</label><input id="sbName" placeholder="Add a participant name"><button type="submit" class="btn">Add</button></form>
+    <ol class="sbd" id="sbList"></ol>
+    <p class="small" id="sbEmpty">Add each participant's name, then tap the points as they earn badges. Scores stay on this laptop.</p>
+   </article>
+   <article class="card">
+    <div class="k">Badges · up to 11 points</div>
+    <h3>How to score</h3>
+    <ul class="badges2">
+     <li><span class="pt1">+1</span><b>Speed builder</b><em>Finished a build in Level 1</em></li>
+     <li><span class="pt2">+2</span><b>Data sorter</b><em>One tower per outlet in Level 2</em></li>
+     <li><span class="pt2">+2</span><b>Sample spotter</b><em>Explained why a neighbour got a different answer</em></li>
+     <li><span class="pt2">+2</span><b>Data cleaner</b><em>Removed white, stuck and 1×1 bricks and rebuilt</em></li>
+     <li><span class="pt1">+1</span><b>Storyteller</b><em>Wrote one sentence for Kak Mira</em></li>
+     <li><span class="pt3">+3</span><b>Room's favourite</b><em>Most thumbs up in the gallery walk</em></li>
+    </ul>
+   </article>
   </div>
 
   <div class="lg2">
    <article class="card">
-    <div class="k">Trainer prep · one kit per team</div>
-    <h3>Pack three labelled bags</h3>
-    <div class="tw"><table class="kit">
-     <thead><tr><th>Bag</th><th>Red</th><th>Blue</th><th>Yellow</th><th>Dirty extras</th></tr></thead>
-     <tbody>
-      <tr><td><b>Store A</b></td><td>16</td><td>10</td><td>1</td><td>3 stuck red pairs, 1 white, 3 tiny</td></tr>
-      <tr><td><b>Store B</b></td><td>9</td><td>9</td><td>1</td><td>1 white, 3 tiny</td></tr>
-      <tr><td><b>Store C</b></td><td>12</td><td>4</td><td>5</td><td>1 white, 3 tiny</td></tr>
-     </tbody></table></div>
-    <p class="small">Use standard 2×4 bricks. Short on bricks? Halve every count; the answer stays the same.</p>
+    <div class="k">Trainer prep · one box for the room</div>
+    <h3>Mix one big box of bricks</h3>
+    <ul class="prep">
+     <li>About <b>15 bricks per participant</b> (300 for 20 people)</li>
+     <li>Roughly equal <b>red, blue and yellow</b>, in 2×4 and 2×2 sizes</li>
+     <li>Mix in a few <b>white</b> bricks and a handful of <b>1×1</b> pieces</li>
+     <li>Press about <b>20 pairs</b> of bricks together before the session</li>
+     <li>One sticky note and pen per participant for Level 5</li>
+    </ul>
+    <p class="small">Handfuls are random on purpose. Different people get different data, and that difference is the lesson of Level 3.</p>
    </article>
-   <article class="card ans">
-    <div class="k">Answer key · keep hidden until the debrief</div>
-    <details><summary>Show the answer</summary>
-     <div class="tw"><table class="kit">
-      <thead><tr><th>Store</th><th>Sales</th><th>Staff hours</th><th>Sales per hour</th><th>Complaints</th></tr></thead>
-      <tbody>
-       <tr><td>A</td><td>160</td><td>100</td><td>1.6</td><td>1</td></tr>
-       <tr><td>B</td><td>90</td><td>90</td><td>1.0</td><td>1</td></tr>
-       <tr class="win"><td>C</td><td>120</td><td>40</td><td>3.0</td><td>5</td></tr>
-      </tbody></table></div>
-     <p><b>The trap:</b> before cleaning, Store A looks biggest (22 red bricks with the duplicates), so teams who build "total sales" pick A.</p>
-     <p><b>The answer:</b> "Give the extra staff member to Store C. Each staff hour there handles 3 transactions, nearly double Store A, and it has five times the complaints."</p>
-    </details>
+   <article class="card">
+    <div class="k">What the bricks teach</div>
+    <h3>Every level is a Power BI step you'll do today</h3>
+    <div class="tw"><table class="kit">
+     <thead><tr><th>In the game</th><th>In Power BI</th><th>Where</th></tr></thead>
+     <tbody>
+      <tr><td>Knowing the question first</td><td>Define the decision and the KPI</td><td><span class="mt m1">Module 1</span></td></tr>
+      <tr><td>Neighbours with different handfuls</td><td>Combine data from every source</td><td><span class="mt m2">Module 2</span></td></tr>
+      <tr><td>Removing white, stuck and 1×1 bricks</td><td>Clean unknowns, duplicates and noise</td><td><span class="mt m2">Module 2</span></td></tr>
+      <tr><td>One tower per outlet</td><td>KPI cards and a bar chart</td><td><span class="mt m3">Module 3</span></td></tr>
+      <tr><td>One sentence for Kak Mira</td><td>One evidence-based recommendation</td><td><span class="mt m4">Module 4</span></td></tr>
+     </tbody></table></div>
    </article>
   </div>
-
-  <article class="card map">
-   <div class="k">What the bricks teach</div>
-   <h3>Every Lego move is a Power BI step you'll do today</h3>
-   <div class="tw"><table class="kit">
-    <thead><tr><th>In the Lego case</th><th>In Power BI</th><th>Where</th></tr></thead>
-    <tbody>
-     <tr><td>Reading the question card first</td><td>Define the decision and the KPI</td><td><span class="mt m1">Module 1</span></td></tr>
-     <tr><td>Pulling apart stuck pairs</td><td>Remove duplicates in Power Query</td><td><span class="mt m2">Module 2</span></td></tr>
-     <tr><td>Setting white bricks aside</td><td>Flag missing values as Unknown</td><td><span class="mt m2">Module 2</span></td></tr>
-     <tr><td>Dropping 1×1 pieces</td><td>Filter out noise and test rows</td><td><span class="mt m2">Module 2</span></td></tr>
-     <tr><td>Towers per store</td><td>KPI cards and a bar chart</td><td><span class="mt m3">Module 3</span></td></tr>
-     <tr><td>One sentence for Puan Aina</td><td>One evidence-based recommendation</td><td><span class="mt m4">Module 4</span></td></tr>
-    </tbody></table></div>
-  </article>
  </div>
 </section>
+
 
 <section class="pg" id="pg-brain">
  <div class="w">
@@ -531,7 +582,7 @@ body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-i
 
 <footer><div class="w">
  <div><a class="logo" href="#board"><svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true"><rect x="2" y="2" width="36" height="24" rx="6" fill="#14336E"/><rect x="9" y="14" width="5" height="7" rx="1.2" fill="#1677FF"/><rect x="17.5" y="10" width="5" height="11" rx="1.2" fill="#5A9DFF"/><rect x="26" y="6" width="5" height="15" rx="1.2" fill="#F2C811"/></svg><span>Dashboards Without Code</span></a><p class="dtl">28 Nov 2026 · 9:00 AM to 1:00 PM MYT</p><p>Trainer: Muhammad Yusri Abdullah</p></div>
- <div><h4>Board</h4><a href="#columns">Session columns</a><a href="#ground-rules">Ground rules</a><a href="#lego">Lego case study</a><a href="#brainstorm">Brainstorm</a><a href="#feedback">Feedback</a><a href="#run-sheet">Trainer run sheet</a><a href="https://app.powerbi.com" target="_blank" rel="noopener">Power BI Service</a></div>
+ <div><h4>Board</h4><a href="#columns">Session columns</a><a href="#ground-rules">Ground rules</a><a href="#lego">Lego game</a><a href="#brainstorm">Brainstorm</a><a href="#feedback">Feedback</a><a href="#run-sheet">Trainer run sheet</a><a href="https://app.powerbi.com" target="_blank" rel="noopener">Power BI Service</a></div>
  <div><h4>Keep learning</h4><a href="https://learn.microsoft.com/en-us/training/powerplatform/power-bi" target="_blank" rel="noopener">Microsoft Learn: Power BI</a><a href="https://learn.microsoft.com/en-us/credentials/certifications/data-analyst-associate/" target="_blank" rel="noopener">PL-300 certification</a><a href="https://www.linkedin.com/in/yushabdullah" target="_blank" rel="noopener">LinkedIn</a></div>
  <p style="grid-column:1/-1;margin-top:8px">© 2026 Muhammad Yusri Abdullah · Aventra Group · Skills today, a brighter tomorrow.</p>
 </div></footer>
@@ -562,7 +613,7 @@ const COLS = [
   {tag:"checkpoint",title:"Signed in to Power BI Service",body:"Every participant can open app.powerbi.com and see My workspace before we move on.",meta:"5 min"}
  ]},
  {id:"m1",mc:"1",time:"9:30 – 10:05 · 35 min",title:"Module 1 · Identify data for better decisions",desc:"Why data matters, and why we don't build the dashboard straight away.",start:30,end:65,posts:[
-  {tag:"activity",title:"Lego case study: The December staffing call",body:"Three stores, one manager, one question. Teams try to build the answer straight away, then again after asking, sorting and cleaning. The difference is the lesson.",meta:"15 min · teams of 4",page:"lego",pageText:"Open the case study"},
+  {tag:"activity",title:"The Data Brick Challenge",body:"Everyone grabs their own handful of bricks. Seven quick levels with points: build fast, get the question, compare, clean, and tell Kak Mira which café outlet gets RM 20,000.",meta:"15 min · everyone builds",page:"lego",pageText:"Open the Lego game"},
   {tag:"note",title:"From data chaos to data value",body:"About 90% of enterprise data is unstructured, and 58% of leaders say big decisions use inaccurate data most of the time (SoftServe, 2025)."},
   {tag:"activity",title:"The Big Why: KPI brainstorm on Miro",body:"Start from one decision you make every month. Which number would change that decision? Post three KPIs for your role on the shared board.",meta:"9 min · individual",page:"brainstorm",pageText:"Open the brainstorm"},
   {tag:"checkpoint",title:"Three role-specific KPIs on Miro",body:"Each participant has posted three KPIs with the decision each one supports."},
@@ -607,7 +658,7 @@ const FLOW = [
   {m:25,d:5,t:"Power BI sign-in check",tr:"Everyone opens app.powerbi.com. Early finishers help neighbours.",pa:"Sign in with work or school email.",mat:"Sign-in guide",cp:"Every participant can see My workspace."}
  ]},
  {title:"Module 1 · Identify data for better decisions",mc:"1",m:30,d:35,lo:"Outcomes (a) and (c)",steps:[
-  {m:30,d:15,t:"Lego case study: The December staffing call",tr:"Run the four rounds on the Lego page: 3 min build it now, 5 min ask and sort, 4 min build the story, 3 min debrief.",pa:"Teams of 4 build, sort, rebuild and give one recommendation.",mat:"Pre-packed Lego bags, question card, Lego page",say:"Your manager wants a dashboard by lunch. Go."},
+  {m:30,d:15,t:"The Data Brick Challenge (Lego game)",tr:"Run the seven levels on the Lego page: grab 1, build fast 2, real question 3, compare 2, clean 2, tell Kak Mira 3, debrief 2. Tap points on the scoreboard.",pa:"Each participant grabs a handful, builds, sorts, cleans and writes one sentence.",mat:"Box of mixed bricks, sticky notes, Lego page on screen",say:"This handful is the data you received this month. Build something that shows Kak Mira how her café is doing."},
   {m:45,d:4,t:"The data gap: having data vs being data-driven",tr:"Mini-lecture with the DataCamp and Economist Impact numbers. Link back to Round 1 chaos.",pa:"Share one example from work.",mat:"Slide 2"},
   {m:49,d:4,t:"Why stored data is not yet an asset",tr:"Unstructured, messy, ungoverned data. Quick article discussion.",pa:"Discuss in pairs.",mat:"Article excerpt"},
   {m:53,d:9,t:"Choosing the right KPIs: the Big Why",tr:"Model one: decision → question → KPI. Open the Brainstorm page and show the Miro QR.",pa:"Post three KPIs for their role on the shared Miro board.",mat:"Brainstorm page, Miro board",cp:"Each participant posts three role-specific KPIs."},
@@ -615,7 +666,7 @@ const FLOW = [
  ]},
  {title:"Module 2 · Preparing data for analysis",mc:"2",m:65,d:40,lo:"Outcomes (b) and (g)",steps:[
   {m:65,d:12,t:"Finding and combining data",tr:"Live demo: upload the sample Excel and a CSV to Power BI Service.",pa:"Follow along with the same files.",mat:"Financial sample; Power BI Service"},
-  {m:77,d:13,t:"Cleaning and structuring data",tr:"Demo then hands-on: remove duplicates, fix types, flag blanks as Unknown. Point back to the stuck Lego pairs and white bricks.",pa:"Clean their copy of the dataset.",mat:"Power Query"},
+  {m:77,d:13,t:"Cleaning and structuring data",tr:"Demo then hands-on: remove duplicates, fix types, flag blanks as Unknown. Point back to the stuck Lego pairs, white bricks and 1×1 pieces.",pa:"Clean their copy of the dataset.",mat:"Power Query"},
   {m:90,d:10,t:"Data protection and quality checklist",tr:"Run the six-point checklist together on the cleaned data.",pa:"Tick the checklist on their own data.",mat:"Checklist (board, Module 2)",cp:"Cleaned dataset passes the quality checklist."},
   {m:100,d:5,t:"Confidentiality and responsible handling",tr:"PDPA basics, least data needed, sensitivity labels, sharing rules.",pa:"Name one dataset at work that needs a Confidential label.",mat:"Sensitivity labels link"}
  ]},
@@ -628,7 +679,7 @@ const FLOW = [
  ]},
  {title:"Module 4 · Interpreting and presenting insights",mc:"4",m:170,d:70,lo:"Outcomes (e) and (f)",steps:[
   {m:170,d:15,t:"Reading trends: real problems vs noise",tr:"Four questions test on two example charts. Group discussion.",pa:"Apply the four questions to their own dashboard.",mat:"Example charts"},
-  {m:185,d:10,t:"Data storytelling: one recommendation",tr:"Model the four-part structure: what happened, why it matters, what to do, what we need. Reuse the Lego Store C sentence as the example.",pa:"Draft their recommendation.",mat:"Story template"},
+  {m:185,d:10,t:"Data storytelling: one recommendation",tr:"Model the four-part structure: what happened, why it matters, what to do, what we need. Reuse a sentence from the Lego game as the example.",pa:"Draft their recommendation.",mat:"Story template"},
   {m:195,d:30,t:"Capstone presentations",tr:"Groups of 4, 2 min each plus 1 min feedback. Trainer rotates.",pa:"Present; give one strength and one question.",mat:"Feedback guide",cp:"Every participant presents one evidence-based recommendation."},
   {m:225,d:10,t:"Back-to-work action plan",tr:"Show Microsoft Learn paths and PL-300. Give the 30-day prompt.",pa:"Write three next steps with dates.",mat:"Action plan template",cp:"Each participant leaves with a recommendation and an action plan."},
   {m:235,d:5,t:"Wrap-up, questions and feedback",tr:"Three takeaways, open Q&A, then put the Feedback page on screen.",pa:"Scan the QR and submit feedback.",mat:"Feedback page (QR)"}
@@ -788,20 +839,102 @@ document.addEventListener("keydown",e=>{
   if(e.key==="ArrowLeft"||e.key==="PageUp"){ e.preventDefault(); step(-1); }
 });
 
-// Round timers on the Lego page
-document.querySelectorAll(".round").forEach(r=>{
-  const total=+r.dataset.sec, box=r.querySelector(".tmr"), tv=r.querySelector(".tv"), btn=r.querySelector(".tbtn");
-  let left=total, iv=null;
-  const show=()=>{ tv.textContent=Math.floor(left/60)+":"+String(left%60).padStart(2,"0"); };
-  const stop=()=>{ clearInterval(iv); iv=null; box.classList.remove("run"); btn.textContent=left>0?"Resume":"Start"; };
-  btn.onclick=()=>{
-    if(iv){ stop(); return; }
-    if(left<=0){ left=total; box.classList.remove("end"); }
-    box.classList.add("run"); btn.textContent="Pause";
-    iv=setInterval(()=>{ left--; show(); if(left<=0){ stop(); box.classList.add("end"); btn.textContent="Start"; } },1000);
+// Lego game: levels, reveal cards, timer, scoreboard
+const QUESTION="Which outlet should get the RM 20,000 next month?";
+const LEVELS=[
+ {n:"Level 0",t:"Grab your data",min:1,c:"--mn",pts:0,
+  do:"Everyone takes <b>one handful</b> of bricks from the box, without looking. Keep them in front of you.",
+  say:"This handful is the data you received this month. Look around: nobody has the same data.",
+  lesson:"Data never arrives neat. It comes in whatever shape the systems give you."},
+ {n:"Level 1",t:"Build it fast",min:2,c:"--m1",pts:1,badge:"Speed builder",
+  do:"Build something that shows Kak Mira how her café is doing. That is the whole brief.",
+  say:"Two minutes. Go!",
+  twist:"Hands up if your build answers a question. Which question? Could Kak Mira decide anything from it?",
+  lesson:"<b>Why not build the dashboard straight away?</b> Without a question, you build something that looks good and decides nothing."},
+ {n:"Level 2",t:"The real question",min:3,c:"--m1",pts:2,badge:"Data sorter",reveal:true,
+  do:"Now you know the question and the data key. Sort your bricks by colour and build <b>one tower per outlet</b>. Taller tower, more cups sold.",
+  say:"Kak Mira's question is on the screen. Same bricks, new build.",
+  lesson:"The question decides what you build. Same data, completely different dashboard."},
+ {n:"Level 3",t:"Compare with your neighbour",min:2,c:"--m2",pts:2,badge:"Sample spotter",
+  do:"Look at your neighbour's towers. Did you pick the same outlet?",
+  twist:"Different handfuls gave different answers. Which answer is right? Neither, until all the data is combined.",
+  lesson:"<b>Why data matters:</b> a decision built on part of the data can point the wrong way. We combine every source first."},
+ {n:"Level 4",t:"Clean the data",min:2,c:"--m2",pts:2,badge:"Data cleaner",
+  do:"Take out every <b>white</b> brick, pull apart <b>stuck pairs</b> and keep one, and drop the <b>1×1</b> pieces. Rebuild your towers.",
+  twist:"White bricks had no outlet. Stuck pairs were the same sale entered twice. 1×1 pieces were test entries. Did your answer change?",
+  lesson:"Dirty data makes confident, wrong decisions. Cleaning comes before charting."},
+ {n:"Level 5",t:"Tell Kak Mira",min:3,c:"--m3",pts:"1 + 3",badge:"Storyteller · Room's favourite",
+  do:"Write <b>one sentence</b> on a sticky: the outlet, the number, the reason. Put it next to your towers. Then walk the room and give a thumbs up to the clearest story.",
+  say:"Example: Give the RM 20,000 to Cheras, because it sold 80 cups, the most of all three outlets after cleaning.",
+  lesson:"A dashboard earns its place when it ends in one clear recommendation."},
+ {n:"Level 6",t:"Debrief",min:2,c:"--m4",pts:0,
+  list:["Why didn't your first build help Kak Mira?","What changed once you knew the question?","Why did neighbours get different answers?","What would you check before you trust a dashboard?"],
+  lesson:"Question first, complete data, clean data, then the dashboard. That is the order for the rest of today."}
+];
+let lv=0, keyShown=false, twistShown={};
+let gt={left:LEVELS[0].min*60,iv:null,lvl:0};
+function setKey(on){ keyShown=on; $("keyHidden").hidden=on; $("keyList").hidden=!on; $("qText").textContent=on?QUESTION:"Hidden until Level 2"; }
+$("keyReveal").onclick=()=>setKey(true);
+function fmtT(s){ return Math.floor(s/60)+":"+String(s%60).padStart(2,"0"); }
+function stopT(){ clearInterval(gt.iv); gt.iv=null; }
+function renderLevel(){
+  const L=LEVELS[lv];
+  if(L.reveal && !keyShown) setKey(true);
+  if(gt.lvl!==lv){ stopT(); gt={left:L.min*60,iv:null,lvl:lv}; }
+  $("lvTabs").innerHTML=LEVELS.map((x,i)=>`<button type="button" role="tab" aria-selected="${i===lv}" class="${i<lv?"done":""}" data-i="${i}"><i>${i}</i>${esc(x.t)}</button>`).join("");
+  const el=$("lvl"); el.style.setProperty("--lc",`var(${L.c})`);
+  el.innerHTML=`<div>
+    <div class="ln">${L.n} · ${L.min} min</div><h2>${esc(L.t)}</h2>
+    ${L.do?`<p class="do">${L.do}</p>`:""}
+    ${L.list?`<ul>${L.list.map(q=>`<li>${esc(q)}</li>`).join("")}</ul>`:""}
+    ${L.say?`<div class="say">Say: “${esc(L.say)}”</div>`:""}
+    ${L.reveal?`<div class="qcard" style="margin-top:16px"><small>Kak Mira's question</small><b>${esc(QUESTION)}</b></div>`:""}
+    <div class="lesson">${L.lesson}</div>
+   </div>
+   <div class="lvside">
+    ${L.pts?`<div class="ptsbig"><b>+${L.pts}</b><span>${esc(L.badge)}<em>Tap the points on the scoreboard</em></span></div>`:""}
+    ${L.twist?`<div class="twist" data-hid="${twistShown[lv]?0:1}"><small>Twist card</small><b>${esc(L.twist)}</b>${twistShown[lv]?"":`<button type="button" id="twistBtn">Reveal the twist</button>`}</div>`:""}
+    <div class="tmr${gt.iv?" run":""}${gt.left<=0?" end":""}"><span class="tv" id="gtv">${fmtT(Math.max(0,gt.left))}</span><button type="button" class="tbtn" id="gtStart">${gt.iv?"Pause":gt.left<L.min*60&&gt.left>0?"Resume":"Start"}</button><button type="button" class="treset" id="gtReset">Reset</button></div>
+    <div class="lvnav"><button type="button" class="btn gh" id="lvPrev" ${lv===0?"disabled":""}>Back</button><button type="button" class="btn" id="lvNext">${lv===LEVELS.length-1?"Finish":"Next level"}</button></div>
+   </div>`;
+  const tb=$("twistBtn"); if(tb) tb.onclick=()=>{ twistShown[lv]=true; renderLevel(); };
+  $("gtStart").onclick=()=>{
+    if(gt.iv){ stopT(); renderLevel(); return; }
+    if(gt.left<=0) gt.left=L.min*60;
+    gt.iv=setInterval(()=>{ gt.left--; const v=$("gtv"); if(v) v.textContent=fmtT(Math.max(0,gt.left)); if(gt.left<=0){ stopT(); renderLevel(); } },1000);
+    renderLevel();
   };
-  r.querySelector(".treset").onclick=()=>{ clearInterval(iv); iv=null; left=total; box.classList.remove("run","end"); btn.textContent="Start"; show(); };
+  $("gtReset").onclick=()=>{ stopT(); gt.left=L.min*60; renderLevel(); };
+  $("lvPrev").onclick=()=>{ if(lv>0){ lv--; renderLevel(); } };
+  $("lvNext").onclick=()=>{ if(lv<LEVELS.length-1){ lv++; renderLevel(); } };
+}
+$("lvTabs").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; lv=+b.dataset.i; renderLevel(); });
+renderLevel();
+
+// Scoreboard (kept on this laptop)
+let players=[];
+try{ players=JSON.parse(localStorage.getItem("dwc-score")||"[]"); }catch(e){ players=[]; }
+const saveP=()=>{ try{ localStorage.setItem("dwc-score",JSON.stringify(players)); }catch(e){} };
+function renderScore(){
+  const sorted=players.map((p,i)=>({...p,i})).sort((a,b)=>b.s-a.s||a.n.localeCompare(b.n));
+  $("sbList").innerHTML=sorted.map(p=>`<li><span class="nm">${esc(p.n)}</span><span class="tot">${p.s}</span><span class="pts"><button type="button" class="p" data-i="${p.i}" data-d="1">+1</button><button type="button" class="p" data-i="${p.i}" data-d="2">+2</button><button type="button" class="p" data-i="${p.i}" data-d="3">+3</button><button type="button" data-i="${p.i}" data-d="-1" aria-label="Minus one for ${esc(p.n)}">−1</button></span></li>`).join("");
+  $("sbEmpty").hidden=players.length>0;
+}
+$("sbForm").addEventListener("submit",e=>{
+  e.preventDefault(); const v=$("sbName").value.trim(); if(!v) return;
+  v.split(/[,\n]/).map(x=>x.trim()).filter(Boolean).forEach(n=>players.push({n,s:0}));
+  $("sbName").value=""; saveP(); renderScore(); $("sbName").focus();
 });
+$("sbList").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  const p=players[+b.dataset.i]; p.s=Math.max(0,p.s+ +b.dataset.d); saveP(); renderScore();
+});
+let resetArm=false;
+$("sbReset").onclick=()=>{
+  if(!resetArm){ resetArm=true; $("sbReset").textContent="Tap again to clear all"; setTimeout(()=>{ resetArm=false; $("sbReset").textContent="Reset scores"; },3000); return; }
+  players=[]; saveP(); renderScore(); resetArm=false; $("sbReset").textContent="Reset scores";
+};
+renderScore();
 
 // Miro brainstorm: link saved on this laptop, QR to join, embed where the host allows it.
 function miroUrl(){ let u=""; try{ u=localStorage.getItem("dwc-miro")||""; }catch(e){} return u||MIRO_DEFAULT; }
