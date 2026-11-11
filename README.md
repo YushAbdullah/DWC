@@ -17,3 +17,7 @@ The shared brainstorm board is https://miro.com/app/board/uXjVEP4jFNc=/ (set as 
 ## Publishing with GitHub Pages
 
 Settings → Pages → Deploy from a branch → `main` / root. The app is then at `https://yushabdullah.github.io/DWC/`.
+
+## Registration
+
+Participants register once (name, email, Power BI experience) when they first open the link, then the site greets them by name. No account is needed. Set `REG_URL` in `board.html` to a Google Apps Script web app URL to collect registrations in a Google Sheet. Trainer link that skips registration: `https://yushabdullah.github.io/DWC/?trainer`. To show the form again on a device: add `?register`.
