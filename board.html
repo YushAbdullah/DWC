@@ -873,7 +873,7 @@ body.present .reg{display:none}
 
 <section class="pg" id="pg-ice">
  <div class="w">
-  <div class="pgh"><div><div class="eyebrow">Welcome · Ice breaker · 9:15 AM · 10 min</div><h1>Number Line-Up</h1><p>Ten participants each hold one A4 card, numbered 1 to 10. A number appears on screen. The people holding its cards run up and line up in the right order.</p></div></div>
+  <div class="pgh"><div><div class="eyebrow">Welcome · Ice breaker · 9:15 AM · 10 min</div><h1>Number Line-Up</h1><p>Ten participants each hold one A4 card, numbered 0 to 9. A number appears on screen. The people holding its cards run up and line up in the right order.</p></div></div>
 
   <div class="ice">
    <article class="icestage" aria-live="polite">
@@ -886,13 +886,13 @@ body.present .reg{display:none}
    <div class="iceside">
     <article class="card">
      <div class="k">When your line is ready, each person says</div>
-     <div class="script"><p>“Hi, I'm <b>Alia</b>, No. <b>10</b>.”</p><p>“Hi, I'm <b>Ravi</b>, No. <b>2</b>.”</p><p>“Hi, I'm <b>Siti</b>, No. <b>3</b>.”</p><p class="all">All together: “And we are number set <b id="iceSay">1023</b>!”</p></div>
+     <div class="script"><p>“Hi, I'm <b>Alia</b>, No. <b>1</b>.”</p><p>“Hi, I'm <b>Ravi</b>, No. <b>0</b>.”</p><p>“Hi, I'm <b>Siti</b>, No. <b>2</b>.”</p><p>“Hi, I'm <b>Tan</b>, No. <b>3</b>.”</p><p class="all">All together: “And we are number set <b id="iceSay">1023</b>!”</p></div>
     </article>
     <article class="card">
      <div class="k">How to play</div>
      <ol class="steps2">
-      <li>Give ten people one A4 card each, numbered <b>1</b> to <b>10</b>. Everyone else is the cheering crowd.</li>
-      <li>Press <b>New number</b>. Each number is built only from cards 1 to 10, with no card used twice. <b>1023</b> is 10 + 2 + 3.</li>
+      <li>Give ten people one A4 card each, numbered <b>0</b> to <b>9</b>. Everyone else is the cheering crowd.</li>
+      <li>Press <b>New number</b>. Each digit is one card from 0 to 9, with no card used twice and never a 0 in front. <b>1023</b> is cards 1, 0, 2 and 3.</li>
       <li>Card holders in the number run up and stand left to right in order. 30 seconds.</li>
       <li>Each person introduces themselves with their card number, then the group calls out its number set.</li>
       <li>Swap cards between rounds so new people play. Finish with <b>All 10</b>.</li>
@@ -1167,7 +1167,7 @@ const COLS = [
   {tag:"note",title:"Meet your trainer",body:"Yusri Abdullah: AI & Transformation trainer, Microsoft Power BI Data Analyst.",page:"trainer",pageText:"Open the intro slide"},
   {tag:"note",title:"Everyone has data. Few can use it.",body:"60% of enterprise leaders report a data skills gap, yet only 42% train at scale (DataCamp, 2026). 49.2% of Malaysian employees say data analysis and visualisation is a must-have skill (Economist Impact).",page:"reality",pageText:"Open the slide"},
   {tag:"checkpoint",title:"Ground rules",body:"Our eight-point working agreement: be present, attempt first then ask, protect confidential data, and more.",page:"ground-rules",pageText:"Open the ground rules"},
-  {tag:"activity",title:"Number Line-Up",body:"Ten people hold A4 cards numbered 1 to 10. A random number appears, like 1023. Its card holders line up in order, introduce themselves and call out their number set.",meta:"10 min · ice breaker",page:"ice-breaker",pageText:"Open the ice breaker"},
+  {tag:"activity",title:"Number Line-Up",body:"Ten people hold A4 cards numbered 0 to 9. A random number appears, like 1023. Its card holders line up in order, introduce themselves and call out their number set.",meta:"10 min · ice breaker",page:"ice-breaker",pageText:"Open the ice breaker"},
   {tag:"note",title:"By the end you will be able to",list:["Define the metrics that matter","Prepare and clean data","Build a dashboard, no code","Interpret real issues vs noise","Present a recommendation","Protect confidential data"],page:"objectives",pageText:"Open the objectives slide"},
   {tag:"checkpoint",title:"Signed in to Power BI Service",body:"Every participant can open app.powerbi.com and see My workspace before we move on.",meta:"5 min"}
  ]},
@@ -1217,7 +1217,7 @@ const FLOW = [
  {title:"Introduction and ice breaking",mc:"n",m:0,d:30,lo:"Sets up all outcomes",steps:[
   {m:0,d:8,t:"Welcome, trainer and participant introductions",tr:"Open the Intro slide (your profile). Tell your story in one line: non-technical role to Power BI. Point to the QR for your website.",pa:"Name, role, one report they receive every month.",mat:"Intro slide",say:"Who here gets reports but can't build or question one yourself?"},
   {m:8,d:7,t:"Programme overview, objectives and ground rules",tr:"Walk the Roadmap slide and the six objectives. Then show the Ground rules page and agree them.",pa:"Agree the rules; note one thing they want to leave with.",mat:"Roadmap and Objectives slides; Ground rules page"},
-  {m:15,d:10,t:"Ice breaker: Number Line-Up",tr:"Hand out ten A4 cards numbered 1 to 10. Click New number on the ice breaker page, start the 30 s timer, swap cards each round, finish with All 10. Close with the moral.",pa:"Card holders line up in order and say \"Hi, I'm Alia, No. 9\", then the group calls out its number set.",mat:"Ten A4 cards numbered 1 to 10, ice breaker page on screen",say:"Each card is just a number. In the right order it means something. You have been carrying data since the minute you walked in."},
+  {m:15,d:10,t:"Ice breaker: Number Line-Up",tr:"Hand out ten A4 cards numbered 0 to 9. Click New number on the ice breaker page, start the 30 s timer, swap cards each round, finish with All 10. Close with the moral.",pa:"Card holders line up in order and say \"Hi, I'm Alia, No. 9\", then the group calls out its number set.",mat:"Ten A4 cards numbered 1 to 10, ice breaker page on screen",say:"Each card is just a number. In the right order it means something. You have been carrying data since the minute you walked in."},
   {m:25,d:5,t:"Power BI sign-in check",tr:"Everyone opens app.powerbi.com. Early finishers help neighbours.",pa:"Sign in with work or school email.",mat:"Sign-in guide",cp:"Every participant can see My workspace."}
  ]},
  {title:"Module 1 · Identify data for better decisions",mc:"1",m:30,d:35,lo:"Outcomes (a) and (c)",steps:[
@@ -1414,11 +1414,11 @@ document.addEventListener("keydown",e=>{
   if(e.key==="ArrowLeft"||e.key==="PageUp"){ e.preventDefault(); step(-1); }
 });
 
-// Number Line-Up ice breaker: numbers built from distinct cards 1 to 10
-let iceK=4, iceRound=0, iceSet=[10,2,3];
+// Number Line-Up ice breaker: numbers built from distinct digit cards 0 to 9 (never starting with 0)
+let iceK=4, iceRound=0, iceSet=[1,0,2,3];
 function iceMake(k){
-  const deck=[1,2,3,4,5,6,7,8,9,10];
-  for(let i=deck.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [deck[i],deck[j]]=[deck[j],deck[i]]; }
+  const deck=[0,1,2,3,4,5,6,7,8,9];
+  do{ for(let i=deck.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [deck[i],deck[j]]=[deck[j],deck[i]]; } }while(deck[0]===0);
   return deck.slice(0,k);
 }
 function iceDraw(){
