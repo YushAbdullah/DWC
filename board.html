@@ -409,11 +409,65 @@ body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-i
 .next a span{width:30px;height:30px;border-radius:50%;background:var(--pri);color:var(--onpri);display:grid;place-items:center;font-size:.875rem;flex:0 0 30px}
 .next a em{font-style:normal;font-weight:400;color:var(--ts);font-size:.875rem;display:block}
 #sbQuick{margin-top:4px}
+
+/* Registration */
+.reg{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:16px;background:radial-gradient(1200px 600px at 20% 0%,#1A3F8A 0%,transparent 60%),linear-gradient(160deg,#0A2350,#061533);overflow-y:auto}
+.regc{width:min(480px,100%);background:var(--sur);color:var(--tx);border-radius:20px;box-shadow:var(--sh3);padding:32px 28px;display:grid;gap:18px;animation:pop .45s var(--ease)}
+.regc .logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:.9375rem}
+.regc h2{margin:0;font-size:1.75rem;line-height:1.2;letter-spacing:-.01em}
+.regc p{margin:0;color:var(--tm);font-size:.9375rem}
+.regc form{display:grid;gap:14px}
+.regc label.f{display:grid;gap:6px;font-size:.875rem;font-weight:600}
+.regc input[type=text],.regc input[type=email]{height:48px;border-radius:10px;border:1px solid var(--bd);background:var(--mut);color:var(--tx);padding:0 14px;font:400 1rem var(--font);width:100%}
+.regc input:focus{outline:2px solid var(--acc);outline-offset:1px}
+.regc fieldset{border:0;margin:0;padding:0;display:grid;gap:8px}
+.regc legend{font-size:.875rem;font-weight:600;margin-bottom:8px;padding:0}
+.opt{display:flex;gap:10px;align-items:center;border:1px solid var(--bd);border-radius:10px;padding:12px 14px;cursor:pointer;font-size:.9375rem}
+.opt:has(input:checked){border-color:var(--acc);background:var(--tint)}
+.opt input{accent-color:var(--acc);width:18px;height:18px;margin:0}
+.regc .btn{height:50px;font-size:1rem;font-weight:600;width:100%}
+.regc .err{color:var(--no);font-size:.875rem;min-height:1em}
+.regc .fine{font-size:.8125rem;color:var(--ts)}
+.regc .skip{background:none;border:0;color:var(--ts);font:500 .8125rem var(--font);text-decoration:underline;cursor:pointer;justify-self:center;padding:4px}
+.regdone{text-align:center;justify-items:center}
+.regdone .wave{font-size:3rem;line-height:1}
+.hi{display:none;align-items:center;gap:8px;font-size:.875rem;color:var(--tm);white-space:nowrap}
+.hi b{color:var(--tx)}
+.hi button{background:none;border:0;color:var(--ts);font:500 .75rem var(--font);text-decoration:underline;cursor:pointer;padding:0}
+@media(min-width:1100px){.hi.on{display:inline-flex}}
+.hello{display:inline-flex;align-items:center;gap:8px;background:var(--yel);color:var(--onyel);font-weight:600;font-size:.9375rem;border-radius:9999px;padding:6px 14px;margin-bottom:14px}
+body.present .reg{display:none}
 </style>
 
 </head><body><div class="shell">
 <div class="glow" aria-hidden="true" style="width:520px;height:520px;left:-160px;top:120px"></div>
 <svg class="blob" aria-hidden="true" viewBox="0 0 220 220"><path d="M220 0v220A110 110 0 0 1 110 110 110 110 0 0 1 220 0z" fill="#0A2350"/><path d="M220 0A110 110 0 0 0 110 110 110 110 0 0 0 0 0z" fill="#1677FF"/></svg>
+
+<div class="reg" id="reg" hidden role="dialog" aria-modal="true" aria-labelledby="regH">
+ <div class="regc" id="regForm">
+  <div class="logo"><svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true"><rect x="2" y="2" width="36" height="24" rx="6" fill="#0A2350"/><rect x="9" y="14" width="5" height="7" rx="1.2" fill="#1677FF"/><rect x="17.5" y="10" width="5" height="11" rx="1.2" fill="#5A9DFF"/><rect x="26" y="6" width="5" height="15" rx="1.2" fill="#F2C811"/></svg>Dashboards Without Code</div>
+  <div><div class="eyebrow">Join the session</div><h2 id="regH">Welcome! Kindly register</h2></div>
+  <p>Takes 20 seconds. No account or password needed.</p>
+  <form id="regF" novalidate autocomplete="on">
+   <label class="f">Your name<input type="text" id="rName" name="name" autocomplete="name" placeholder="e.g. Alia Rahman" required></label>
+   <label class="f">Email<input type="email" id="rEmail" name="email" autocomplete="email" inputmode="email" placeholder="you@company.com" required></label>
+   <fieldset><legend>Is this your first time hearing about Power BI?</legend>
+    <label class="opt"><input type="radio" name="pbi" value="First time">Yes, this is my first time</label>
+    <label class="opt"><input type="radio" name="pbi" value="Heard of it">I've heard of it, never used it</label>
+    <label class="opt"><input type="radio" name="pbi" value="Used it">I've used it before</label>
+   </fieldset>
+   <div class="err" id="rErr" aria-live="polite"></div>
+   <button type="submit" class="btn" id="rBtn">Register</button>
+   <p class="fine">Your name and email are shared only with the trainer for this session.</p>
+  </form>
+ </div>
+ <div class="regc regdone" id="regDone" hidden>
+  <div class="wave" aria-hidden="true">👋</div>
+  <h2>Hi <span id="rHi"></span>!</h2>
+  <p>You're registered. Welcome to Dashboards Without Code.</p>
+  <button type="button" class="btn" id="rGo">Enter the session</button>
+ </div>
+</div>
 
 <header><div class="w">
  <div class="nav">
@@ -421,6 +475,7 @@ body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-i
    <svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true"><rect x="2" y="2" width="36" height="24" rx="6" fill="#0A2350"/><rect x="9" y="14" width="5" height="7" rx="1.2" fill="#1677FF"/><rect x="17.5" y="10" width="5" height="11" rx="1.2" fill="#5A9DFF"/><rect x="26" y="6" width="5" height="15" rx="1.2" fill="#F2C811"/></svg>
    <span>Dashboards Without Code<small>Aventra Group · Session board</small></span></a>
   <nav class="links" aria-label="Main"><a href="#board" data-p="board">Board</a><a href="#ground-rules" data-p="ground-rules">Ground rules</a><a href="#ice-breaker" data-p="ice-breaker">Ice breaker</a><a href="#lego" data-p="lego">Lego game</a><a href="#brainstorm" data-p="brainstorm">Brainstorm</a><a href="#feedback" data-p="feedback">Feedback</a><a href="#run-sheet" data-p="run-sheet">Run sheet</a></nav>
+  <span class="hi" id="hi">Hi, <b id="hiName"></b><button type="button" id="hiOut">Not you?</button></span>
   <button class="btn dk" type="button" id="present" aria-pressed="false">Present</button>
  </div>
  <nav class="mn" aria-label="Main mobile"><a href="#board" data-p="board">Board</a><a href="#ground-rules" data-p="ground-rules">Ground rules</a><a href="#ice-breaker" data-p="ice-breaker">Ice breaker</a><a href="#lego" data-p="lego">Lego game</a><a href="#brainstorm" data-p="brainstorm">Brainstorm</a><a href="#feedback" data-p="feedback">Feedback</a><a href="#run-sheet" data-p="run-sheet">Run sheet</a></nav>
@@ -432,6 +487,7 @@ body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-i
   <div class="hero" id="hero">
    <div>
     <div class="chips"><div class="chip"><b>4</b><span>modules</span></div><div class="chip"><b>240</b><span>minutes</span></div><div class="chip"><b>0</b><span>lines of code</span></div></div>
+    <div class="hello" id="hello" hidden></div>
     <div class="eyebrow">Hands-on training session</div>
     <h1 class="pt">Dashboards <span>Without Code</span></h1>
     <p class="ptsub"><b>Using Microsoft Power BI:</b> From Data to Decisions.</p>
@@ -1156,5 +1212,36 @@ const stackHero=$("hero");
 if(!matchMedia("(prefers-reduced-motion: reduce)").matches){ stackHero.classList.add("pile"); requestAnimationFrame(()=>requestAnimationFrame(()=>stackHero.classList.remove("pile"))); }
 
 renderBoard(); renderFlow(); route(); tick(); setInterval(tick,30000);
+// Registration: no account needed. Saved on this device; sent to the trainer's Google Sheet when REG_URL is set.
+const REG_URL="";
+let me=null;
+try{ me=JSON.parse(localStorage.getItem("dwc-user")||"null"); }catch(e){ me=null; }
+try{ const q=new URLSearchParams(location.search); if(q.has("trainer")){ me={trainer:true}; localStorage.setItem("dwc-user",JSON.stringify(me)); } if(q.has("register")){ me=null; localStorage.removeItem("dwc-user"); } }catch(e){}
+const first=n=>String(n||"").trim().split(/\s+/)[0];
+function showMe(){
+  const named=me && me.name;
+  $("hi").classList.toggle("on",!!named); $("hiName").textContent=named?first(me.name):"";
+  $("hello").hidden=!named; if(named) $("hello").textContent="Hi "+first(me.name)+", welcome to the session 👋";
+  $("reg").hidden=!!me;
+  document.documentElement.style.overflow=me?"":"hidden";
+}
+$("regF").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const name=$("rName").value.trim(), email=$("rEmail").value.trim();
+  const pick=document.querySelector('#regF input[name="pbi"]:checked');
+  const err=$("rErr");
+  if(name.length<2){ err.textContent="Please enter your name."; $("rName").focus(); return; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ err.textContent="Please enter a valid email."; $("rEmail").focus(); return; }
+  if(!pick){ err.textContent="Please pick one answer about Power BI."; return; }
+  err.textContent=""; $("rBtn").disabled=true; $("rBtn").textContent="Registering…";
+  const rec={name,email,pbi:pick.value,at:new Date().toISOString()};
+  if(REG_URL){ try{ await fetch(REG_URL,{method:"POST",mode:"no-cors",body:new URLSearchParams(rec)}); }catch(x){} }
+  me=rec; try{ localStorage.setItem("dwc-user",JSON.stringify(me)); }catch(x){}
+  $("rHi").textContent=first(name); $("regForm").hidden=true; $("regDone").hidden=false; $("rGo").focus();
+});
+$("rGo").onclick=()=>{ showMe(); $("regForm").hidden=false; $("regDone").hidden=true; $("rBtn").disabled=false; $("rBtn").textContent="Register"; };
+$("hiOut").onclick=()=>{ me=null; try{ localStorage.removeItem("dwc-user"); }catch(x){} $("regF").reset(); showMe(); $("rName").focus(); };
+showMe();
+
 </script>
 </body></html>
