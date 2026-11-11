@@ -584,8 +584,8 @@ body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-i
     <div class="k">Trainer prep</div>
     <h3>One mixed bag per group</h3>
     <ul class="prep">
-     <li>About <b>40 to 50 bricks</b> per group of 5, in at least <b>five colours</b></li>
-     <li>Tick the colours you have below so the reveals only pick those</li>
+     <li>About <b>40 to 50 bricks</b> per group of 5, in the <b>six colours</b>: red, orange, yellow, lime green, blue and purple</li>
+     <li>Untick any colour a group is missing so the reveals skip it</li>
      <li>Groups of 5 at separate tables, one bag each</li>
     </ul>
     <div class="palette" id="palette" role="group" aria-label="Colours in your Lego box"></div>
@@ -955,13 +955,12 @@ $("iceCards").innerHTML=iceSet.map(c=>`<span>${c}</span>`).join("");
 // Lego game for groups of 5: build, remove colours, filter to one colour, takeaways
 function fmtT(s){ return Math.floor(s/60)+":"+String(s%60).padStart(2,"0"); }
 const COLOURS=[
- {n:"Red",h:"#D7263D",d:"Complaints"},{n:"Blue",h:"#1E5AA8",d:"Cups sold"},{n:"Yellow",h:"#F2C811",d:"Social media likes"},
- {n:"Green",h:"#2E9E44",d:"Staff hours"},{n:"White",h:"#F4F4F4",d:"Blank receipts"},{n:"Black",h:"#26292E",d:"Old stock records"},
- {n:"Orange",h:"#F57C00",d:"Promo vouchers"},{n:"Grey",h:"#9AA1A8",d:"Test entries"}
+ {n:"Red",h:"#D7263D",d:"Complaints"},{n:"Orange",h:"#F57C00",d:"Promo vouchers"},{n:"Yellow",h:"#F2C811",d:"Social media likes"},
+ {n:"Lime",h:"#A4D233",d:"Staff hours"},{n:"Blue",h:"#1E88E5",d:"Cups sold"},{n:"Purple",h:"#5B3FD9",d:"Test entries"}
 ];
-let have=["Red","Blue","Yellow","Green","White"];
-try{ const s=JSON.parse(localStorage.getItem("dwc-colours")||"null"); if(Array.isArray(s)&&s.length>=3) have=s; }catch(e){}
-const saveHave=()=>{ try{ localStorage.setItem("dwc-colours",JSON.stringify(have)); }catch(e){} };
+let have=COLOURS.map(c=>c.n);
+try{ const s=JSON.parse(localStorage.getItem("dwc-colours2")||"null"); if(Array.isArray(s)&&s.length>=3&&s.every(n=>COLOURS.some(c=>c.n===n))) have=s; }catch(e){}
+const saveHave=()=>{ try{ localStorage.setItem("dwc-colours2",JSON.stringify(have)); }catch(e){} };
 const col=n=>COLOURS.find(c=>c.n===n);
 let removed=null, keep=null;
 const pick=a=>a[Math.floor(Math.random()*a.length)];
