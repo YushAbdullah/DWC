@@ -265,7 +265,7 @@ details.st.live{box-shadow:0 0 0 2px var(--acc),var(--sh2)}
 /* brainstorm */
 .prompts{list-style:none;margin:8px 0 16px;padding:0;display:grid;gap:12px}
 .prompts li{border-radius:4px;padding:16px 18px;transform:rotate(-1deg);box-shadow:var(--sh1);color:#1a1a1a}
-.prompts li:nth-child(1){background:#FFE97A}.prompts li:nth-child(2){background:#BFD9FF;transform:rotate(.8deg)}.prompts li:nth-child(3){background:#C6EDC9;transform:rotate(-.5deg)}
+.prompts li:nth-child(1){background:#FFE97A}.prompts li:nth-child(2){background:#BFD9FF;transform:rotate(.8deg)}.prompts li:nth-child(3){background:#C6EDC9;transform:rotate(-.5deg)}.prompts li:nth-child(4){background:#F6C7E4;transform:rotate(.6deg)}
 .prompts small{display:block;font-size:.75rem;opacity:.7;letter-spacing:.04em;text-transform:uppercase}
 .prompts b{font-size:1.125rem;line-height:1.35}
 .miro{display:flex;flex-direction:column;gap:12px}
@@ -277,10 +277,23 @@ details.st.live{box-shadow:0 0 0 2px var(--acc),var(--sh2)}
 .row3 input{flex:1;min-width:0;height:44px;border:1px solid var(--bd);border-radius:8px;padding:0 14px;font:400 .9375rem var(--font);background:var(--mut);color:var(--tx)}
 .embed{margin-bottom:20px;border-radius:24px;overflow:hidden;box-shadow:var(--sh2);background:var(--sur)}
 .embed iframe{display:block;width:100%;height:min(70vh,640px);border:0}
-.frames{display:grid;gap:12px;margin-top:12px}@media(min-width:760px){.frames{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.frames{display:grid;gap:12px;margin-top:12px}@media(min-width:760px){.frames{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .frames div{background:var(--ct);border-radius:14px;padding:16px;border-left:5px solid var(--c);display:grid;gap:4px}
 .frames b{color:var(--cx)}.frames span{font-size:.875rem;color:var(--tm)}
 #pg-brain .card:last-child{margin-bottom:80px}
+.maph{margin:6px 0 14px}
+.dmap{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:10px}@media(min-width:760px){.dmap{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.dmap li{position:relative;background:var(--mut);border:1px solid var(--bd);border-top:5px solid var(--c);border-radius:14px;padding:14px 14px 14px 56px;display:grid;gap:2px;min-height:76px;align-content:center}
+.dmap em{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:var(--c);color:#fff;font-style:normal;font-weight:700;display:grid;place-items:center}
+.dmap li:first-child em{color:#0A2350}
+.dmap span{font-size:.875rem;color:var(--tm)}
+@media(min-width:760px){.dmap li:not(:last-child)::after{content:"→";position:absolute;right:-10px;top:50%;transform:translate(50%,-50%);font-weight:700;color:var(--tm);z-index:1}}
+.mtab{overflow-x:auto;border-radius:12px;border:1px solid var(--bd)}
+.mtab table{border-collapse:collapse;width:100%;min-width:620px;font-size:.875rem}
+.mtab th{background:var(--ink);color:#fff;text-align:left;padding:10px 12px;font-weight:600}
+.mtab td{padding:10px 12px;border-top:1px solid var(--bd);vertical-align:top}
+.mtab code{font-size:.8rem;background:var(--m4t);color:var(--m4x);padding:1px 6px;border-radius:6px;white-space:nowrap}
+
 /* feedback */
 .fb{display:grid;gap:40px;align-items:center;padding:48px 0 96px}@media(min-width:960px){.fb{grid-template-columns:1fr auto}}
 .fb h1{font-size:clamp(2.5rem,6vw,4rem);color:var(--tx)}
@@ -460,6 +473,43 @@ body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-i
 .rbar{display:flex;height:12px;border-radius:9999px;overflow:hidden;margin-top:28px;gap:3px}
 .rbar i{display:block;background:var(--c)}
 .rends{display:flex;justify-content:space-between;font-size:.875rem;font-weight:600;color:var(--tm);margin-top:8px}
+.mmap{position:relative;margin:28px 0 0;display:grid;gap:18px;justify-items:center}
+.mlinks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;display:none}
+.mlinks path{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:6 7;animation:mdash 1.2s linear infinite reverse}
+.mlinks circle{stroke:var(--sur);stroke-width:3}
+@keyframes mdash{to{stroke-dashoffset:26}}
+.mhub{position:relative;width:200px;height:200px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,#3D8BFF,#0B63E5 45%,#0A2350);box-shadow:0 0 0 10px color-mix(in srgb,var(--acc) 18%,transparent),0 20px 50px rgba(11,99,229,.35);color:#fff;z-index:2}
+.mring{position:absolute;inset:-22px;border-radius:50%;border:2px dashed color-mix(in srgb,var(--acc) 55%,transparent);animation:mspin 30s linear infinite}
+@keyframes mspin{to{transform:rotate(360deg)}}
+.mhin{display:grid;justify-items:center;gap:2px;text-align:center}
+.mhin svg{width:36px;height:36px;fill:#F2C811;margin-bottom:4px}
+.mhin b{font-size:2rem;line-height:1.05;font-weight:800}
+.mhin span{font-size:.875rem;opacity:.85;font-weight:500}
+.mnodes{list-style:none;margin:0;padding:0 0 0 22px;display:grid;gap:14px;width:100%;position:relative}
+.mnodes::before{content:"";position:absolute;left:6px;top:-18px;bottom:28px;border-left:3px dashed var(--bd)}
+.mnode{position:relative;background:var(--sur);border-radius:18px;box-shadow:0 0 0 1px var(--bd),var(--sh1);padding:16px 18px;display:flex;gap:14px;align-items:center;border-left:6px solid var(--c);animation:mpop .6s var(--ease) both;animation-delay:calc(var(--i) * 90ms)}
+.mnode::before{content:"";position:absolute;left:-22px;top:50%;width:16px;border-top:3px dashed var(--bd)}
+@keyframes mpop{from{opacity:0;transform:translateY(12px) scale(.96)}}
+.mic{position:relative;flex:0 0 56px;height:56px;border-radius:50%;background:var(--ct);color:var(--cx);display:grid;place-items:center}
+.mic svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mic em{position:absolute;right:-4px;top:-4px;width:22px;height:22px;border-radius:50%;background:var(--c);color:#fff;font-style:normal;font-weight:700;font-size:.75rem;display:grid;place-items:center;box-shadow:0 0 0 2px var(--sur)}
+.mnode:nth-child(4) .mic em{color:#2A2100}
+.mnode b{display:block;font-size:1.0625rem;line-height:1.3}
+.mnode p{margin:2px 0 6px;color:var(--tm);font-size:.875rem;line-height:1.4}
+.mmod{display:inline-block;font-size:.6875rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--ct);color:var(--cx);padding:3px 9px;border-radius:999px}
+.mleg{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:22px;font-size:.8125rem;color:var(--tm);font-weight:500}
+.mleg span{display:inline-flex;align-items:center;gap:8px}.mleg span::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--c)}
+@media(min-width:960px){
+ .mmap{grid-template-columns:1fr 240px 1fr;grid-template-rows:repeat(3,auto);align-items:center;gap:22px 48px;justify-items:stretch}
+ .mlinks{display:block}
+ .mhub{grid-column:2;grid-row:1/4;justify-self:center;width:220px;height:220px}
+ .mnodes{display:contents}.mnodes::before,.mnode::before{display:none}
+ .mnode.L{grid-column:1;flex-direction:row-reverse;text-align:right;border-left:0;border-right:6px solid var(--c)}
+ .mnode.R{grid-column:3}
+ .mnode:nth-child(1),.mnode:nth-child(4){grid-row:1}.mnode:nth-child(2),.mnode:nth-child(5){grid-row:2}.mnode:nth-child(3),.mnode:nth-child(6){grid-row:3}
+ .mnode:nth-child(1),.mnode:nth-child(3){margin-right:28px}.mnode:nth-child(4),.mnode:nth-child(6){margin-left:28px}
+}
+@media(prefers-reduced-motion:reduce){.mring,.mlinks path,.mnode{animation:none}}
 .objs{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:16px}
 @media(min-width:700px){.objs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(min-width:1100px){.objs{grid-template-columns:repeat(3,minmax(0,1fr))}}
@@ -667,14 +717,19 @@ body.present .reg{display:none}
  <div class="w slide">
   <div class="eyebrow">Welcome · Course objectives</div>
   <h1 class="sh1">By the end, you will be able to</h1>
-  <ol class="objs">
-   <li style="--ct:var(--m1t);--cx:var(--m1x)"><em>1</em><div><b>Define the metrics that matter</b><span>Module 1</span></div></li>
-   <li style="--ct:var(--m2t);--cx:var(--m2x)"><em>2</em><div><b>Prepare and clean data</b><span>Module 2</span></div></li>
-   <li style="--ct:var(--m2t);--cx:var(--m2x)"><em>3</em><div><b>Protect confidential data</b><span>Module 2</span></div></li>
-   <li style="--ct:var(--m3t);--cx:var(--m3x)"><em>4</em><div><b>Build a dashboard, with no code</b><span>Module 3</span></div></li>
-   <li style="--ct:var(--m4t);--cx:var(--m4x)"><em>5</em><div><b>Tell a real issue from noise</b><span>Module 4</span></div></li>
-   <li style="--ct:var(--m4t);--cx:var(--m4x)"><em>6</em><div><b>Present one clear recommendation</b><span>Module 4</span></div></li>
-  </ol>
+  <div class="mmap" id="mmap">
+   <svg class="mlinks" id="mlinks" aria-hidden="true"></svg>
+   <div class="mhub" id="mhub"><div class="mring" aria-hidden="true"></div><div class="mhin"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="12" width="4" height="8" rx="1"/><rect x="10" y="7" width="4" height="13" rx="1"/><rect x="17" y="3" width="4" height="17" rx="1"/></svg><b>4 hours</b><span>6 new skills</span></div></div>
+   <ol class="mnodes">
+   <li class="mnode L" style="--c:var(--m1);--ct:var(--m1t);--cx:var(--m1x);--i:1"><span class="mic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg><em>1</em></span><div><b>Define the metrics that matter</b><p>Pick KPIs that drive decisions</p><span class="mmod">Module 1</span></div></li>
+   <li class="mnode L" style="--c:var(--m2);--ct:var(--m2t);--cx:var(--m2x);--i:2"><span class="mic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16l-6 7v6l-4 2v-8z"/></svg><em>2</em></span><div><b>Prepare and clean data</b><p>Fix messy columns in Power Query</p><span class="mmod">Module 2</span></div></li>
+   <li class="mnode L" style="--c:var(--m2);--ct:var(--m2t);--cx:var(--m2x);--i:3"><span class="mic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><em>3</em></span><div><b>Protect confidential data</b><p>Hide and secure sensitive fields</p><span class="mmod">Module 2</span></div></li>
+   <li class="mnode R" style="--c:var(--m3);--ct:var(--m3t);--cx:var(--m3x);--i:4"><span class="mic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><em>4</em></span><div><b>Build a dashboard, with no code</b><p>Cards, slicers and charts by drag and drop</p><span class="mmod">Module 3</span></div></li>
+   <li class="mnode R" style="--c:var(--m4);--ct:var(--m4t);--cx:var(--m4x);--i:5"><span class="mic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h3l2-6 4 12 3-9 2 3h6"/></svg><em>5</em></span><div><b>Tell a real issue from noise</b><p>Read trends, not one-off spikes</p><span class="mmod">Module 4</span></div></li>
+   <li class="mnode R" style="--c:var(--m4);--ct:var(--m4t);--cx:var(--m4x);--i:6"><span class="mic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l6 4V6L7 10z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg><em>6</em></span><div><b>Present one clear recommendation</b><p>One insight, one action</p><span class="mmod">Module 4</span></div></li>
+   </ol>
+  </div>
+  <div class="mleg"><span style="--c:var(--m1)">Module 1 · Why</span><span style="--c:var(--m2)">Module 2 · Prepare</span><span style="--c:var(--m3)">Module 3 · Build</span><span style="--c:var(--m4)">Module 4 · Tell the story</span></div>
   <div class="snav"><a href="#roadmap">← 4-hour roadmap</a><a href="#ground-rules">Ground rules →</a></div>
  </div>
 </section>
@@ -719,7 +774,7 @@ body.present .reg{display:none}
    <li style="--c:var(--m3)"><em>03</em><b>Every question is welcome</b><span>If you are asking, others in the room are likely wondering the same.</span></li>
    <li style="--c:var(--m4)"><em>04</em><b>Protect confidential data</b><span>Use only the practice datasets provided. Do not upload company or personal data (PDPA 2010).</span></li>
    <li style="--c:var(--m1)"><em>05</em><b>Respect the time</b><span>Every activity is timed on screen. When time is up, we regroup.</span></li>
-   <li style="--c:var(--m2)"><em>06</em><b>Use the Parking Lot</b><span>Post off-topic or larger questions on Miro. We address them before we close.</span></li>
+   <li style="--c:var(--m2)"><em>06</em><b>Park big questions</b><span>Note off-topic or larger questions for the Q&amp;A. We answer them before we close.</span></li>
    <li style="--c:var(--m3)"><em>07</em><b>Challenge the data, not the person</b><span>Question the source and the numbers. Respect every perspective.</span></li>
    <li style="--c:var(--m4)"><em>08</em><b>Learn together</b><span>Explaining a step to a colleague is the fastest way to master it.</span></li>
   </ol>
@@ -844,13 +899,14 @@ body.present .reg{display:none}
   <div class="pgh"><div><div class="eyebrow m1e">Module 1 · 9:53 AM · 9 min</div><h1>The Big Why</h1><p>Start from a decision, not from the data. Everyone posts on one shared Miro board.</p></div></div>
   <div class="lg2">
    <article class="card">
-    <div class="k">Three sticky notes each</div>
+    <div class="k">Four sticky notes each</div>
     <ol class="prompts">
-     <li><small>Yellow sticky</small><b>"One decision I make every month is…"</b></li>
-     <li><small>Blue sticky</small><b>"The number that would change that decision is…"</b></li>
-     <li><small>Green sticky</small><b>"My three KPIs are…"</b></li>
+     <li><small>Yellow sticky · Decision</small><b>"One decision I make every month is…"</b></li>
+     <li><small>Blue sticky · Number</small><b>"The number that would change that decision is…"</b></li>
+     <li><small>Green sticky · KPI</small><b>"I would track it as this KPI…"</b></li>
+     <li><small>Pink sticky · Data</small><b>"The data lives in… (file, sheet, column)"</b></li>
     </ol>
-    <p class="small">Example: "I decide how many temp staff to hire each month. The number that changes it is orders per staff hour. My KPIs: orders per hour, overtime hours, late deliveries."</p>
+    <p class="small">Read it top to bottom: decision first, data last. If you cannot name the column, that is your first data gap.</p>
    </article>
    <article class="card miro" id="miroCard">
     <div class="k">Shared Miro board · scan to join</div>
@@ -869,12 +925,32 @@ body.present .reg{display:none}
   </div>
   <div id="miroEmbed" class="embed" hidden></div>
   <article class="card">
+   <div class="k">How we map the data</div>
+   <h3 class="maph">From a decision to the column that answers it</h3>
+   <ol class="dmap">
+    <li style="--c:var(--yel)"><em>1</em><b>Decision</b><span>What will you do differently?</span></li>
+    <li style="--c:var(--acc)"><em>2</em><b>Number</b><span>What would make you change it?</span></li>
+    <li style="--c:var(--m3)"><em>3</em><b>KPI</b><span>How do we measure that number?</span></li>
+    <li style="--c:var(--m4)"><em>4</em><b>Data</b><span>Which sheet and column feed it?</span></li>
+   </ol>
+   <div class="mtab" role="region" aria-label="HR mapping examples" tabindex="0">
+    <table>
+     <thead><tr><th>Decision</th><th>Number</th><th>KPI</th><th>Data in the HR file</th></tr></thead>
+     <tbody>
+      <tr><td>Where to focus retention</td><td>People leaving</td><td>Turnover rate by department</td><td><code>Status</code>, <code>Leave Reason</code>, <code>Department</code></td></tr>
+      <tr><td>Which hiring channel to fund</td><td>Good hires per source</td><td>Hires and performance by source</td><td><code>Recruitment Source</code>, <code>Hire Year</code>, <code>Performance</code></td></tr>
+      <tr><td>Which teams need support</td><td>Absence and lateness</td><td>Avg absences per employee</td><td><code>Absences</code>, <code>Days Late (last 30)</code>, <code>Manager</code></td></tr>
+      <tr><td>Whether pay is fair</td><td>Salary gaps</td><td>Avg salary by position and gender</td><td><code>Salary (USD)</code>, <code>Position</code>, <code>Gender</code></td></tr>
+     </tbody>
+    </table>
+   </div>
+   <p class="small" style="margin-top:12px">This table becomes your dashboard: each KPI is a card or a chart, and each column is a field you drag in Power BI.</p>
+  </article>
+  <article class="card">
    <div class="k">What is on the Miro board</div>
    <div class="frames">
-    <div style="--c:var(--m1);--ct:var(--m1t);--cx:var(--m1x)"><b>Frame 1 · The Big Why</b><span>One column per person: decision, number, three KPIs.</span></div>
-    <div style="--c:var(--m2);--ct:var(--m2t);--cx:var(--m2x)"><b>Frame 2 · KPI wall</b><span>Group the KPIs by function: Operations, Finance, Sales, HR, Other.</span></div>
-    <div style="--c:var(--m3);--ct:var(--m3t);--cx:var(--m3x)"><b>Frame 3 · Lego builds</b><span>Teams post a photo of their Round 3 towers and their one sentence.</span></div>
-    <div style="--c:var(--m4);--ct:var(--m4t);--cx:var(--m4x)"><b>Frame 4 · Parking lot</b><span>Questions for later. We clear it before we close.</span></div>
+    <div style="--c:var(--m1);--ct:var(--m1t);--cx:var(--m1x)"><b>Frame 1 · The Big Why</b><span>One column per person: decision, number, KPI and data, top to bottom.</span></div>
+    <div style="--c:var(--m2);--ct:var(--m2t);--cx:var(--m2x)"><b>Frame 2 · KPI wall</b><span>Group the KPIs by function: Operations, Finance, Sales, HR, Other. Circle the ones the HR file can answer today.</span></div>
    </div>
   </article>
  </div>
@@ -929,8 +1005,8 @@ const COLS = [
  {id:"m1",mc:"1",time:"9:30 – 10:05 · 35 min",title:"Module 1 · Identify data for better decisions",desc:"Why data matters, and why we don't build the dashboard straight away.",start:30,end:65,posts:[
   {tag:"activity",title:"The Data Brick Challenge",body:"Groups of 5 build one tower from every colour. Then the screen reveals which colours to remove, and which single colour to rebuild with. Each group shares a key takeaway.",meta:"15 min · groups of 5",page:"lego",pageText:"Open the Lego game"},
   {tag:"note",title:"From data chaos to data value",body:"About 90% of enterprise data is unstructured, and 58% of leaders say big decisions use inaccurate data most of the time (SoftServe, 2025)."},
-  {tag:"activity",title:"The Big Why: KPI brainstorm on Miro",body:"Start from one decision you make every month. Which number would change that decision? Post three KPIs for your role on the shared board.",meta:"9 min · individual",page:"brainstorm",pageText:"Open the brainstorm"},
-  {tag:"checkpoint",title:"Three role-specific KPIs on Miro",body:"Each participant has posted three KPIs with the decision each one supports."},
+  {tag:"activity",title:"The Big Why: KPI brainstorm on Miro",body:"Start from one decision you make every month. Which number would change that decision? Map it: decision, number, KPI, then the sheet and column that feed it. Post it on the shared board.",meta:"9 min · individual",page:"brainstorm",pageText:"Open the brainstorm"},
+  {tag:"checkpoint",title:"One decision mapped to data on Miro",body:"Each participant has posted a decision, its number, the KPI and the column that feeds it."},
   {tag:"link",title:"What is Power BI?",body:"Connect, clean, model, visualise and share in one workflow.",href:L("https://learn.microsoft.com/en-us/power-bi/fundamentals/power-bi-overview")}
  ]},
  {id:"m2",mc:"2",time:"10:05 – 10:45 · 40 min",title:"Module 2 · Preparing data for analysis",desc:"Combine and clean data, then check quality and privacy.",start:65,end:105,posts:[
@@ -978,7 +1054,7 @@ const FLOW = [
   {m:30,d:15,t:"The Data Brick Challenge (Lego game)",tr:"Run the steps on the Lego page: groups 2, build a tower 3, reveal colours to remove 2, reveal one colour to rebuild 3, moral 1, key takeaways 3, next step into Power BI 1. Tap points on the group scoreboard.",pa:"Groups of 5 build, remove the banned colours, rebuild with one colour, and share one takeaway.",mat:"One mixed bag of bricks per group, Lego page on screen",say:"Imagine this tower is a set of unstructured data. How do you get an answer out of it? You restrict it and you clean it."},
   {m:45,d:4,t:"The data gap: having data vs being data-driven",tr:"Mini-lecture with the DataCamp and Economist Impact numbers. Link back to Round 1 chaos.",pa:"Share one example from work.",mat:"Everyone has data slide (the spotlight)"},
   {m:49,d:4,t:"Why stored data is not yet an asset",tr:"Unstructured, messy, ungoverned data. Quick article discussion.",pa:"Discuss in pairs: which of these is on your desk?",mat:"Everyone has data slide (the reality desk)"},
-  {m:53,d:9,t:"Choosing the right KPIs: the Big Why",tr:"Model one: decision → question → KPI. Open the Brainstorm page and show the Miro QR.",pa:"Post three KPIs for their role on the shared Miro board.",mat:"Brainstorm page, Miro board",cp:"Each participant posts three role-specific KPIs."},
+  {m:53,d:9,t:"Choosing the right KPIs: the Big Why",tr:"Model one row of the mapping: decision → number → KPI → data column (HR example: turnover from Status and Leave Reason). Show the Miro QR.",pa:"Post four stickies on Miro: decision, number, KPI and data source.",mat:"Brainstorm page, Miro board",cp:"Each participant posts three role-specific KPIs."},
   {m:62,d:3,t:"Why Power BI?",tr:"Compare with Excel PivotTables, Tableau and custom web apps in one table.",pa:"Ask questions.",mat:"Comparison slide"}
  ]},
  {title:"Module 2 · Preparing data for analysis",mc:"2",m:65,d:40,lo:"Outcomes (b) and (g)",steps:[
@@ -1246,7 +1322,7 @@ const LEVELS=[
  {n:"Share",t:"Key takeaways",min:3,c:"--m4",pts:"+3",badge:"Best takeaway",
   do:"Each group has <b>30 seconds</b> to tell the room <b>one key takeaway</b>. Then the room votes for the sharpest one.",
   list:["What happened to your tower when the colours came out?","Why was the one-colour tower more useful?","Where at work do you have a big, mixed tower of data?"],
-  lesson:"Write the best takeaways in the Miro board's Parking lot so we can come back to them."},
+  lesson:"Share the best takeaway with the room. We use it in the Big Why next."},
  {n:"Next",t:"Now we go to Power BI",min:1,c:"--m1",next:true,
   do:"Same steps, real tool: get Power BI, get a dataset, and start building the dashboard.",
   lesson:"From here on, every click in Power BI is a brick move: load the data, clean it, filter it, then build."}
@@ -1438,5 +1514,16 @@ $("rGo").onclick=()=>{ showMe(); $("regForm").hidden=false; $("regDone").hidden=
 $("hiOut").onclick=()=>{ me=null; try{ localStorage.removeItem("dwc-user"); }catch(x){} $("regF").reset(); showMe(); $("rName").focus(); };
 showMe();
 
+
+/* objectives mind map connectors */
+(function(){const m=document.getElementById("mmap");if(!m)return;const sv=document.getElementById("mlinks"),hub=document.getElementById("mhub");
+function draw(){const r=m.getBoundingClientRect();if(!r.width||getComputedStyle(sv).display==="none"){sv.innerHTML="";return}
+const h=hub.getBoundingClientRect(),cx=h.left+h.width/2-r.left,cy=h.top+h.height/2-r.top,R=h.width/2+6;let o="";
+m.querySelectorAll(".mnode").forEach(n=>{const b=n.getBoundingClientRect(),L=n.classList.contains("L"),x=(L?b.right:b.left)-r.left,y=b.top+b.height/2-r.top;
+const ang=Math.atan2(y-cy,x-cx),sx=cx+R*Math.cos(ang),sy=cy+R*Math.sin(ang),mx=(sx+x)/2,c=getComputedStyle(n).getPropertyValue("--c")?getComputedStyle(n).borderColor:"#1677FF";
+const col=L?getComputedStyle(n).borderRightColor:getComputedStyle(n).borderLeftColor;
+o+=`<path d="M${sx},${sy} C${mx},${sy} ${mx},${y} ${x},${y}" stroke="${col}"/><circle cx="${x}" cy="${y}" r="6" fill="${col}"/><circle cx="${sx}" cy="${sy}" r="5" fill="${col}"/>`});
+sv.innerHTML=o}
+addEventListener("resize",draw);addEventListener("hashchange",()=>setTimeout(draw,60));new ResizeObserver(draw).observe(m);setTimeout(draw,700);})();
 </script>
 </body></html>
