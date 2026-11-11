@@ -448,6 +448,20 @@ body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-i
 .bwp p{margin:0;border-radius:3px;padding:8px 10px;font-size:.875rem;line-height:1.35;color:#1a1a1a;box-shadow:0 1px 3px rgba(0,0,0,.12)}
 .bwp p small{display:block;font-size:.625rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.6}
 .bwp p:nth-of-type(1){background:#FFE97A}.bwp p:nth-of-type(2){background:#BFD9FF}.bwp p:nth-of-type(3){background:#C6EDC9}.bwp p:nth-of-type(4){background:#F6C7E4}
+/* dax */
+.eyebrow.m3e{color:var(--m3x)}
+.dxhow{display:grid;gap:12px;margin-bottom:20px}@media(min-width:900px){.dxhow{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.dxhow div{background:var(--sur);border-radius:14px;box-shadow:0 0 0 1px var(--bd);padding:14px 16px;display:grid;gap:4px}
+.dxhow span{font-size:.875rem;color:var(--tm)}
+.dxgrid{display:grid;gap:16px;margin-bottom:80px}@media(min-width:900px){.dxgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.dxc{background:var(--sur);border-radius:16px;box-shadow:0 0 0 1px var(--bd),var(--sh1);overflow:hidden;display:flex;flex-direction:column}
+.dxh{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px}
+.dxk{font-size:.6875rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--m1t);color:var(--m1x);border-radius:999px;padding:3px 10px}
+.dxk.dxcol{background:var(--m3t);color:var(--m3x)}
+.dxc pre{margin:0;background:#0A2350;color:#E7F0FF;padding:16px;font:500 .875rem/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-x:auto;flex:1}
+.dxf{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px}
+.dxf small{color:var(--ts);font-size:.8125rem}
+.dxcp{border:1px solid var(--bd);background:var(--mut);color:var(--tx);border-radius:8px;padding:6px 14px;font:600 .8125rem var(--font);cursor:pointer;flex-shrink:0}
 /* gallery */
 .gbar{background:var(--m3t);color:var(--m3x);border-radius:12px;padding:12px 16px;font-size:.875rem;margin-bottom:16px}
 .glay{display:grid;gap:20px;align-items:start}@media(min-width:960px){.glay{grid-template-columns:360px 1fr}.gform{position:sticky;top:96px}}
@@ -1045,10 +1059,10 @@ body.present .reg{display:none}
     <table>
      <thead><tr><th>Decision</th><th>Number</th><th>KPI</th><th>Data in the HR file</th></tr></thead>
      <tbody>
-      <tr><td>Where to focus retention</td><td>People leaving</td><td>Turnover rate by department</td><td><code>Status</code>, <code>Leave Reason</code>, <code>Department</code></td></tr>
-      <tr><td>Which hiring channel to fund</td><td>Good hires per source</td><td>Hires and performance by source</td><td><code>Recruitment Source</code>, <code>Hire Year</code>, <code>Performance</code></td></tr>
-      <tr><td>Which teams need support</td><td>Absence and lateness</td><td>Avg absences per employee</td><td><code>Absences</code>, <code>Days Late (last 30)</code>, <code>Manager</code></td></tr>
-      <tr><td>Whether pay is fair</td><td>Salary gaps</td><td>Avg salary by position and gender</td><td><code>Salary (USD)</code>, <code>Position</code>, <code>Gender</code></td></tr>
+      <tr><td>Where to focus retention</td><td>People leaving</td><td>Turnover rate by department</td><td><code>EmploymentStatus</code>, <code>TermReason</code>, <code>Department</code></td></tr>
+      <tr><td>Which hiring channel to fund</td><td>Good hires per source</td><td>Hires and performance by source</td><td><code>RecruitmentSource</code>, <code>DateofHire</code>, <code>PerformanceScore</code></td></tr>
+      <tr><td>Which teams need support</td><td>Absence and lateness</td><td>Avg absences per employee</td><td><code>Absences</code>, <code>DaysLateLast30</code>, <code>ManagerName</code></td></tr>
+      <tr><td>Whether pay is fair</td><td>Salary gaps</td><td>Avg salary by position and gender</td><td><code>Salary</code>, <code>Position</code>, <code>Sex</code></td></tr>
      </tbody>
     </table>
    </div>
@@ -1060,6 +1074,56 @@ body.present .reg{display:none}
    <div class="gbar" id="bwMode" hidden></div>
    <div class="bwgrid" id="bwGrid"><p class="gempty">No posts yet. Be the first!</p></div>
   </article>
+ </div>
+</section>
+
+<section class="pg" id="pg-dax">
+ <div class="w">
+  <div class="pgh"><div><div class="eyebrow m3e">Module 3 · Basic DAX</div><h1>Basic DAX for the HR dashboard</h1><p>Eight short formulas for the staff performance dashboard. Copy one, paste it, check the number.</p></div></div>
+  <div class="dxhow">
+   <div><b>Measure</b><span>Home → <b>New measure</b>. A number that changes with the slicers (cards, gauge, table).</span></div>
+   <div><b>Column</b><span>Table tools → <b>New column</b>. A label for every row (Absence Category, Salary Group). Use it on an axis or a slicer.</span></div>
+   <div><b>Table name</b><span>Your table must be called <code>HRDataset_v14</code>. If yours has another name, change it in the formula.</span></div>
+  </div>
+  <div class="dxgrid">
+   <article class="dxc"><div class="dxh"><b>1. Count of Employees</b><span class="dxk ">Measure</span></div><pre><code>Count of Employees =
+COUNT(HRDataset_v14[EmpID])</code></pre><div class="dxf"><small>Check: 311 · yellow card</small><button type="button" class="dxcp">Copy</button></div></article>
+   <article class="dxc"><div class="dxh"><b>2. Average Salary</b><span class="dxk ">Measure</span></div><pre><code>Average Salary =
+AVERAGE(HRDataset_v14[Salary])</code></pre><div class="dxf"><small>Check: 69.02K</small><button type="button" class="dxcp">Copy</button></div></article>
+   <article class="dxc"><div class="dxh"><b>3. Average Absences</b><span class="dxk ">Measure</span></div><pre><code>Average Absences =
+AVERAGE(HRDataset_v14[Absences])</code></pre><div class="dxf"><small>Check: 10.24</small><button type="button" class="dxcp">Copy</button></div></article>
+   <article class="dxc"><div class="dxh"><b>4. Avg Satisfaction</b><span class="dxk ">Measure</span></div><pre><code>Avg Satisfaction =
+AVERAGE(HRDataset_v14[EmpSatisfaction])</code></pre><div class="dxf"><small>Check: 3.89 · gauge, min 1, max 5</small><button type="button" class="dxcp">Copy</button></div></article>
+   <article class="dxc"><div class="dxh"><b>5. Absence Category</b><span class="dxk dxcol">Column</span></div><pre><code>Absence Category =
+IF(
+    HRDataset_v14[Absences] &gt; 15,
+    &quot;BAD&quot;,
+    &quot;GOOD&quot;
+)</code></pre><div class="dxf"><small>Check: GOOD 235 · BAD 76</small><button type="button" class="dxcp">Copy</button></div></article>
+   <article class="dxc"><div class="dxh"><b>6. GOOD and BAD staff</b><span class="dxk ">Measure</span></div><pre><code>Good Staff =
+CALCULATE(
+    [Count of Employees],
+    HRDataset_v14[Absence Category] = &quot;GOOD&quot;
+)
+
+Bad Staff =
+CALCULATE(
+    [Count of Employees],
+    HRDataset_v14[Absence Category] = &quot;BAD&quot;
+)</code></pre><div class="dxf"><small>Check: 235 👍 · 76 👎</small><button type="button" class="dxcp">Copy</button></div></article>
+   <article class="dxc"><div class="dxh"><b>7. Salary Group</b><span class="dxk dxcol">Column</span></div><pre><code>Salary Group =
+VAR S = HRDataset_v14[Salary]
+RETURN
+SWITCH(
+    TRUE(),
+    S &lt;= 60340, &quot;Bottom 40&quot;,
+    S &lt;= 75188, &quot;Middle 40&quot;,
+    &quot;Top 20&quot;
+)</code></pre><div class="dxf"><small>Check: Bottom 40: 125 · Middle 40: 124 · Top 20: 62</small><button type="button" class="dxcp">Copy</button></div></article>
+   <article class="dxc"><div class="dxh"><b>8. SalaryDifference</b><span class="dxk ">Measure</span></div><pre><code>SalaryDifference =
+MAX(HRDataset_v14[Salary]) -
+MIN(HRDataset_v14[Salary])</code></pre><div class="dxf"><small>Check: 204,954 in total · per department in the table</small><button type="button" class="dxcp">Copy</button></div></article>
+  </div>
  </div>
 </section>
 
@@ -1195,10 +1259,10 @@ const COLS = [
   {tag:"link",title:"What is Power BI?",body:"Connect, clean, model, visualise and share in one workflow.",href:L("https://learn.microsoft.com/en-us/power-bi/fundamentals/power-bi-overview")}
  ]},
  {id:"m2",mc:"2",time:"10:05 – 10:45 · 40 min",title:"Module 2 · Preparing data for analysis",desc:"Combine and clean data, then check quality and privacy.",start:65,end:105,posts:[
-  {tag:"link",title:"Practice data: HR Workforce (beginner)",body:"311 fictional employees in 19 clear columns. Build the dashboard from the Employees sheet. Employees_Raw is a messy copy for cleaning practice. The Start here sheet lists six questions to answer.",href:"https://yushabdullah.github.io/DWC/data/HR_Workforce_Beginner.xlsx",hrefText:"Download the Excel file"},
+  {tag:"link",title:"Practice data: HRDataset_v14",body:"311 fictional employees, 36 columns, one sheet. Load it as it is: Salary, Absences, EmpSatisfaction, PerformanceScore, Sex, MaritalDesc, RecruitmentSource and Department feed the dashboard.",href:"https://yushabdullah.github.io/DWC/data/HRDataset_v14.xlsx",meta:"Excel · 70 KB"},
   {tag:"link",title:"Get data from files",body:"Bring an Excel or CSV file into Power BI Service.",href:L("https://learn.microsoft.com/en-us/power-bi/connect-data/service-get-data-from-files")},
   {tag:"link",title:"What is Power Query?",body:"The no-code tool for removing duplicates, fixing types and filling blanks.",href:L("https://learn.microsoft.com/en-us/power-query/power-query-what-is-power-query")},
-  {tag:"activity",title:"Clean it live",body:"Load the Employees_Raw sheet. Trim the extra spaces in Department, fix the hire date column, remove duplicate rows, and flag blank departments as Unknown. Same moves as the Lego clean-up, now in Power Query.",meta:"13 min · hands-on"},
+  {tag:"activity",title:"Clean it live",body:"Open HRDataset_v14 in Power Query. Trim the extra spaces in Department and Sex, set DOB, DateofHire and LastPerformanceReview_Date to Date, and check for duplicate EmpIDs. Same moves as the Lego clean-up.",meta:"13 min · hands-on"},
   {tag:"checkpoint",title:"Data quality and protection checklist",list:["No duplicate rows","Missing fields filled or flagged","Unknown values labelled","Who is missing from this data? (bias)","No personal data you don't need","Owner and refresh source known"]},
   {tag:"link",title:"Sensitivity labels in Power BI",body:"How to mark a report Confidential.",href:L("https://learn.microsoft.com/en-us/power-bi/enterprise/service-security-sensitivity-label-overview")}
  ]},
@@ -1207,11 +1271,13 @@ const COLS = [
   {tag:"link",title:"Visualization types in Power BI",body:"Reference for every built-in chart.",href:L("https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-types-for-reports-and-q-and-a")},
   {tag:"link",title:"Card visuals",body:"Build the headline KPI tiles.",href:L("https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-card")},
   {tag:"link",title:"Slicers",body:"Let each audience filter by month, region or team.",href:L("https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-slicers")},
-  {tag:"activity",title:"Build the HR Workforce dashboard",body:"Follow this layout: a header with three slicers (Department, Gender, Status), four KPI cards (Active headcount, Turnover rate, Avg engagement, Avg absences), then six charts.",img:"https://yushabdullah.github.io/DWC/data/HR_Dashboard_Layout.png",alt:"HR Workforce Overview dashboard layout with four KPI cards and six charts",meta:"Running case study"},
-  {tag:"activity",title:"Design the background in Canva",body:"Open the Canva template, change the colours if you like, then Share, Download, PNG. In Power BI: Format page, Canvas background, Image, Fit, transparency 0%. Place your visuals on the white panels and switch off their own backgrounds.",img:"https://yushabdullah.github.io/DWC/data/HR_Dashboard_Background.png",alt:"Empty HR dashboard background with header, four KPI cards and six panels",href:CANVA_HR,hrefText:"Open the Canva template"},
+  {tag:"activity",title:"Build the HR Staff Performance dashboard",body:"Follow this layout: three slicers on the left (Sex, MaritalDesc, RecruitmentSource), Count of Employees in the yellow box, cards for Average Salary and Average Absences, GOOD vs BAD staff, a satisfaction gauge, Salary Group and Absence Category charts, PerformanceScore chart and a salary table by department.",img:"https://yushabdullah.github.io/DWC/data/HR_Staff_Layout.png"},
+  {tag:"activity",title:"Empty background to edit",body:"Download this blank 1920 × 1080 background. In Power BI: Format page, Canvas background, Image, Fit, transparency 0%. Place your visuals on the white area and switch their own backgrounds off. Want other colours? Edit it in Canva or PowerPoint.",img:"https://yushabdullah.github.io/DWC/data/HR_Staff_Background_Empty.png"},
+  {tag:"link",title:"Logo (transparent PNG)",body:"Put it in the top-left corner of the blue header: Insert, Image. The background is transparent, so it sits cleanly on blue or white.",img:"https://yushabdullah.github.io/DWC/data/HR_Dashboard_Logo.png",href:"https://yushabdullah.github.io/DWC/data/HR_Dashboard_Logo.png"},
+  {tag:"activity",title:"Basic DAX: 8 formulas",body:"Count of Employees, averages, Absence Category, GOOD vs BAD staff, Salary Group and SalaryDifference, each with a Copy button and the number to check.",page:"dax",pageText:"Open Basic DAX"},
   {tag:"activity",title:"Template 2: sidebar layout",body:"Prefer a menu on the left? Use this template instead: page buttons and two slicers in the sidebar, two charts on top, a wide table below. The dashed squares are where your icons go.",img:"https://yushabdullah.github.io/DWC/data/HR_Template_Sidebar.png",alt:"Sidebar dashboard template with header, left menu, two panels and one wide panel",href:"https://yushabdullah.github.io/DWC/data/HR_Template_Sidebar_Blank.png",hrefText:"Download the blank version"},
   {tag:"link",title:"Free SVG icons",body:"Search SVG Repo for simple icons (try: employee, chart, filter, calendar), download the SVG and add it in Power BI with Insert, Image. Pick one style and one colour for all your icons, and check each icon's licence before using it at work.",href:"https://www.svgrepo.com",hrefText:"Open SVG Repo"},
-  {tag:"checkpoint",title:"Dashboard checkpoint",body:"One HR page with four KPI cards, three slicers and at least three charts on the Canva background. Then submit it to the gallery.",page:"gallery",pageText:"Submit to the gallery"}
+  {tag:"checkpoint",title:"Dashboard checkpoint",body:"One HR Staff Performance page on the empty background: three slicers, the yellow Count of Employees card, the Salary Group and Absence Category columns from Basic DAX, and at least three charts. Then submit it to the gallery.",page:"gallery",pageText:"Submit to the gallery"},
  ]},
  {id:"m4",mc:"4",time:"11:50 – 1:00 · 70 min",title:"Module 4 · Interpreting and presenting insights",desc:"Separate signal from noise, then recommend one action.",start:170,end:240,posts:[
   {tag:"note",title:"Real issue or noise?",list:["Is the change bigger than normal month-to-month swings?","Did it last more than one period?","Is the base number big enough to matter?","Did the definition or data source change?"]},
@@ -1240,11 +1306,11 @@ const FLOW = [
   {m:30,d:15,t:"The Data Brick Challenge (Lego game)",tr:"Run the steps on the Lego page: groups 2, build a tower 3, reveal colours to remove 2, reveal one colour to rebuild 3, moral 1, key takeaways 3, next step into Power BI 1. Tap points on the group scoreboard.",pa:"Groups of 5 build, remove the banned colours, rebuild with one colour, and share one takeaway.",mat:"One mixed box of bricks per group, Lego page on screen",say:"Imagine this tower is a set of unstructured data. How do you get an answer out of it? You restrict it and you clean it."},
   {m:45,d:4,t:"The data gap: having data vs being data-driven",tr:"Mini-lecture with the DataCamp and Economist Impact numbers. Link back to Round 1 chaos.",pa:"Share one example from work.",mat:"Everyone has data slide (the spotlight)"},
   {m:49,d:4,t:"Why stored data is not yet an asset",tr:"Unstructured, messy, ungoverned data. Quick article discussion.",pa:"Discuss in pairs: which of these is on your desk?",mat:"Everyone has data slide (the reality desk)"},
-  {m:53,d:9,t:"Choosing the right KPIs: the Big Why",tr:"Model one row of the mapping: decision → number → KPI → data column (HR example: turnover from Status and Leave Reason). Open the Big Why wall on screen.",pa:"Post four stickies on the Big Why wall: decision, number, KPI and data source.",mat:"Brainstorm page (Big Why wall)",cp:"Each participant posts three role-specific KPIs."},
+  {m:53,d:9,t:"Choosing the right KPIs: the Big Why",tr:"Model one row of the mapping: decision → number → KPI → data column (HR example: turnover from EmploymentStatus and TermReason). Open the Big Why wall on screen.",pa:"Post four stickies on the Big Why wall: decision, number, KPI and data source.",mat:"Brainstorm page (Big Why wall)",cp:"Each participant posts three role-specific KPIs."},
   {m:62,d:3,t:"Why Power BI?",tr:"Compare with Excel PivotTables, Tableau and custom web apps in one table.",pa:"Ask questions.",mat:"Comparison slide"}
  ]},
  {title:"Module 2 · Preparing data for analysis",mc:"2",m:65,d:40,lo:"Outcomes (b) and (g)",steps:[
-  {m:65,d:12,t:"Finding and combining data",tr:"Live demo: upload the sample Excel and a CSV to Power BI Service.",pa:"Follow along with the same files.",mat:"HR Workforce dataset (Employees_Raw sheet); Power BI Service"},
+  {m:65,d:12,t:"Finding and combining data",tr:"Live demo: upload the sample Excel and a CSV to Power BI Service.",pa:"Follow along with the same files.",mat:"HRDataset_v14.xlsx; Power BI Service"},
   {m:77,d:13,t:"Cleaning and structuring data",tr:"Demo then hands-on: remove duplicates, fix types, flag blanks as Unknown. Point back to the Lego colours the groups had to remove.",pa:"Clean their copy of the dataset.",mat:"Power Query"},
   {m:90,d:10,t:"Data protection and quality checklist",tr:"Run the six-point checklist together on the cleaned data.",pa:"Tick the checklist on their own data.",mat:"Checklist (board, Module 2)",cp:"Cleaned dataset passes the quality checklist."},
   {m:100,d:5,t:"Confidentiality and responsible handling",tr:"PDPA basics, least data needed, sensitivity labels, sharing rules.",pa:"Name one dataset at work that needs a Confidential label.",mat:"Sensitivity labels link"}
@@ -1253,8 +1319,8 @@ const FLOW = [
   {m:105,d:10,t:"Dashboard design principles",tr:"Right chart, right analysis, right question. Show a bad and a good dashboard.",pa:"Spot three problems in the bad one.",mat:"Chart selection guide"},
   {m:115,d:20,t:"Hands-on: KPI cards and trend chart",tr:"Build step by step: three cards, one line chart over time.",pa:"Build alongside the trainer.",mat:"Power BI Service"},
   {m:135,d:15,t:"Breakdowns, filters and slicers",tr:"Add a bar chart breakdown and a month or region slicer. Test cross-filtering.",pa:"Add a slicer and test it.",mat:"Slicers link"},
-  {m:150,d:10,t:"Interface design with Canva",tr:"Demo: open the HR Canva template, export it as PNG, set it as the Power BI canvas background, then place visuals on the panels with their backgrounds switched off.",pa:"Export the background and apply it to their HR page.",mat:"HR Canva template; HR_Dashboard_Background.png"},
-  {m:160,d:10,t:"Running use case and progress review",tr:"Participants finish the HR Workforce dashboard against the layout; trainer checks each screen against the rubric.",pa:"Finish their page.",mat:"HR layout picture; rubric",cp:"Page has three KPI cards, one trend chart and one slicer."}
+  {m:150,d:10,t:"Interface design: background, logo and DAX",tr:"Demo: set the empty background as the canvas background, add the transparent logo, then add the Absence Category and Salary Group columns from the Basic DAX page.",pa:"Apply the background and logo, paste the DAX, check the numbers.",mat:"Empty background PNG, logo PNG, Basic DAX page"},
+  {m:160,d:10,t:"Running use case and progress review",tr:"Participants finish the HR Staff Performance dashboard against the layout, using the Basic DAX page; trainer checks each screen against the rubric.",pa:"Finish their page.",mat:"HR layout picture; rubric",cp:"Page has the yellow count card, two KPI cards, three slicers and the DAX columns in charts."}
  ]},
  {title:"Module 4 · Interpreting and presenting insights",mc:"4",m:170,d:70,lo:"Outcomes (e) and (f)",steps:[
   {m:170,d:15,t:"Reading trends: real problems vs noise",tr:"Four questions test on two example charts. Group discussion.",pa:"Apply the four questions to their own dashboard.",mat:"Example charts"},
@@ -1382,8 +1448,8 @@ const OPEN=Date.UTC(2026,10,12,0,55,0);
 const FREE=["trainer","roadmap","objectives"];
 function isTrainer(){ try{ if(new URLSearchParams(location.search).has("trainer")) return true; const u=JSON.parse(localStorage.getItem("dwc-user")||"null"); return !!(u&&u.trainer); }catch(e){ return false; } }
 const isLocked=()=>!isTrainer() && Date.now()<OPEN;
-const PAGES={"lock":"pg-lock","trainer":"pg-trainer","roadmap":"pg-roadmap","objectives":"pg-objectives","reality":"pg-reality","run-sheet":"pg-run","ice-breaker":"pg-ice","ground-rules":"pg-rules","lego":"pg-lego","brainstorm":"pg-brain","bonus":"pg-bonus","gallery":"pg-gallery","feedback":"pg-feedback"};
-const ORDER=["board","trainer","roadmap","objectives","ground-rules","ice-breaker","lego","reality","brainstorm","gallery","bonus","feedback"];
+const PAGES={"lock":"pg-lock","trainer":"pg-trainer","roadmap":"pg-roadmap","objectives":"pg-objectives","reality":"pg-reality","run-sheet":"pg-run","ice-breaker":"pg-ice","ground-rules":"pg-rules","lego":"pg-lego","brainstorm":"pg-brain","bonus":"pg-bonus","gallery":"pg-gallery","dax":"pg-dax","feedback":"pg-feedback"};
+const ORDER=["board","trainer","roadmap","objectives","ground-rules","ice-breaker","lego","reality","brainstorm","dax","gallery","bonus","feedback"];
 const NAVKEY={roadmap:"trainer",objectives:"trainer",reality:"lego"};
 let current="board";
 function route(){
@@ -1778,5 +1844,10 @@ $("bwF").addEventListener("submit",async e=>{e.preventDefault();const g=id=>$(id
  $("bwF").reset();$("bwBtn").disabled=false;$("bwBtn").textContent="Posted ✓ Post another";setTimeout(load,SHEET_URL?2000:0);});
 $("bwRef").onclick=load;addEventListener("hashchange",()=>{if(location.hash==="#brainstorm")load();});
 load();setInterval(()=>{if(location.hash==="#brainstorm")load();},15000);})();
+
+/* DAX copy buttons */
+document.querySelectorAll(".dxcp").forEach(b=>b.onclick=async()=>{const t=b.closest(".dxc").querySelector("code").textContent;
+ try{await navigator.clipboard.writeText(t);}catch(e){const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(x){}a.remove();}
+ b.textContent="Copied ✓";setTimeout(()=>b.textContent="Copy",1500);});
 </script>
 </body></html>
