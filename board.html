@@ -1,0 +1,1161 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Dashboards Without Code Board</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: poster palette (navy, Power BI blue, module colours 1 blue / 2 green / 3 yellow / 4 purple) on the session-website structure. Rounded shell on a cool backdrop, sticky nav, hero with live card stack, then a Padlet shelf board on a tint band; second page is the trainer run sheet. */
+:root{--pri:#0B63E5;--onpri:#FFFFFF;--prih:#0A52BF;--acc:#1677FF;--yel:#F2C811;--onyel:#2A2100;--sur:#FFFFFF;--mut:#F5F8FE;--tint:#E7F0FF;--band:#EAF1FC;--ink:#0A2350;--onink:#FFFFFF;--inkh:#14336E;--back:#D3DDEC;--bd:#DCE4F1;--tx:#0A1A33;--tm:#44506A;--ts:#56627C;--ok:#0B5CD6;--no:#C42A36;--m1:#1677FF;--m1t:#E3EEFF;--m1x:#0B4FB8;--m2:#2E9E44;--m2t:#E2F4E5;--m2x:#1D6E2E;--m3:#F2B705;--m3t:#FFF4D1;--m3x:#7A5A00;--m4:#6A35C2;--m4t:#EEE6FA;--m4x:#552A9C;--mn:#0A2350;--mnt:#E7F0FF;--mnx:#0A2350;--frost:rgba(255,255,255,.74);--frostb:rgba(255,255,255,.7);--sh1:0 4px 16px rgba(10,35,80,.07);--sh2:0 12px 32px rgba(10,35,80,.10);--sh3:0 24px 60px rgba(10,35,80,.18);--ease:cubic-bezier(.22,1,.36,1);--font:Poppins,ui-sans-serif,system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--pri:#3D8BFF;--onpri:#04122E;--prih:#62A2FF;--acc:#5A9DFF;--sur:#0F2149;--mut:#0A1938;--tint:#15306A;--band:#0C1D42;--back:#040B1F;--bd:#21386B;--tx:#EEF3FF;--tm:#B9C5DE;--ts:#9DACC9;--ok:#7FB2FF;--no:#FF8A93;--ink:#030B20;--inkh:#0F2149;--m1t:#132E5E;--m1x:#8DB8FF;--m2t:#123A23;--m2x:#86D998;--m3t:#3A3010;--m3x:#F7D35C;--m4t:#2A1B4F;--m4x:#C3A6F2;--mn:#5A9DFF;--mnt:#15306A;--mnx:#B9C5DE;--frost:rgba(22,40,84,.78);--frostb:rgba(255,255,255,.12);--sh1:0 4px 16px rgba(0,0,0,.35);--sh2:0 12px 32px rgba(0,0,0,.4);--sh3:0 24px 60px rgba(0,0,0,.5);color-scheme:dark}}
+:root[data-theme="dark"]{--pri:#3D8BFF;--onpri:#04122E;--prih:#62A2FF;--acc:#5A9DFF;--sur:#0F2149;--mut:#0A1938;--tint:#15306A;--band:#0C1D42;--back:#040B1F;--bd:#21386B;--tx:#EEF3FF;--tm:#B9C5DE;--ts:#9DACC9;--ok:#7FB2FF;--no:#FF8A93;--ink:#030B20;--inkh:#0F2149;--m1t:#132E5E;--m1x:#8DB8FF;--m2t:#123A23;--m2x:#86D998;--m3t:#3A3010;--m3x:#F7D35C;--m4t:#2A1B4F;--m4x:#C3A6F2;--mn:#5A9DFF;--mnt:#15306A;--mnx:#B9C5DE;--frost:rgba(22,40,84,.78);--frostb:rgba(255,255,255,.12);--sh1:0 4px 16px rgba(0,0,0,.35);--sh2:0 12px 32px rgba(0,0,0,.4);--sh3:0 24px 60px rgba(0,0,0,.5);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 100px);scroll-behavior:smooth}
+body{margin:0;background:var(--back);color:var(--tx);font:400 16px/1.5 var(--font)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--mut);z-index:30}
+.shell{background:var(--mut);position:relative;overflow:hidden;min-height:100vh}
+@media(min-width:1440px){.shell{max-width:1440px;margin:24px auto;border-radius:40px;min-height:0}}
+.glow{position:absolute;border-radius:50%;background:var(--tint);opacity:.55;filter:blur(90px);pointer-events:none}
+.blob{position:absolute;top:-70px;right:-70px;width:220px;height:220px;pointer-events:none}
+.w{position:relative;max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media(min-width:640px){.w{padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px))}}
+@media(min-width:1024px){.w{padding-left:48px;padding-right:48px}}
+.w.wide{max-width:1440px}
+h1,h2,h3{font-weight:600;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.75rem,7vw,4.75rem);line-height:1.105}
+h2{font-size:clamp(2rem,4.5vw,3rem);line-height:1.167}
+p{margin:0 0 16px;color:var(--tm)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--tx);outline-offset:2px}
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--mut)}
+.nav{height:88px;display:flex;align-items:center;gap:24px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:1.125rem;letter-spacing:-.02em;line-height:1.1}
+.logo small{display:block;font-weight:400;font-size:.75rem;color:var(--ts);letter-spacing:.02em}
+.links{display:none;margin:0 auto;gap:20px}
+.links a,.mn a{font-size:.875rem;font-weight:500;color:var(--tm);text-decoration:none;padding:8px 0}
+.links a:hover,.mn a:hover{color:var(--tx)}.links a.on,.mn a.on{color:var(--tx);font-weight:600}
+@media(min-width:1080px){.links{display:flex}}
+.mn{display:flex;overflow-x:auto;gap:24px;padding:0 0 10px}@media(min-width:1080px){.mn{display:none}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 28px;border:0;border-radius:8px;font:500 .875rem var(--font);background:var(--pri);color:var(--onpri);text-decoration:none;cursor:pointer;transition:background .1s,transform .1s;white-space:nowrap}
+.btn:hover{background:var(--prih)}.btn:active{transform:scale(.98)}
+.btn.dk{background:var(--ink);color:var(--onink)}.btn.dk:hover{background:var(--inkh)}
+.btn.gh{background:var(--sur);color:var(--tx);box-shadow:var(--sh1)}
+.nav .btn{margin-left:auto}@media(min-width:1080px){.nav .btn{margin-left:0}}
+@media(max-width:520px){.nav .btn{padding:0 16px}.logo small{display:none}}
+.pg{display:none}.pg.on{display:block}
+/* hero */
+.hero{padding:32px 0 88px;display:grid;gap:40px}
+@media(min-width:1024px){.hero{grid-template-columns:7fr 5fr;align-items:center;padding-top:48px}}
+.chips{display:flex;gap:12px;margin-bottom:28px;overflow-x:auto;padding:6px 4px}
+.chip{background:var(--sur);box-shadow:var(--sh1);border-radius:12px;padding:12px 20px;display:flex;align-items:baseline;gap:8px;white-space:nowrap;transform:rotate(-4deg)}
+.chip:nth-child(2){transform:rotate(-2deg)}
+.chip b{font-size:1.375rem;font-weight:600;font-variant-numeric:tabular-nums}.chip span{font-size:.875rem;color:var(--ts)}
+.lead{max-width:500px;font-size:1.0625rem;margin:24px 0 36px}
+.cta{display:flex;gap:16px;flex-wrap:wrap}
+.stack{position:relative;height:420px;max-width:400px;width:100%;margin:0 auto}
+.pc{position:absolute;left:50%;top:0;width:260px;height:360px;margin-left:-130px;border-radius:12px;padding:22px;box-shadow:var(--sh3);transform-origin:50% 100%;transition:transform .7s var(--ease);display:flex;flex-direction:column}
+.pc.a{background:var(--ink);color:var(--onink);transform:rotate(-14deg) translateX(-100px)}
+.pc.b{background:var(--sur);transform:rotate(12deg) translateX(100px)}
+.pc.c{background:var(--frost);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--frostb);transform:translateY(24px)}
+.pile .pc{transform:none!important}
+.pc small{display:block;font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;opacity:.75}
+.pc strong{display:block;font-size:1.75rem;font-weight:600;line-height:1.12;margin:6px 0 10px;letter-spacing:-.02em}
+.pc .pct{font-size:3rem;font-variant-numeric:tabular-nums;margin-bottom:6px}
+.pc p{font-size:.875rem;margin:0}
+.pc.a p{color:#c9d3cb}
+.pc .foot{margin-top:auto;font-size:.75rem;letter-spacing:.02em;opacity:.75;font-variant-numeric:tabular-nums}
+.pbar{height:6px;border-radius:9999px;background:var(--tint);margin-top:8px;overflow:hidden}.pbar i{display:block;height:100%;width:0;background:var(--acc);border-radius:9999px;transition:width .45s var(--ease)}
+.segs{display:flex;gap:4px;margin-top:18px}.segs i{flex:1;height:40px;border-radius:4px;background:var(--bd)}.segs i.d{background:var(--acc)}.segs i.n{background:var(--pri);box-shadow:0 0 0 2px var(--acc) inset}
+.pc.rt{text-align:right}.dkb{background:rgba(255,255,255,.14)}.pc.a .pbar i{background:var(--pri)}
+@media(max-width:520px){.stack{transform:scale(.82);transform-origin:50% 0;height:360px}}
+/* board band */
+.band{background:var(--band);padding:72px 0 80px}
+.bh{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between;margin-bottom:28px}
+.bh p{margin:8px 0 0;max-width:560px}
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.flt{display:flex;flex-wrap:wrap;gap:6px;background:var(--sur);padding:4px;border-radius:12px;box-shadow:var(--sh1)}
+.flt button{font:500 .875rem var(--font);border:0;background:none;color:var(--tm);height:36px;padding:0 14px;border-radius:8px;cursor:pointer}
+.flt button[aria-pressed="true"]{background:var(--ink);color:var(--onink)}
+.srch{height:44px;border:0;border-radius:12px;padding:0 16px;font:400 .9375rem var(--font);background:var(--sur);color:var(--tx);box-shadow:var(--sh1);width:220px;max-width:100%}
+.srch::placeholder{color:var(--ts)}
+.board{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x proximity;padding:8px 4px 24px;align-items:flex-start;scrollbar-color:var(--bd) transparent}
+.col{flex:0 0 312px;scroll-snap-align:start;display:flex;flex-direction:column;gap:12px;min-width:0}
+.ch{padding:4px 4px 8px;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:center}
+.num{grid-row:span 2;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-weight:600;font-size:1rem;background:var(--sur);box-shadow:var(--sh1);color:var(--ok);font-variant-numeric:tabular-nums}
+.col.live .num{background:var(--pri);color:var(--onpri)}
+.ch .t{font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;font-weight:500;color:var(--ok);font-variant-numeric:tabular-nums;display:flex;gap:8px;align-items:center}
+.ch h3{font-size:1.25rem;line-height:1.25}
+.ch p{grid-column:1/-1;font-size:.875rem;margin:6px 0 0}
+.livepill{background:var(--ink);color:var(--pri);border-radius:9999px;padding:1px 10px;font-size:.6875rem;letter-spacing:.06em}
+.post{background:var(--sur);border-radius:16px;box-shadow:var(--sh1);overflow:hidden;transition:transform .28s var(--ease),box-shadow .28s var(--ease)}
+.post:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.pb{padding:16px 18px 16px;display:flex;flex-direction:column;gap:8px}
+.ptop{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.tag{font-size:.6875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:6px;padding:3px 8px;background:var(--tint);color:var(--ok)}
+.tag.activity{background:var(--ink);color:var(--pri)}
+.tag.checkpoint{background:var(--pri);color:var(--onpri)}
+.tag.link{background:transparent;box-shadow:inset 0 0 0 1px var(--bd);color:var(--tm)}
+.dur{font-size:.75rem;color:var(--ts);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.post h4{font-size:1.0625rem;line-height:1.3;margin:0;font-weight:600;letter-spacing:-.01em}
+.post p{font-size:.875rem;line-height:1.5;margin:0}
+.post ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.post li{font-size:.875rem;color:var(--tm);display:grid;grid-template-columns:18px 1fr;gap:6px;line-height:1.45}
+.post li::before{content:"";width:14px;height:14px;border-radius:50%;margin-top:3px;background:var(--tint);box-shadow:inset 0 0 0 4px var(--sur),inset 0 0 0 14px var(--acc)}
+.post.checkpoint li::before{border-radius:4px;background:none;box-shadow:inset 0 0 0 1.5px var(--acc)}
+.lk{display:flex;align-items:center;gap:12px;text-decoration:none;padding:12px 18px;border-top:1px solid var(--bd);background:var(--mut);transition:background .1s}
+.lk:hover{background:var(--tint)}
+.fav{flex:0 0 32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:.75rem;font-weight:600;background:var(--ink);color:var(--pri)}
+.lk span{min-width:0;font-size:.8125rem;line-height:1.3}
+.lk b{display:block;font-weight:600;font-size:.875rem;color:var(--tx)}
+.lk em{font-style:normal;color:var(--ts);overflow-wrap:anywhere}
+.lk .arr{margin-left:auto;color:var(--ok);font-weight:600}
+.messy{overflow-x:auto;border-radius:10px;box-shadow:inset 0 0 0 1px var(--bd)}
+.messy table{border-collapse:collapse;font-size:.75rem;width:100%;font-variant-numeric:tabular-nums}
+.messy td,.messy th{padding:5px 8px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--bd)}
+.messy tr:last-child td{border-bottom:0}
+.messy th{background:var(--tint);font-weight:600}
+.messy .bad{color:var(--no);font-weight:600}
+.col.brk .ch{opacity:.85}
+.col.brk .post{background:transparent;box-shadow:inset 0 0 0 2px var(--bd)}
+.empty{display:none;font-size:.875rem;color:var(--ts);padding:8px 4px}
+.col.none .empty{display:block}
+.hint{font-size:.8125rem;color:var(--ts);margin:4px 0 0}
+/* run sheet */
+.pgh{padding:40px 0 28px;display:grid;gap:24px}
+@media(min-width:900px){.pgh{grid-template-columns:1fr auto;align-items:end}}
+.pgh h1{font-size:clamp(2.5rem,6vw,3.5rem)}
+.pgh p{font-size:1.0625rem;max-width:620px;margin:12px 0 0}
+.meter{background:var(--sur);box-shadow:var(--sh1);border-radius:16px;padding:16px 20px;min-width:260px}
+.meter small{font-size:.75rem;color:var(--ts);letter-spacing:.04em;text-transform:uppercase}
+.meter b{display:block;font-size:1.375rem;font-weight:600;font-variant-numeric:tabular-nums}
+.meter .row2{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.meter button{font:500 .8125rem var(--font);height:34px;padding:0 12px;border-radius:8px;border:1px solid var(--bd);background:var(--mut);color:var(--tx);cursor:pointer}
+.blk{margin-bottom:32px}
+.bkh{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;padding:0 4px 12px}
+.bkh h2{font-size:1.375rem;line-height:1.273;letter-spacing:0}
+.bkh .t{font-size:.875rem;font-weight:600;color:var(--ok);font-variant-numeric:tabular-nums}
+.bkh .lo{font-size:.75rem;letter-spacing:.02em;background:var(--tint);color:var(--ok);padding:2px 10px;border-radius:9999px;font-weight:500}
+.steps{display:grid;gap:8px;list-style:none;margin:0;padding:0}
+details.st{background:var(--sur);box-shadow:var(--sh1);border-radius:12px;transition:box-shadow .28s}
+details.st[open]{box-shadow:var(--sh2)}
+details.st.live{box-shadow:0 0 0 2px var(--pri),var(--sh2)}
+details.st.done summary .tt{text-decoration:line-through;text-decoration-color:var(--ts);color:var(--ts)}
+details.st summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:28px 76px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 16px;min-height:56px}
+details.st summary::-webkit-details-marker{display:none}
+.ck{width:22px;height:22px;accent-color:var(--acc);cursor:pointer;margin:0}
+.tm{font-variant-numeric:tabular-nums;font-weight:600}
+.tm em{display:block;font-style:normal;font-size:.75rem;font-weight:400;color:var(--ts);letter-spacing:.02em}
+.tt{font-weight:600;line-height:1.35}
+.badges{display:flex;gap:6px;align-items:center}
+.bdg{font-size:.6875rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:6px;background:var(--pri);color:var(--onpri)}
+.bdg.now{background:var(--ink);color:var(--pri)}
+.chev{width:20px;height:20px;transition:transform .18s;color:var(--ts)}
+details[open] .chev{transform:rotate(180deg)}
+.sb{padding:4px 16px 18px 134px;display:grid;gap:12px}
+.g3{display:grid;gap:12px}@media(min-width:760px){.g3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.g3 div{background:var(--mut);border-radius:12px;padding:12px 14px;font-size:.9rem;color:var(--tm)}
+.g3 b{display:block;font-size:.6875rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ts);font-weight:600;margin-bottom:4px}
+.say{font-size:.9375rem;color:var(--tx);border-left:3px solid var(--pri);padding:4px 0 4px 14px}
+.cp{font-size:.875rem;font-weight:600;color:var(--ok);display:flex;gap:8px;align-items:flex-start}
+@media(max-width:640px){details.st summary{grid-template-columns:24px 62px minmax(0,1fr);gap:10px}.badges{grid-column:2/-1}.sb{padding-left:16px}}
+.panel{background:var(--tint);border-radius:24px;padding:16px 20px;font-size:.875rem;color:var(--tm);margin:8px 0 80px}
+/* footer */
+footer{background:var(--ink);color:#fff;border-radius:24px 24px 0 0;padding:48px 0 32px}
+footer .w{display:grid;gap:32px}@media(min-width:800px){footer .w{grid-template-columns:1.4fr 1fr 1fr}}
+footer p,footer a{color:#c9d3cb;font-size:.875rem;text-decoration:none;display:block;margin:0 0 8px}footer a:hover{color:#fff}
+footer h4{margin:0 0 12px;font-size:.875rem;font-weight:600;color:var(--yel)}
+footer .logo{color:#fff;margin-bottom:12px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.post:hover{transform:none}}
+
+/* poster type + colour coding */
+h1,h2,h3{font-weight:700;letter-spacing:-.025em}
+.eyebrow{font-size:.8125rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--ink);margin-bottom:12px}
+:root:not([data-theme="light"]) .eyebrow{color:var(--tx)}
+.eyebrow.m1e{color:var(--m1x)}
+h1.pt{font-size:clamp(3rem,7.5vw,5.25rem);line-height:1.02;font-weight:800;letter-spacing:-.035em;color:var(--ink)}
+h1.pt span{display:block;color:var(--acc)}
+.ptsub{font-size:clamp(1.25rem,2.4vw,1.75rem);line-height:1.3;color:var(--tx);margin:14px 0 0;font-weight:400}
+.ptsub b{font-weight:700}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) h1.pt{color:var(--tx)}}
+:root[data-theme="dark"] h1.pt{color:var(--tx)}
+.lead{margin:20px 0 32px}
+.col{--c:var(--mn);--ct:var(--mnt);--cx:var(--mnx)}
+.col[data-mc="1"]{--c:var(--m1);--ct:var(--m1t);--cx:var(--m1x)}.col[data-mc="2"]{--c:var(--m2);--ct:var(--m2t);--cx:var(--m2x)}
+.col[data-mc="3"]{--c:var(--m3);--ct:var(--m3t);--cx:var(--m3x)}.col[data-mc="4"]{--c:var(--m4);--ct:var(--m4t);--cx:var(--m4x)}
+.ch{background:var(--ct);border-radius:16px;padding:14px 14px 14px;border-top:5px solid var(--c)}
+.num{background:var(--c);color:#fff;box-shadow:none}
+.col[data-mc="3"] .num{color:var(--onyel)}
+.ch .t{color:var(--cx)}
+.col.live .num{background:var(--ink);color:var(--yel)}
+.livepill{background:var(--yel);color:var(--onyel)}
+.post{border-top:3px solid transparent}
+.col .post:hover{border-top-color:var(--c)}
+.tag{background:var(--tint);color:var(--ok)}
+.tag.activity{background:var(--ink);color:#fff}
+.tag.checkpoint{background:var(--yel);color:var(--onyel)}
+.fav{background:var(--ink);color:var(--yel)}
+.pglk{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-top:1px solid var(--bd);background:var(--ct);color:var(--cx);font-weight:600;font-size:.875rem;text-decoration:none}
+.pglk:hover{filter:brightness(.97)}
+.flt button[aria-pressed="true"]{background:var(--pri);color:var(--onpri)}
+.blk{--c:var(--mn);--ct:var(--mnt);--cx:var(--mnx)}
+.blk[data-mc="1"]{--c:var(--m1);--ct:var(--m1t);--cx:var(--m1x)}.blk[data-mc="2"]{--c:var(--m2);--ct:var(--m2t);--cx:var(--m2x)}
+.blk[data-mc="3"]{--c:var(--m3);--ct:var(--m3t);--cx:var(--m3x)}.blk[data-mc="4"]{--c:var(--m4);--ct:var(--m4t);--cx:var(--m4x)}
+.bkh{border-left:5px solid var(--c);padding-left:14px}
+.bkh .t{color:var(--cx)}.bkh .lo{background:var(--ct);color:var(--cx)}
+.bdg{background:var(--yel);color:var(--onyel)}.bdg.now{background:var(--ink);color:var(--yel)}
+details.st.live{box-shadow:0 0 0 2px var(--acc),var(--sh2)}
+.pc.a .pbar i{background:var(--yel)}
+.segs i.d{background:var(--acc)}.segs i.n{background:var(--yel);box-shadow:none}
+.k{font-size:.75rem;letter-spacing:.08em;font-weight:600;color:var(--ok);text-transform:uppercase}
+.card{background:var(--sur);border-radius:24px;padding:28px;box-shadow:var(--sh2);min-width:0}
+.card h3{font-size:1.375rem;line-height:1.3;margin:8px 0 12px}
+.small{font-size:.875rem;color:var(--ts)}
+/* rules */
+.rules{list-style:none;margin:0 0 24px;padding:0;display:grid;gap:16px;counter-reset:r}
+@media(min-width:700px){.rules{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1100px){.rules{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.rules li{counter-increment:r;background:var(--sur);border-radius:20px;box-shadow:var(--sh1);padding:22px;display:flex;flex-direction:column;gap:8px;border-top:5px solid var(--c)}
+.rules li::before{content:counter(r);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--c);color:#fff;font-weight:700;font-size:1.125rem}
+.rules li:nth-child(4n+3)::before{color:var(--onyel)}
+.rules b{font-size:1.125rem;line-height:1.3}
+.rules span{color:var(--tm);font-size:.9375rem}
+.agree{margin-bottom:80px;font-size:1rem}
+/* lego */
+.lg2{display:grid;gap:20px;margin-bottom:20px;align-items:start}@media(min-width:900px){.lg2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.scen p{color:var(--tm)}
+.qcard{background:var(--ink);color:#fff;border-radius:16px;padding:18px 20px;margin-top:8px}
+.qcard small{display:block;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--yel);margin-bottom:4px}
+.qcard b{font-size:1.25rem;line-height:1.3}
+.key{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.key li{display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:center;color:var(--tm)}
+.key b{color:var(--tx)}
+.bk{display:block;width:44px;height:26px;border-radius:5px;position:relative;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18)}
+.bk::before,.bk::after{content:"";position:absolute;top:-6px;width:10px;height:7px;border-radius:3px 3px 0 0;background:inherit;box-shadow:inset 0 -2px 0 rgba(0,0,0,.12)}
+.bk::before{left:7px}.bk::after{right:7px}
+.bk.red{background:#D7262B}.bk.blue{background:#1677FF}.bk.yel{background:#F2C811}.bk.wht{background:#F4F4F4;outline:1px solid var(--bd)}
+.bk.pair{box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 9px 0 -2px #A81D21}
+.bk.tiny{width:16px;height:14px;background:#8A94A8;margin-left:14px}.bk.tiny::after{display:none}.bk.tiny::before{left:3px}
+.sh{font-size:clamp(1.5rem,3vw,2rem);margin:36px 0 16px}
+.rounds{display:grid;gap:16px;margin-bottom:28px}@media(min-width:760px){.rounds{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(min-width:1180px){.rounds{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.round{background:var(--sur);border-radius:20px;box-shadow:var(--sh1);padding:22px;display:flex;flex-direction:column;gap:10px;border-top:5px solid var(--m1)}
+.round:nth-child(2){border-top-color:var(--m2)}.round:nth-child(3){border-top-color:var(--m3)}.round:nth-child(4){border-top-color:var(--m4)}
+.rh{display:flex;gap:12px;align-items:center}
+.rn{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--ink);color:var(--yel);font-weight:700}
+.rh b{display:block;font-size:1.125rem;line-height:1.2}.rh em{font-style:normal;font-size:.8125rem;color:var(--ts)}
+.round p,.round li{font-size:.9375rem;color:var(--tm);margin:0}
+.round ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.round .why{background:var(--tint);border-radius:10px;padding:10px 12px;color:var(--tx);font-size:.875rem}
+.tmr{margin-top:auto;display:flex;align-items:center;gap:8px;padding-top:8px;flex-wrap:wrap}
+.tv{font-size:2rem;font-weight:700;font-variant-numeric:tabular-nums;margin-right:auto;letter-spacing:-.02em}
+.tmr.run .tv{color:var(--acc)}.tmr.end .tv{color:var(--no)}
+.tmr button{font:600 .8125rem var(--font);height:36px;padding:0 14px;border-radius:8px;border:0;cursor:pointer;background:var(--pri);color:var(--onpri)}
+.tmr .treset{background:var(--mut);color:var(--tx);box-shadow:inset 0 0 0 1px var(--bd)}
+.tw{overflow-x:auto}
+.kit{width:100%;border-collapse:collapse;font-size:.9375rem;font-variant-numeric:tabular-nums}
+.kit th,.kit td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--bd);color:var(--tm);vertical-align:top}
+.kit th{color:var(--tx);font-weight:600;font-size:.8125rem}
+.kit tr.win td{background:var(--m3t);color:var(--tx);font-weight:600}
+.ans summary{cursor:pointer;font-weight:600;color:var(--ok);padding:8px 0;min-height:44px;display:flex;align-items:center}
+.ans p{color:var(--tm);margin:12px 0 0}
+.map{margin-bottom:80px}
+.mt{font-size:.75rem;font-weight:600;padding:3px 10px;border-radius:9999px;white-space:nowrap}
+.mt.m1{background:var(--m1t);color:var(--m1x)}.mt.m2{background:var(--m2t);color:var(--m2x)}.mt.m3{background:var(--m3t);color:var(--m3x)}.mt.m4{background:var(--m4t);color:var(--m4x)}
+/* brainstorm */
+.prompts{list-style:none;margin:8px 0 16px;padding:0;display:grid;gap:12px}
+.prompts li{border-radius:4px;padding:16px 18px;transform:rotate(-1deg);box-shadow:var(--sh1);color:#1a1a1a}
+.prompts li:nth-child(1){background:#FFE97A}.prompts li:nth-child(2){background:#BFD9FF;transform:rotate(.8deg)}.prompts li:nth-child(3){background:#C6EDC9;transform:rotate(-.5deg)}
+.prompts small{display:block;font-size:.75rem;opacity:.7;letter-spacing:.04em;text-transform:uppercase}
+.prompts b{font-size:1.125rem;line-height:1.35}
+.miro{display:flex;flex-direction:column;gap:12px}
+.qrwrap{display:flex;justify-content:center}
+.qr{background:#fff;padding:14px;border-radius:16px;box-shadow:var(--sh1);line-height:0}
+.qr img,.qr canvas{display:block;width:220px;height:220px}
+.fld{font-size:.8125rem;font-weight:600;margin-top:8px}
+.row3{display:flex;gap:8px}
+.row3 input{flex:1;min-width:0;height:44px;border:1px solid var(--bd);border-radius:8px;padding:0 14px;font:400 .9375rem var(--font);background:var(--mut);color:var(--tx)}
+.embed{margin-bottom:20px;border-radius:24px;overflow:hidden;box-shadow:var(--sh2);background:var(--sur)}
+.embed iframe{display:block;width:100%;height:min(70vh,640px);border:0}
+.frames{display:grid;gap:12px;margin-top:12px}@media(min-width:760px){.frames{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.frames div{background:var(--ct);border-radius:14px;padding:16px;border-left:5px solid var(--c);display:grid;gap:4px}
+.frames b{color:var(--cx)}.frames span{font-size:.875rem;color:var(--tm)}
+#pg-brain .card:last-child{margin-bottom:80px}
+/* feedback */
+.fb{display:grid;gap:40px;align-items:center;padding:48px 0 96px}@media(min-width:960px){.fb{grid-template-columns:1fr auto}}
+.fb h1{font-size:clamp(2.5rem,6vw,4rem);color:var(--tx)}
+.fbl{margin:0;padding-left:20px;color:var(--tm);display:grid;gap:6px;font-size:1.0625rem}
+.fbq{background:var(--ink);border-radius:32px;padding:28px;display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:var(--sh3);color:#fff;text-align:center;max-width:100%}
+.fbq img{width:min(420px,72vw);height:auto;aspect-ratio:1;background:#fff;border-radius:20px;padding:16px;max-width:100%}
+.fbq b{font-size:1.125rem;margin-top:6px}.fbq span{font-size:.875rem;color:var(--yel);letter-spacing:.06em;text-transform:uppercase}
+/* present mode */
+body.present .shell{max-width:none;margin:0;border-radius:0}
+body.present{zoom:1.12}
+#present[aria-pressed="true"]{background:var(--yel);color:var(--onyel)}
+.pnav{display:none}
+body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));gap:8px;z-index:40}
+.pnav button{width:48px;height:48px;border-radius:50%;border:0;background:var(--ink);color:#fff;font-size:1.25rem;cursor:pointer;box-shadow:var(--sh2)}
+.fbl2{color:#fff;font-size:.875rem;opacity:.85}
+
+/* lego game */
+[hidden]{display:none!important}
+.hiddenkey{background:var(--tint);border-radius:16px;padding:20px;display:grid;gap:12px;justify-items:start}
+.hiddenkey p{margin:0}
+.bk.small{width:26px;margin-left:9px}.bk.small::after{display:none}.bk.small::before{left:8px}
+.game{margin:8px 0 24px}
+.lvtabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px}
+.lvtabs button{flex:0 0 auto;font:600 .875rem var(--font);border:0;cursor:pointer;height:44px;padding:0 16px;border-radius:9999px;background:var(--sur);color:var(--tm);box-shadow:var(--sh1);display:flex;gap:8px;align-items:center}
+.lvtabs button i{font-style:normal;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--tint);color:var(--ok);font-size:.8125rem}
+.lvtabs button[aria-selected="true"]{background:var(--ink);color:#fff}
+.lvtabs button[aria-selected="true"] i{background:var(--yel);color:var(--onyel)}
+.lvtabs button.done i{background:var(--m2);color:#fff}
+.lvl{background:var(--sur);border-radius:28px;box-shadow:var(--sh2);padding:32px;display:grid;gap:24px;border-top:6px solid var(--lc,var(--m1))}
+@media(min-width:960px){.lvl{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}}
+.lvl .lt{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.lvl .ln{font-size:.8125rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ok)}
+.lvl h2{font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin:4px 0 0}
+.lvl .do{font-size:1.1875rem;line-height:1.55;color:var(--tx);margin:16px 0 0}
+.lvl .say{font-size:1.0625rem;margin-top:16px}
+.lvl .lesson{background:var(--tint);border-radius:14px;padding:14px 16px;margin-top:16px;font-size:.9375rem;color:var(--tx)}
+.lvl .lesson b{color:var(--ok)}
+.lvl ul{margin:12px 0 0;padding-left:20px;color:var(--tx);font-size:1.0625rem;display:grid;gap:6px}
+.lvside{display:flex;flex-direction:column;gap:16px}
+.ptsbig{background:var(--ink);color:#fff;border-radius:20px;padding:20px;display:flex;gap:16px;align-items:center}
+.ptsbig b{font-size:2.5rem;line-height:1;color:var(--yel);font-variant-numeric:tabular-nums}
+.ptsbig span{font-size:.9375rem}
+.ptsbig span em{display:block;font-style:normal;color:#c5d0e6;font-size:.8125rem}
+.twist{border-radius:20px;padding:20px;background:var(--m3t);color:var(--tx);display:grid;gap:10px}
+.twist small{font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--m3x)}
+.twist b{font-size:1.125rem;line-height:1.4}
+.twist[data-hid="1"] b{filter:blur(7px);user-select:none}
+.twist button{justify-self:start;font:600 .875rem var(--font);height:40px;padding:0 16px;border-radius:8px;border:0;cursor:pointer;background:var(--ink);color:#fff}
+.lvl .tmr{background:var(--mut);border-radius:16px;padding:14px 16px;margin:0}
+.lvl .tv{font-size:2.75rem}
+.lvnav{display:flex;gap:10px;justify-content:space-between}
+.lvnav .btn{flex:1}
+.score .sbh{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.link{background:none;border:0;color:var(--ok);font:600 .875rem var(--font);cursor:pointer;padding:8px 0}
+.sr{position:absolute;left:-9999px}
+.sbd{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px;counter-reset:s}
+.sbd li{counter-increment:s;display:grid;grid-template-columns:36px minmax(0,1fr) auto auto;gap:10px;align-items:center;background:var(--mut);border-radius:12px;padding:8px 10px}
+.sbd li::before{content:counter(s);width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.875rem;background:var(--tint);color:var(--ok)}
+.sbd li:nth-child(1)::before{background:var(--yel);color:var(--onyel)}
+.sbd li:nth-child(2)::before{background:#C9D2E3;color:#1d2a44}
+.sbd li:nth-child(3)::before{background:#E2B07A;color:#3b2205}
+.sbd .nm{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sbd .tot{font-size:1.375rem;font-weight:700;font-variant-numeric:tabular-nums;min-width:2ch;text-align:right}
+.sbd .pts{display:flex;gap:4px}
+.sbd .pts button{font:600 .8125rem var(--font);height:32px;min-width:36px;border-radius:8px;border:0;cursor:pointer;background:var(--sur);color:var(--tx);box-shadow:inset 0 0 0 1px var(--bd)}
+.sbd .pts button.p{background:var(--pri);color:var(--onpri);box-shadow:none}
+@media(max-width:560px){.sbd li{grid-template-columns:32px minmax(0,1fr) auto}.sbd .pts{grid-column:1/-1}}
+.badges2{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.badges2 li{display:grid;grid-template-columns:48px 1fr;gap:2px 12px;align-items:center}
+.badges2 span{grid-row:span 2;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:700}
+.badges2 .pt1{background:var(--m1t);color:var(--m1x)}.badges2 .pt2{background:var(--m2t);color:var(--m2x)}.badges2 .pt3{background:var(--yel);color:var(--onyel)}
+.badges2 em{font-style:normal;font-size:.875rem;color:var(--tm)}
+.prep{margin:0 0 12px;padding-left:20px;color:var(--tm);display:grid;gap:6px}
+#pg-lego .lg2:last-child{margin-bottom:80px}
+
+/* ice breaker */
+.ice{display:grid;gap:20px;margin-bottom:20px}@media(min-width:1000px){.ice{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}}
+.icestage{background:var(--ink);color:#fff;border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:20px;box-shadow:var(--sh3);min-width:0}
+.icetop{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.icestage .ln{font-size:.8125rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--yel)}
+.icemode{display:flex;gap:4px;background:rgba(255,255,255,.08);padding:4px;border-radius:10px;flex-wrap:wrap}
+.icemode button{font:600 .8125rem var(--font);border:0;background:none;color:#c5d0e6;height:34px;padding:0 12px;border-radius:7px;cursor:pointer}
+.icemode button[aria-pressed="true"]{background:var(--yel);color:var(--onyel)}
+.bignum{font-size:clamp(3.5rem,14vw,10rem);font-weight:800;letter-spacing:.04em;line-height:1;text-align:center;font-variant-numeric:tabular-nums;padding:24px 0;overflow-wrap:anywhere;color:#fff}
+.bignum.pop{animation:pop .45s var(--ease)}
+@keyframes pop{from{transform:scale(.85);opacity:.3}to{transform:none;opacity:1}}
+.cards{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.cards span{min-width:64px;height:84px;padding:0 10px;border-radius:10px;background:#fff;color:var(--ink);display:grid;place-items:center;font-size:2rem;font-weight:800;box-shadow:0 6px 0 rgba(0,0,0,.25)}
+.icebtns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn.big{height:56px;padding:0 36px;font-size:1rem;background:var(--yel);color:var(--onyel)}
+.btn.big:hover{background:#ffd93d}
+.icestage .tmr{background:rgba(255,255,255,.08);border-radius:16px;padding:12px 16px;margin:0}
+.icestage .tv{color:#fff}
+.icestage .tmr.end .tv{color:#FF8A93}
+.iceside{display:flex;flex-direction:column;gap:20px;min-width:0}
+.script p{margin:8px 0;font-size:1.125rem;color:var(--tx)}
+.script .all{background:var(--m3t);border-radius:12px;padding:12px 14px;font-weight:600}
+.steps2{margin:8px 0 0;padding-left:20px;display:grid;gap:8px;color:var(--tm)}
+.moral{margin-bottom:80px}.moral p{color:var(--tm);font-size:1.0625rem;max-width:80ch}
+/* group lego */
+.why3{display:grid;gap:16px;margin-bottom:20px}@media(min-width:900px){.why3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.why3 article{background:var(--ct);border-radius:20px;padding:22px;display:grid;gap:8px;align-content:start}
+.why3 span{width:40px;height:40px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-weight:700}
+.why3 article:nth-child(3) span{color:var(--onyel)}
+.why3 b{font-size:1.25rem;line-height:1.3;color:var(--cx)}
+.why3 p{margin:0;color:var(--tx)}
+.scen{margin-bottom:20px}
+.swatches{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px}
+.sw{display:flex;flex-direction:column;align-items:center;gap:8px;font-weight:700;font-size:1rem}
+.sw i{width:110px;height:70px;border-radius:10px;display:block;position:relative;box-shadow:inset 0 -6px 0 rgba(0,0,0,.18)}
+.sw i::before,.sw i::after{content:"";position:absolute;top:-12px;width:24px;height:14px;border-radius:5px 5px 0 0;background:inherit}
+.sw i::before{left:18px}.sw i::after{right:18px}
+.sw.x i{opacity:.9}
+.sw.x i>em{position:absolute;inset:0;display:grid;place-items:center;font-style:normal;font-size:3rem;font-weight:800;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.5)}
+.reveal{margin-top:16px;border-radius:20px;padding:22px;background:var(--m3t);display:grid;gap:12px}
+.reveal small{font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--m3x)}
+.reveal .rb{display:flex;gap:10px;flex-wrap:wrap}
+.reveal button{font:600 .875rem var(--font);height:44px;padding:0 18px;border-radius:8px;border:0;cursor:pointer;background:var(--ink);color:#fff}
+.reveal button.alt{background:var(--sur);color:var(--tx);box-shadow:inset 0 0 0 1px var(--bd)}
+.palette{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.palette label{display:flex;align-items:center;gap:8px;background:var(--mut);border-radius:9999px;padding:6px 12px 6px 6px;font-size:.875rem;cursor:pointer;box-shadow:inset 0 0 0 1px var(--bd)}
+.palette label i{width:22px;height:22px;border-radius:50%;display:block;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.palette input{accent-color:var(--acc)}
+.next{display:grid;gap:12px;margin-top:16px}
+.next a{display:flex;gap:12px;align-items:center;text-decoration:none;background:var(--mut);border-radius:12px;padding:12px 14px;font-weight:600}
+.next a span{width:30px;height:30px;border-radius:50%;background:var(--pri);color:var(--onpri);display:grid;place-items:center;font-size:.875rem;flex:0 0 30px}
+.next a em{font-style:normal;font-weight:400;color:var(--ts);font-size:.875rem;display:block}
+#sbQuick{margin-top:4px}
+</style>
+
+</head><body><div class="shell">
+<div class="glow" aria-hidden="true" style="width:520px;height:520px;left:-160px;top:120px"></div>
+<svg class="blob" aria-hidden="true" viewBox="0 0 220 220"><path d="M220 0v220A110 110 0 0 1 110 110 110 110 0 0 1 220 0z" fill="#0A2350"/><path d="M220 0A110 110 0 0 0 110 110 110 110 0 0 0 0 0z" fill="#1677FF"/></svg>
+
+<header><div class="w">
+ <div class="nav">
+  <a class="logo" href="#board" aria-label="Dashboards Without Code, session board">
+   <svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true"><rect x="2" y="2" width="36" height="24" rx="6" fill="#0A2350"/><rect x="9" y="14" width="5" height="7" rx="1.2" fill="#1677FF"/><rect x="17.5" y="10" width="5" height="11" rx="1.2" fill="#5A9DFF"/><rect x="26" y="6" width="5" height="15" rx="1.2" fill="#F2C811"/></svg>
+   <span>Dashboards Without Code<small>Aventra Group · Session board</small></span></a>
+  <nav class="links" aria-label="Main"><a href="#board" data-p="board">Board</a><a href="#ground-rules" data-p="ground-rules">Ground rules</a><a href="#ice-breaker" data-p="ice-breaker">Ice breaker</a><a href="#lego" data-p="lego">Lego game</a><a href="#brainstorm" data-p="brainstorm">Brainstorm</a><a href="#feedback" data-p="feedback">Feedback</a><a href="#run-sheet" data-p="run-sheet">Run sheet</a></nav>
+  <button class="btn dk" type="button" id="present" aria-pressed="false">Present</button>
+ </div>
+ <nav class="mn" aria-label="Main mobile"><a href="#board" data-p="board">Board</a><a href="#ground-rules" data-p="ground-rules">Ground rules</a><a href="#ice-breaker" data-p="ice-breaker">Ice breaker</a><a href="#lego" data-p="lego">Lego game</a><a href="#brainstorm" data-p="brainstorm">Brainstorm</a><a href="#feedback" data-p="feedback">Feedback</a><a href="#run-sheet" data-p="run-sheet">Run sheet</a></nav>
+</div></header>
+
+<main>
+<section class="pg" id="pg-board">
+ <div class="w">
+  <div class="hero" id="hero">
+   <div>
+    <div class="chips"><div class="chip"><b>4</b><span>modules</span></div><div class="chip"><b>240</b><span>minutes</span></div><div class="chip"><b>0</b><span>lines of code</span></div></div>
+    <div class="eyebrow">Hands-on training session</div>
+    <h1 class="pt">Dashboards <span>Without Code</span></h1>
+    <p class="ptsub"><b>Using Microsoft Power BI:</b> From Data to Decisions.</p>
+    <p class="lead"><span class="dt">Saturday 28 Nov 2026</span>, 9:00 AM to 1:00 PM, physical training. Led by Yusri Abdullah. Everything for the session lives on this board.</p>
+    <div class="cta"><a class="btn" href="#columns">Open the board</a><a class="btn gh" href="#ground-rules">Ground rules</a><a class="btn gh" href="#lego">Lego game</a></div>
+   </div>
+   <div class="stack" id="stack" role="img" aria-label="Session status cards: current block, next block and overall progress">
+    <div class="pc a"><small>Session progress</small><strong class="pct" id="cP">0%</strong><div class="pbar dkb"><i id="cBar"></i></div><div class="foot" id="cF">0 of 240 minutes</div></div>
+    <div class="pc b rt"><small>Up next</small><strong id="bT">Welcome &amp; ice breaker</strong><p id="bS">9:00 AM · 30 min</p><div class="foot">Followed automatically on the day</div></div>
+    <div class="pc c"><small id="aL">Starts in</small><strong id="aT">Sat 28 Nov, 9:00 AM</strong><p id="aS">Prep kit is in the first column.</p><div class="segs" id="segs" aria-hidden="true"></div><div class="foot" id="aF">9:00 AM – 1:00 PM MYT · 5 blocks</div></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="band" id="columns">
+  <div class="w wide">
+   <div class="bh">
+    <div><h2>Session board</h2><p>One column per block of the day. Scroll sideways to move through time; the live column lights up on the day.</p></div>
+    <div class="tools">
+     <div class="flt" role="group" aria-label="Filter posts" id="flt">
+      <button type="button" data-f="all" aria-pressed="true">All</button>
+      <button type="button" data-f="activity" aria-pressed="false">Activities</button>
+      <button type="button" data-f="checkpoint" aria-pressed="false">Checkpoints</button>
+      <button type="button" data-f="link" aria-pressed="false">Links</button>
+      <button type="button" data-f="note" aria-pressed="false">Notes</button>
+     </div>
+     <label for="q" style="position:absolute;left:-9999px">Search posts</label>
+     <input class="srch" id="q" type="search" placeholder="Search posts" autocomplete="off">
+    </div>
+   </div>
+   <div class="board" id="board" tabindex="0" aria-label="Session board, scroll sideways"></div>
+   <p class="hint">Tip: Shift + scroll or swipe to move across the columns.</p>
+  </div>
+ </div>
+</section>
+
+<section class="pg" id="pg-run">
+ <div class="w">
+  <div class="pgh">
+   <div><h1>Trainer run sheet</h1><p>The session minute by minute. Open a step for what you do, what participants do and what to say. Tick it off as you go; ticks stay on this device.</p></div>
+   <div class="meter" aria-live="polite"><small>Steps done</small><b id="mDone">0 of 24</b><div class="pbar"><i id="mBar"></i></div>
+    <div class="row2"><button type="button" id="jump">Jump to now</button><button type="button" id="openAll">Expand all</button><button type="button" id="reset">Clear ticks</button></div></div>
+  </div>
+  <div id="flow"></div>
+  <div class="panel">Timing follows the Session Plan exactly: 30 + 35 + 40 + 65 + 70 = 240 minutes, with no break.</div>
+ </div>
+</section>
+<section class="pg" id="pg-rules">
+ <div class="w">
+  <div class="pgh"><div><div class="eyebrow">Welcome · 9:08 AM</div><h1>Ground rules</h1><p>Eight rules for a hands-on morning. We agree them together before we start building.</p></div></div>
+  <ol class="rules">
+   <li style="--c:var(--m1);--ct:var(--m1t);--cx:var(--m1x)"><b>Phones on silent, laptops open</b><span>We build today, not just watch. Keep your laptop charged and Power BI open.</span></li>
+   <li style="--c:var(--m2);--ct:var(--m2t);--cx:var(--m2x)"><b>Try first, then ask</b><span>Stuck for two minutes? Raise your hand or ask your neighbour. Nobody gets left behind.</span></li>
+   <li style="--c:var(--m3);--ct:var(--m3t);--cx:var(--m3x)"><b>No silly questions</b><span>If you are wondering about it, someone else in the room is too.</span></li>
+   <li style="--c:var(--m4);--ct:var(--m4t);--cx:var(--m4x)"><b>Synthetic data only</b><span>Use the practice files today. Don't upload real company or personal data (PDPA).</span></li>
+   <li style="--c:var(--m1);--ct:var(--m1t);--cx:var(--m1x)"><b>Watch the timer</b><span>Every activity has a timer on screen. When it ends, we come back together.</span></li>
+   <li style="--c:var(--m2);--ct:var(--m2t);--cx:var(--m2x)"><b>Park it on Miro</b><span>Off-topic or big questions go on the Parking Lot. We answer them before we close.</span></li>
+   <li style="--c:var(--m3);--ct:var(--m3t);--cx:var(--m3x)"><b>Challenge the data, not the person</b><span>Every view is welcome. Ask what the numbers show and where they came from.</span></li>
+   <li style="--c:var(--m4);--ct:var(--m4t);--cx:var(--m4x)"><b>Help your neighbour</b><span>Explaining a step to someone else is the fastest way to learn it yourself.</span></li>
+  </ol>
+  <div class="panel agree">Agree with a thumbs up. Anything to add? Tell us now and it goes on the list.</div>
+ </div>
+</section>
+
+<section class="pg" id="pg-ice">
+ <div class="w">
+  <div class="pgh"><div><div class="eyebrow">Welcome · Ice breaker · 9:15 AM · 10 min</div><h1>Number Line-Up</h1><p>Ten participants each hold one A4 card, numbered 1 to 10. A number appears on screen. The people holding its cards run up and line up in the right order.</p></div></div>
+
+  <div class="ice">
+   <article class="icestage" aria-live="polite">
+    <div class="icetop"><span class="ln" id="iceRound">Round 1</span><span class="icemode" role="group" aria-label="Number size"><button type="button" data-k="3" aria-pressed="false">Easy</button><button type="button" data-k="4" aria-pressed="true">Normal</button><button type="button" data-k="6" aria-pressed="false">Hard</button><button type="button" data-k="10" aria-pressed="false">All 10</button></span></div>
+    <div class="bignum" id="iceNum">1023</div>
+    <div class="cards" id="iceCards" hidden></div>
+    <div class="icebtns"><button type="button" class="btn big" id="iceNext">New number</button><button type="button" class="btn gh" id="iceShow">Show the cards</button></div>
+    <div class="tmr" id="iceTmr"><span class="tv" id="iceTv">0:30</span><button type="button" class="tbtn" id="iceStart">Start 30 s</button><button type="button" class="treset" id="iceReset">Reset</button></div>
+   </article>
+   <div class="iceside">
+    <article class="card">
+     <div class="k">When your line is ready, each person says</div>
+     <div class="script"><p>“Hi, I'm <b>Alia</b>, No. <b>10</b>.”</p><p>“Hi, I'm <b>Ravi</b>, No. <b>2</b>.”</p><p>“Hi, I'm <b>Siti</b>, No. <b>3</b>.”</p><p class="all">All together: “And we are number set <b id="iceSay">1023</b>!”</p></div>
+    </article>
+    <article class="card">
+     <div class="k">How to play</div>
+     <ol class="steps2">
+      <li>Give ten people one A4 card each, numbered <b>1</b> to <b>10</b>. Everyone else is the cheering crowd.</li>
+      <li>Press <b>New number</b>. Each number is built only from cards 1 to 10, with no card used twice. <b>1023</b> is 10 + 2 + 3.</li>
+      <li>Card holders in the number run up and stand left to right in order. 30 seconds.</li>
+      <li>Each person introduces themselves with their card number, then the group calls out its number set.</li>
+      <li>Swap cards between rounds so new people play. Finish with <b>All 10</b>.</li>
+     </ol>
+    </article>
+   </div>
+  </div>
+
+  <article class="card moral">
+   <div class="k">The point of the game</div>
+   <h3>We are all data, from the minute we walk into the office</h3>
+   <p>This isn't just an ice breaker. Each card on its own is just a number. In the right order, the same cards become a meaningful set: <b>1023</b> and <b>2310</b> use the same cards and mean completely different things.</p>
+   <p>Every one of us comes from a different background, but data matters to all of us. You may look simple, but you are carrying data right now: you badged in at a time, you parked somewhere, you bought a coffee, you opened your email. That is all data, and it means something once it is put in order.</p>
+  </article>
+ </div>
+</section>
+
+
+<section class="pg" id="pg-lego">
+ <div class="w">
+  <div class="pgh"><div><div class="eyebrow m1e">Module 1 · Lego game · 15 min · groups of 5</div><h1>The Data Brick Challenge</h1><p>Build with everything, then cut it down to what the question needs. That is what cleaning and filtering data feels like.</p></div></div>
+
+  <div class="why3">
+   <article style="--c:var(--m1);--ct:var(--m1t);--cx:var(--m1x)"><span>1</span><b>What is data?</b><p>Facts we record about what happens: every sale, every timesheet, every complaint, every click. On its own it is just bricks in a box.</p></article>
+   <article style="--c:var(--m2);--ct:var(--m2t);--cx:var(--m2x)"><span>2</span><b>Why learn dashboards?</b><p>Because nobody has time to read a pile of raw data. A dashboard sorts the bricks so the answer is visible in seconds.</p></article>
+   <article style="--c:var(--m3);--ct:var(--m3t);--cx:var(--m3x)"><span>3</span><b>Why do reporting dashboards matter?</b><p>Managers decide every day. A trusted dashboard means they decide on facts, everyone sees the same numbers, and problems show up early.</p></article>
+  </div>
+
+  <article class="card scen">
+   <div class="k">The scenario</div>
+   <h3>Kopi Kita's data pile</h3>
+   <p>Kak Mira owns <b>Kopi Kita</b>, a café with three outlets. Every day her systems collect data: cups sold, receipts, staff hours, stock, complaints, social media likes. It all lands in one big pile, and nobody has sorted it.</p>
+   <p>Each colour of brick is a different kind of data. Your group's tower is everything Kopi Kita collected this month. Kak Mira doesn't need all of it. She needs <b>one answer</b>.</p>
+  </article>
+
+  <div class="game">
+   <div class="lvtabs" role="tablist" aria-label="Game steps" id="lvTabs"></div>
+   <article class="lvl" id="lvl" aria-live="polite"></article>
+  </div>
+
+  <div class="lg2">
+   <article class="card score">
+    <div class="sbh"><div><div class="k">Group scoreboard</div><h3>Which group is leading?</h3></div><button type="button" class="link" id="sbReset">Reset scores</button></div>
+    <form class="row3" id="sbForm" autocomplete="off"><label for="sbName" class="sr">Group name</label><input id="sbName" placeholder="Add a group name"><button type="submit" class="btn">Add</button></form>
+    <button type="button" class="link" id="sbQuick">Add Groups 1 to 6</button>
+    <ol class="sbd" id="sbList"></ol>
+    <p class="small" id="sbEmpty">Add your groups, then tap points as they earn them. Scores stay on this laptop.</p>
+   </article>
+   <article class="card">
+    <div class="k">Points · up to 10 per group</div>
+    <h3>How groups score</h3>
+    <ul class="badges2">
+     <li><span class="pt1">+1</span><b>Tower stands</b><em>The Step 1 tower stands on its own</em></li>
+     <li><span class="pt2">+2</span><b>Fastest clean-up</b><em>First group to remove every banned colour</em></li>
+     <li><span class="pt2">+2</span><b>Fastest filter</b><em>First correct one-colour tower in Step 3</em></li>
+     <li><span class="pt2">+2</span><b>Tallest clean tower</b><em>Tallest one-colour tower when time is up</em></li>
+     <li><span class="pt3">+3</span><b>Best takeaway</b><em>The room votes for the sharpest key takeaway</em></li>
+    </ul>
+   </article>
+  </div>
+
+  <div class="lg2">
+   <article class="card">
+    <div class="k">Trainer prep</div>
+    <h3>One mixed bag per group</h3>
+    <ul class="prep">
+     <li>About <b>40 to 50 bricks</b> per group of 5, in at least <b>five colours</b></li>
+     <li>Tick the colours you have below so the reveals only pick those</li>
+     <li>Groups of 5 at separate tables, one bag each</li>
+    </ul>
+    <div class="palette" id="palette" role="group" aria-label="Colours in your Lego box"></div>
+   </article>
+   <article class="card">
+    <div class="k">What the bricks teach</div>
+    <h3>Each step is a Power BI move</h3>
+    <div class="tw"><table class="kit">
+     <thead><tr><th>In the game</th><th>In Power BI</th><th>Where</th></tr></thead>
+     <tbody>
+      <tr><td>A tower of every colour</td><td>Raw, unstructured data from many sources</td><td><span class="mt m1">Module 1</span></td></tr>
+      <tr><td>Removing banned colours</td><td>Cleaning: remove what is wrong or not needed</td><td><span class="mt m2">Module 2</span></td></tr>
+      <tr><td>One-colour tower</td><td>Filtering to the data that answers the question</td><td><span class="mt m2">Module 2</span></td></tr>
+      <tr><td>A clean, tall tower</td><td>A clear visual on the dashboard</td><td><span class="mt m3">Module 3</span></td></tr>
+      <tr><td>Group takeaways</td><td>Insight and recommendation</td><td><span class="mt m4">Module 4</span></td></tr>
+     </tbody></table></div>
+   </article>
+  </div>
+ </div>
+</section>
+
+
+<section class="pg" id="pg-brain">
+ <div class="w">
+  <div class="pgh"><div><div class="eyebrow m1e">Module 1 · 9:53 AM · 9 min</div><h1>The Big Why</h1><p>Start from a decision, not from the data. Everyone posts on one shared Miro board.</p></div></div>
+  <div class="lg2">
+   <article class="card">
+    <div class="k">Three sticky notes each</div>
+    <ol class="prompts">
+     <li><small>Yellow sticky</small><b>"One decision I make every month is…"</b></li>
+     <li><small>Blue sticky</small><b>"The number that would change that decision is…"</b></li>
+     <li><small>Green sticky</small><b>"My three KPIs are…"</b></li>
+    </ol>
+    <p class="small">Example: "I decide how many temp staff to hire each month. The number that changes it is orders per staff hour. My KPIs: orders per hour, overtime hours, late deliveries."</p>
+   </article>
+   <article class="card miro" id="miroCard">
+    <div class="k">Shared Miro board · scan to join</div>
+    <div id="miroOn" hidden>
+     <div class="qrwrap"><div id="miroQr" class="qr" aria-label="QR code for the Miro board"></div></div>
+     <a class="btn" id="miroOpen" href="#" target="_blank" rel="noopener">Open the Miro board ↗</a>
+     <p class="small" id="miroLink"></p>
+    </div>
+    <div id="miroOff">
+     <h3>Add your Miro board link</h3>
+     <p class="small">Create a board in Miro, set Share to <b>Anyone with the link · Can edit</b>, then paste the link here. It is saved on this laptop.</p>
+    </div>
+    <label class="fld" for="miroUrl">Miro board link</label>
+    <div class="row3"><input id="miroUrl" type="url" placeholder="https://miro.com/app/board/…" autocomplete="off"><button type="button" class="btn gh" id="miroSave">Save</button></div>
+   </article>
+  </div>
+  <div id="miroEmbed" class="embed" hidden></div>
+  <article class="card">
+   <div class="k">What is on the Miro board</div>
+   <div class="frames">
+    <div style="--c:var(--m1);--ct:var(--m1t);--cx:var(--m1x)"><b>Frame 1 · The Big Why</b><span>One column per person: decision, number, three KPIs.</span></div>
+    <div style="--c:var(--m2);--ct:var(--m2t);--cx:var(--m2x)"><b>Frame 2 · KPI wall</b><span>Group the KPIs by function: Operations, Finance, Sales, HR, Other.</span></div>
+    <div style="--c:var(--m3);--ct:var(--m3t);--cx:var(--m3x)"><b>Frame 3 · Lego builds</b><span>Teams post a photo of their Round 3 towers and their one sentence.</span></div>
+    <div style="--c:var(--m4);--ct:var(--m4t);--cx:var(--m4x)"><b>Frame 4 · Parking lot</b><span>Questions for later. We clear it before we close.</span></div>
+   </div>
+  </article>
+ </div>
+</section>
+
+<section class="pg" id="pg-feedback">
+ <div class="w">
+  <div class="fb">
+   <div><div class="eyebrow">Before you go · 12:55 PM</div><h1>Tell us how it went</h1><p class="lead">Scan the code with your phone camera. It takes about two minutes, and it shapes the next session.</p>
+    <ul class="fbl"><li>What was most useful today?</li><li>What should we change?</li><li>How confident are you to build a dashboard on your own?</li></ul></div>
+   <div class="fbq"><img id="fbQr" alt="QR code for the session feedback form" width="420" height="420"><b>Dashboard Without Code, Using Microsoft Power BI</b><span>Feedback form</span><a class="fbl2" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=5Om4qiXIYU6QGQOThYKmVdVJvCQxEZZOpLwmmnrdayxUQjBOSE9LQzBHTDNFNk1BMVA3MzNCRFlITC4u&amp;origin=QRCode" target="_blank" rel="noopener">Can't scan? Open the form ↗</a></div>
+  </div>
+ </div>
+</section>
+
+</main>
+
+<footer><div class="w">
+ <div><a class="logo" href="#board"><svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true"><rect x="2" y="2" width="36" height="24" rx="6" fill="#14336E"/><rect x="9" y="14" width="5" height="7" rx="1.2" fill="#1677FF"/><rect x="17.5" y="10" width="5" height="11" rx="1.2" fill="#5A9DFF"/><rect x="26" y="6" width="5" height="15" rx="1.2" fill="#F2C811"/></svg><span>Dashboards Without Code</span></a><p class="dtl">28 Nov 2026 · 9:00 AM to 1:00 PM MYT</p><p>Trainer: Muhammad Yusri Abdullah</p></div>
+ <div><h4>Board</h4><a href="#columns">Session columns</a><a href="#ground-rules">Ground rules</a><a href="#ice-breaker">Ice breaker</a><a href="#lego">Lego game</a><a href="#brainstorm">Brainstorm</a><a href="#feedback">Feedback</a><a href="#run-sheet">Trainer run sheet</a><a href="https://app.powerbi.com" target="_blank" rel="noopener">Power BI Service</a></div>
+ <div><h4>Keep learning</h4><a href="https://learn.microsoft.com/en-us/training/powerplatform/power-bi" target="_blank" rel="noopener">Microsoft Learn: Power BI</a><a href="https://learn.microsoft.com/en-us/credentials/certifications/data-analyst-associate/" target="_blank" rel="noopener">PL-300 certification</a><a href="https://www.linkedin.com/in/yushabdullah" target="_blank" rel="noopener">LinkedIn</a></div>
+ <p style="grid-column:1/-1;margin-top:8px">© 2026 Muhammad Yusri Abdullah · Aventra Group · Skills today, a brighter tomorrow.</p>
+</div></footer>
+</div>
+
+<div class="pnav" aria-label="Presenter controls"><button type="button" id="pPrev" aria-label="Previous page">←</button><button type="button" id="pNext" aria-label="Next page">→</button></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const FEEDBACK_QR="data:image/png;base64,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";
+const MIRO_DEFAULT="https://miro.com/app/board/uXjVEP4jFNc=/"; // shared brainstorm board
+
+const L = (href) => href;
+// mc = module colour key (matches the poster: 1 blue, 2 green, 3 yellow, 4 purple)
+const COLS = [
+ {id:"prep",mc:"n",time:"Before the day",title:"Start here",desc:"Get set up before the day so nobody loses build time.",start:null,posts:[
+  {tag:"checkpoint",title:"Prep kit checklist",list:["Work or school email (Power BI Service will not accept Gmail or Yahoo)","Free Miro account","Free Canva account","Laptop with Chrome or Edge, charger","Basic Excel familiarity helps; no coding needed"]},
+  {tag:"link",title:"Sign up for Power BI (free)",body:"Self-service sign-up with a work or school email.",href:L("https://learn.microsoft.com/en-us/power-bi/fundamentals/service-self-service-signup-for-power-bi")},
+  {tag:"link",title:"Open Power BI Service",body:"Where we build the dashboard on the day.",href:L("https://app.powerbi.com")},
+  {tag:"link",title:"Miro",body:"Used for the KPI brainstorm in Module 1.",href:L("https://miro.com")},
+  {tag:"link",title:"Canva",body:"Used for dashboard backgrounds and buttons in Module 3.",href:L("https://www.canva.com")},
+  {tag:"note",title:"Pre-course check",body:"A short pre-assessment goes to the participant group before the day, so the trainer knows everyone's starting level."}
+ ]},
+ {id:"welcome",mc:"n",time:"9:00 – 9:30 · 30 min",title:"Welcome & ice breaker",desc:"Meet, agree the ground rules, get everyone signed in.",start:0,end:30,posts:[
+  {tag:"note",title:"Everyone has data. Few can use it.",body:"60% of enterprise leaders report a data skills gap, yet only 42% train at scale (DataCamp, 2026). 49.2% of Malaysian employees say data analysis and visualisation is a must-have skill (Economist Impact)."},
+  {tag:"checkpoint",title:"Ground rules",body:"Eight rules for a hands-on morning: phones on silent, try first then ask, synthetic data only, and the rest.",page:"ground-rules",pageText:"Open the ground rules"},
+  {tag:"activity",title:"Number Line-Up",body:"Ten people hold A4 cards numbered 1 to 10. A random number appears, like 1023. Its card holders line up in order, introduce themselves and call out their number set.",meta:"10 min · ice breaker",page:"ice-breaker",pageText:"Open the ice breaker"},
+  {tag:"note",title:"By the end you will be able to",list:["Define the metrics that matter","Prepare and clean data","Build a dashboard, no code","Interpret real issues vs noise","Present a recommendation","Protect confidential data"]},
+  {tag:"checkpoint",title:"Signed in to Power BI Service",body:"Every participant can open app.powerbi.com and see My workspace before we move on.",meta:"5 min"}
+ ]},
+ {id:"m1",mc:"1",time:"9:30 – 10:05 · 35 min",title:"Module 1 · Identify data for better decisions",desc:"Why data matters, and why we don't build the dashboard straight away.",start:30,end:65,posts:[
+  {tag:"activity",title:"The Data Brick Challenge",body:"Groups of 5 build one tower from every colour. Then the screen reveals which colours to remove, and which single colour to rebuild with. Each group shares a key takeaway.",meta:"15 min · groups of 5",page:"lego",pageText:"Open the Lego game"},
+  {tag:"note",title:"From data chaos to data value",body:"About 90% of enterprise data is unstructured, and 58% of leaders say big decisions use inaccurate data most of the time (SoftServe, 2025)."},
+  {tag:"activity",title:"The Big Why: KPI brainstorm on Miro",body:"Start from one decision you make every month. Which number would change that decision? Post three KPIs for your role on the shared board.",meta:"9 min · individual",page:"brainstorm",pageText:"Open the brainstorm"},
+  {tag:"checkpoint",title:"Three role-specific KPIs on Miro",body:"Each participant has posted three KPIs with the decision each one supports."},
+  {tag:"link",title:"What is Power BI?",body:"Connect, clean, model, visualise and share in one workflow.",href:L("https://learn.microsoft.com/en-us/power-bi/fundamentals/power-bi-overview")}
+ ]},
+ {id:"m2",mc:"2",time:"10:05 – 10:45 · 40 min",title:"Module 2 · Preparing data for analysis",desc:"Combine and clean data, then check quality and privacy.",start:65,end:105,posts:[
+  {tag:"link",title:"Practice data: Financial sample",body:"Microsoft's free Excel workbook for the running case study.",href:L("https://learn.microsoft.com/en-us/power-bi/create-reports/sample-financial-download")},
+  {tag:"link",title:"Get data from files",body:"Bring an Excel or CSV file into Power BI Service.",href:L("https://learn.microsoft.com/en-us/power-bi/connect-data/service-get-data-from-files")},
+  {tag:"link",title:"What is Power Query?",body:"The no-code tool for removing duplicates, fixing types and filling blanks.",href:L("https://learn.microsoft.com/en-us/power-query/power-query-what-is-power-query")},
+  {tag:"activity",title:"Clean it live",body:"Remove duplicates, fix the date column, flag missing regions as Unknown, set the revenue column to a number. Same moves as the Lego sort, now in Power Query.",meta:"13 min · hands-on"},
+  {tag:"checkpoint",title:"Data quality and protection checklist",list:["No duplicate rows","Missing fields filled or flagged","Unknown values labelled","Who is missing from this data? (bias)","No personal data you don't need","Owner and refresh source known"]},
+  {tag:"link",title:"Sensitivity labels in Power BI",body:"How to mark a report Confidential.",href:L("https://learn.microsoft.com/en-us/power-bi/enterprise/service-security-sensitivity-label-overview")}
+ ]},
+ {id:"m3",mc:"3",time:"10:45 – 11:50 · 65 min",title:"Module 3 · Building your dashboard without code",desc:"KPI cards, a trend, slicers and a clean layout, no code.",start:105,end:170,posts:[
+  {tag:"note",title:"Right chart for the question",list:["How much? Card","Over time? Line chart","Compare items? Bar chart","Part of a whole (2 to 4 parts)? Donut","Where? Map","Details? Table"]},
+  {tag:"link",title:"Visualization types in Power BI",body:"Reference for every built-in chart.",href:L("https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-types-for-reports-and-q-and-a")},
+  {tag:"link",title:"Card visuals",body:"Build the headline KPI tiles.",href:L("https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-card")},
+  {tag:"link",title:"Slicers",body:"Let each audience filter by month, region or team.",href:L("https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-slicers")},
+  {tag:"activity",title:"Pick your use case",body:"Option A: HR Analytics Dashboard. Option B: Turning Sales Data into Revenue Decisions.",href:L("https://learn.microsoft.com/en-us/power-bi/create-reports/sample-human-resources"),hrefText:"HR sample dataset"},
+  {tag:"checkpoint",title:"Dashboard checkpoint",body:"One page with three KPI cards, one trend chart and one slicer."}
+ ]},
+ {id:"m4",mc:"4",time:"11:50 – 1:00 · 70 min",title:"Module 4 · Interpreting and presenting insights",desc:"Separate signal from noise, then recommend one action.",start:170,end:240,posts:[
+  {tag:"note",title:"Real issue or noise?",list:["Is the change bigger than normal month-to-month swings?","Did it last more than one period?","Is the base number big enough to matter?","Did the definition or data source change?"]},
+  {tag:"note",title:"One-slide recommendation",body:"What happened (the number) → why it matters (impact) → what we should do (one action) → what we need (owner, date)."},
+  {tag:"activity",title:"Capstone: present your dashboard",body:"Two minutes each in small groups: your dashboard and one evidence-based recommendation. Peers give one strength and one question.",meta:"30 min"},
+  {tag:"link",title:"Microsoft Learn: Power BI learning paths",body:"Free next steps after today.",href:L("https://learn.microsoft.com/en-us/training/powerplatform/power-bi")},
+  {tag:"link",title:"PL-300 Power BI Data Analyst certification",body:"The certification to aim for.",href:L("https://learn.microsoft.com/en-us/credentials/certifications/data-analyst-associate/")},
+  {tag:"checkpoint",title:"Feedback before you leave",body:"Scan the QR code on screen and give your feedback. It takes two minutes.",page:"feedback",pageText:"Show the feedback QR"}
+ ]},
+ {id:"after",mc:"n",time:"After the session",title:"Keep going",desc:"Feedback and follow-up.",start:null,posts:[
+  {tag:"note",title:"30-day action plan prompt",list:["Week 1: rebuild today's dashboard with your own data","Week 2: share it with one manager and get one question back","Week 3–4: finish one Microsoft Learn module"]},
+  {tag:"note",title:"Connect with the trainer",body:"linkedin.com/in/yushabdullah"}
+ ]}
+];
+
+// Run sheet: minute-by-minute. m = minutes after 9:00.
+const FLOW = [
+ {title:"Introduction and ice breaking",mc:"n",m:0,d:30,lo:"Sets up all outcomes",steps:[
+  {m:0,d:8,t:"Welcome, trainer and participant introductions",tr:"Lego opener slide. Tell your story in one line: non-technical PMO to Power BI.",pa:"Name, role, one report they receive every month.",mat:"Slides 1, 4",say:"Who here gets reports but can't build or question one yourself?"},
+  {m:8,d:7,t:"Programme overview, objectives and ground rules",tr:"Walk the 4-hour roadmap and the six outcomes. Show the Ground rules page and agree them.",pa:"Agree the rules; note one thing they want to leave with.",mat:"Slides 3, 5; Ground rules page"},
+  {m:15,d:10,t:"Ice breaker: Number Line-Up",tr:"Hand out ten A4 cards numbered 1 to 10. Click New number on the ice breaker page, start the 30 s timer, swap cards each round, finish with All 10. Close with the moral.",pa:"Card holders line up in order and say \"Hi, I'm Alia, No. 9\", then the group calls out its number set.",mat:"Ten A4 cards numbered 1 to 10, ice breaker page on screen",say:"Each card is just a number. In the right order it means something. You have been carrying data since the minute you walked in."},
+  {m:25,d:5,t:"Power BI sign-in check",tr:"Everyone opens app.powerbi.com. Early finishers help neighbours.",pa:"Sign in with work or school email.",mat:"Sign-in guide",cp:"Every participant can see My workspace."}
+ ]},
+ {title:"Module 1 · Identify data for better decisions",mc:"1",m:30,d:35,lo:"Outcomes (a) and (c)",steps:[
+  {m:30,d:15,t:"The Data Brick Challenge (Lego game)",tr:"Run the steps on the Lego page: groups 2, build a tower 3, reveal colours to remove 2, reveal one colour to rebuild 3, moral 1, key takeaways 3, next step into Power BI 1. Tap points on the group scoreboard.",pa:"Groups of 5 build, remove the banned colours, rebuild with one colour, and share one takeaway.",mat:"One mixed bag of bricks per group, Lego page on screen",say:"Imagine this tower is a set of unstructured data. How do you get an answer out of it? You restrict it and you clean it."},
+  {m:45,d:4,t:"The data gap: having data vs being data-driven",tr:"Mini-lecture with the DataCamp and Economist Impact numbers. Link back to Round 1 chaos.",pa:"Share one example from work.",mat:"Slide 2"},
+  {m:49,d:4,t:"Why stored data is not yet an asset",tr:"Unstructured, messy, ungoverned data. Quick article discussion.",pa:"Discuss in pairs.",mat:"Article excerpt"},
+  {m:53,d:9,t:"Choosing the right KPIs: the Big Why",tr:"Model one: decision → question → KPI. Open the Brainstorm page and show the Miro QR.",pa:"Post three KPIs for their role on the shared Miro board.",mat:"Brainstorm page, Miro board",cp:"Each participant posts three role-specific KPIs."},
+  {m:62,d:3,t:"Why Power BI?",tr:"Compare with Excel PivotTables, Tableau and custom web apps in one table.",pa:"Ask questions.",mat:"Comparison slide"}
+ ]},
+ {title:"Module 2 · Preparing data for analysis",mc:"2",m:65,d:40,lo:"Outcomes (b) and (g)",steps:[
+  {m:65,d:12,t:"Finding and combining data",tr:"Live demo: upload the sample Excel and a CSV to Power BI Service.",pa:"Follow along with the same files.",mat:"Financial sample; Power BI Service"},
+  {m:77,d:13,t:"Cleaning and structuring data",tr:"Demo then hands-on: remove duplicates, fix types, flag blanks as Unknown. Point back to the Lego colours the groups had to remove.",pa:"Clean their copy of the dataset.",mat:"Power Query"},
+  {m:90,d:10,t:"Data protection and quality checklist",tr:"Run the six-point checklist together on the cleaned data.",pa:"Tick the checklist on their own data.",mat:"Checklist (board, Module 2)",cp:"Cleaned dataset passes the quality checklist."},
+  {m:100,d:5,t:"Confidentiality and responsible handling",tr:"PDPA basics, least data needed, sensitivity labels, sharing rules.",pa:"Name one dataset at work that needs a Confidential label.",mat:"Sensitivity labels link"}
+ ]},
+ {title:"Module 3 · Building your dashboard without code",mc:"3",m:105,d:65,lo:"Outcome (d)",steps:[
+  {m:105,d:10,t:"Dashboard design principles",tr:"Right chart, right analysis, right question. Show a bad and a good dashboard.",pa:"Spot three problems in the bad one.",mat:"Chart selection guide"},
+  {m:115,d:20,t:"Hands-on: KPI cards and trend chart",tr:"Build step by step: three cards, one line chart over time.",pa:"Build alongside the trainer.",mat:"Power BI Service"},
+  {m:135,d:15,t:"Breakdowns, filters and slicers",tr:"Add a bar chart breakdown and a month or region slicer. Test cross-filtering.",pa:"Add a slicer and test it.",mat:"Slicers link"},
+  {m:150,d:10,t:"Interface design with Canva",tr:"Demo: Canva background and buttons placed behind visuals.",pa:"Apply one template to their page.",mat:"Canva templates"},
+  {m:160,d:10,t:"Running use case and progress review",tr:"Participants pick HR or Sales; trainer checks each screen against the rubric.",pa:"Finish their page.",mat:"Synthetic datasets; rubric",cp:"Page has three KPI cards, one trend chart and one slicer."}
+ ]},
+ {title:"Module 4 · Interpreting and presenting insights",mc:"4",m:170,d:70,lo:"Outcomes (e) and (f)",steps:[
+  {m:170,d:15,t:"Reading trends: real problems vs noise",tr:"Four questions test on two example charts. Group discussion.",pa:"Apply the four questions to their own dashboard.",mat:"Example charts"},
+  {m:185,d:10,t:"Data storytelling: one recommendation",tr:"Model the four-part structure: what happened, why it matters, what to do, what we need. Reuse the best Lego takeaway as the example.",pa:"Draft their recommendation.",mat:"Story template"},
+  {m:195,d:30,t:"Capstone presentations",tr:"Groups of 4, 2 min each plus 1 min feedback. Trainer rotates.",pa:"Present; give one strength and one question.",mat:"Feedback guide",cp:"Every participant presents one evidence-based recommendation."},
+  {m:225,d:10,t:"Back-to-work action plan",tr:"Show Microsoft Learn paths and PL-300. Give the 30-day prompt.",pa:"Write three next steps with dates.",mat:"Action plan template",cp:"Each participant leaves with a recommendation and an action plan."},
+  {m:235,d:5,t:"Wrap-up, questions and feedback",tr:"Three takeaways, open Q&A, then put the Feedback page on screen.",pa:"Scan the QR and submit feedback.",mat:"Feedback page (QR)"}
+ ]}
+];
+
+const fmt = m => { let h=9+Math.floor(m/60), mm=m%60; const ap=h>=12?"PM":"AM"; if(h>12)h-=12; return h+":"+String(mm).padStart(2,"0")+" "+ap; };
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const $ = id => document.getElementById(id);
+
+const MESSY = `<div class="messy"><table><thead><tr><th>Date</th><th>Region</th><th>Sales (RM)</th></tr></thead><tbody>
+<tr><td>03/01/2026</td><td>Central</td><td>12,400</td></tr>
+<tr><td>2026-01-03</td><td>central</td><td>12400</td></tr>
+<tr><td>4 Jan</td><td class="bad">(blank)</td><td>9,850</td></tr>
+<tr><td>05/01/2026</td><td>Northern</td><td class="bad">TBC</td></tr>
+<tr><td>06/01/2026</td><td>Southern</td><td>RM 7.2k</td></tr></tbody></table></div>`;
+
+const host = h => new URL(h).hostname.replace(/^www\./,"");
+const favTxt = h => { const d=host(h); return d.startsWith("learn.microsoft")?"ML":d.startsWith("app.powerbi")?"BI":d.slice(0,2).toUpperCase(); };
+
+// Session columns get a sequence number; prep and follow-up do not.
+let seq=0;
+COLS.forEach(c=>{ c.n = /^[1-4]$/.test(c.mc) ? c.mc : c.id==="welcome" ? "0" : c.id==="prep" ? "→" : "✓"; });
+
+function renderBoard(){
+  $("board").innerHTML = COLS.map(c=>`
+   <div class="col" data-col="${c.id}" data-mc="${c.mc}">
+    <div class="ch"><div class="num" aria-hidden="true">${c.n}</div><div class="t">${esc(c.time)}</div><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></div>
+    ${c.posts.map(p=>{
+      const text=[p.title,p.body||"",(p.list||[]).join(" ")].join(" ").toLowerCase();
+      return `<article class="post ${p.tag}" data-tag="${p.tag}" data-text="${esc(text)}">
+      <div class="pb">
+       <div class="ptop"><span class="tag ${p.tag}">${p.tag}</span>${p.meta?`<span class="dur">${esc(p.meta)}</span>`:""}</div>
+       <h4>${esc(p.title)}</h4>
+       ${p.body?`<p>${esc(p.body)}</p>`:""}
+       ${p.table?MESSY:""}
+       ${p.list?`<ul>${p.list.map(i=>`<li>${esc(i)}</li>`).join("")}</ul>`:""}
+      </div>
+      ${p.page?`<a class="pglk" href="#${p.page}">${esc(p.pageText)}<span aria-hidden="true">→</span></a>`:""}
+      ${p.href?`<a class="lk" href="${esc(p.href)}" target="_blank" rel="noopener"><span class="fav" aria-hidden="true">${favTxt(p.href)}</span><span><b>${esc(p.hrefText||"Open link")}</b><em>${esc(host(p.href))}</em></span><span class="arr" aria-hidden="true">↗</span></a>`:""}
+     </article>`}).join("")}
+    <div class="empty">No matching posts in this column.</div>
+   </div>`).join("");
+}
+
+let filter="all";
+function applyFilter(){
+  const q=$("q").value.trim().toLowerCase();
+  document.querySelectorAll(".col").forEach(col=>{
+    let shown=0;
+    col.querySelectorAll(".post").forEach(p=>{
+      const ok=(filter==="all"||p.dataset.tag===filter)&&(!q||p.dataset.text.includes(q));
+      p.hidden=!ok; if(ok) shown++;
+    });
+    col.classList.toggle("none",shown===0);
+  });
+}
+$("flt").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  filter=b.dataset.f;
+  $("flt").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));
+  applyFilter();
+});
+$("q").addEventListener("input",applyFilter);
+
+// Run sheet
+let ticks={};
+try{ ticks=JSON.parse(localStorage.getItem("dwc-ticks")||"{}"); }catch(e){ ticks={}; }
+const saveTicks=()=>{ try{ localStorage.setItem("dwc-ticks",JSON.stringify(ticks)); }catch(e){} };
+const TOTAL=FLOW.reduce((n,b)=>n+b.steps.length,0);
+const CHEV='<svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+function renderFlow(){
+  $("flow").innerHTML = FLOW.map((b,bi)=>`
+   <section class="blk" data-mc="${b.mc}">
+    <div class="bkh"><h2>${esc(b.title)}</h2><span class="t">${fmt(b.m)} – ${fmt(b.m+b.d)} · ${b.d} min</span>${b.lo?`<span class="lo">${esc(b.lo)}</span>`:""}</div>
+    <ol class="steps">${b.steps.map((s,si)=>{const k=bi+"-"+si;return `<li>
+     <details class="st${ticks[k]?" done":""}" data-start="${s.m}" data-end="${s.m+s.d}" id="st-${k}">
+      <summary>
+       <input type="checkbox" class="ck" id="ck-${k}" data-k="${k}" ${ticks[k]?"checked":""} aria-label="Mark done: ${esc(s.t)}">
+       <span class="tm">${fmt(s.m)}<em>${s.d} min</em></span>
+       <span class="tt">${esc(s.t)}</span>
+       <span class="badges">${s.cp?'<span class="bdg">Checkpoint</span>':""}${CHEV}</span>
+      </summary>
+      <div class="sb">
+       <div class="g3"><div><b>Trainer</b>${esc(s.tr)}</div><div><b>Participants</b>${esc(s.pa)}</div><div><b>Materials</b>${esc(s.mat)}</div></div>
+       ${s.say?`<div class="say">Say: “${esc(s.say)}”</div>`:""}
+       ${s.cp?`<div class="cp"><span aria-hidden="true">✓</span><span>Checkpoint: ${esc(s.cp)}</span></div>`:""}
+      </div>
+     </details></li>`}).join("")}</ol>
+   </section>`).join("");
+  updateMeter();
+}
+function updateMeter(){
+  const n=Object.keys(ticks).length;
+  $("mDone").textContent=`${n} of ${TOTAL}`;
+  $("mBar").style.width=(n/TOTAL*100)+"%";
+}
+document.addEventListener("change",e=>{
+  if(!e.target.matches(".ck")) return;
+  const k=e.target.dataset.k;
+  if(e.target.checked) ticks[k]=1; else delete ticks[k];
+  e.target.closest("details").classList.toggle("done",e.target.checked);
+  saveTicks(); updateMeter();
+});
+$("reset").onclick=()=>{ ticks={}; saveTicks(); renderFlow(); tick(); };
+$("openAll").onclick=()=>{
+  const all=[...document.querySelectorAll("details.st")]; const open=!all.every(d=>d.open);
+  all.forEach(d=>d.open=open); $("openAll").textContent=open?"Collapse all":"Expand all";
+};
+$("jump").onclick=()=>{
+  const live=document.querySelector("details.st.live")||document.querySelector("details.st:not(.done)");
+  if(live){ live.open=true; live.scrollIntoView({block:"center"}); }
+};
+
+// Pages
+const PAGES={"run-sheet":"pg-run","ice-breaker":"pg-ice","ground-rules":"pg-rules","lego":"pg-lego","brainstorm":"pg-brain","feedback":"pg-feedback"};
+const ORDER=["board","ground-rules","ice-breaker","lego","brainstorm","feedback"];
+let current="board";
+function route(){
+  const h=location.hash.slice(1);
+  const key=PAGES[h]?h:"board";
+  const changed=key!==current; current=key;
+  document.querySelectorAll(".pg").forEach(p=>p.classList.toggle("on", p.id===(PAGES[key]||"pg-board")));
+  document.querySelectorAll(".links a,.mn a").forEach(a=>a.classList.toggle("on", a.dataset.p===key && !(key==="board" && h==="columns" && false)));
+  if(PAGES[key] && changed) window.scrollTo(0,0);
+  if(key==="brainstorm") renderMiro();
+}
+window.addEventListener("hashchange",route);
+
+// Present mode: fullscreen, larger type, arrow keys move between participant pages.
+const presentBtn=$("present");
+function setPresent(on){
+  document.body.classList.toggle("present",on);
+  presentBtn.setAttribute("aria-pressed",String(on));
+  presentBtn.textContent=on?"Exit present":"Present";
+}
+presentBtn.onclick=()=>{
+  const on=!document.body.classList.contains("present");
+  setPresent(on);
+  try{
+    if(on && document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(()=>{});
+    if(!on && document.fullscreenElement) document.exitFullscreen().catch(()=>{});
+  }catch(e){}
+};
+document.addEventListener("fullscreenchange",()=>{ if(!document.fullscreenElement && document.body.classList.contains("present")) setPresent(false); });
+function step(d){
+  const i=Math.max(0,ORDER.indexOf(current));
+  const n=ORDER[Math.min(ORDER.length-1,Math.max(0,i+d))];
+  location.hash=n;
+}
+$("pPrev").onclick=()=>step(-1); $("pNext").onclick=()=>step(1);
+document.addEventListener("keydown",e=>{
+  if(!document.body.classList.contains("present")) return;
+  if(/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
+  if(e.key==="ArrowRight"||e.key==="PageDown"){ e.preventDefault(); step(1); }
+  if(e.key==="ArrowLeft"||e.key==="PageUp"){ e.preventDefault(); step(-1); }
+});
+
+// Number Line-Up ice breaker: numbers built from distinct cards 1 to 10
+let iceK=4, iceRound=0, iceSet=[10,2,3];
+function iceMake(k){
+  const deck=[1,2,3,4,5,6,7,8,9,10];
+  for(let i=deck.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [deck[i],deck[j]]=[deck[j],deck[i]]; }
+  return deck.slice(0,k);
+}
+function iceDraw(){
+  let s=iceMake(iceK);
+  iceSet=s; iceRound++;
+  const n=s.join("");
+  const el=$("iceNum"); el.textContent=n; el.classList.remove("pop"); void el.offsetWidth; el.classList.add("pop");
+  $("iceSay").textContent=n; $("iceRound").textContent="Round "+iceRound;
+  $("iceCards").innerHTML=s.map(c=>`<span>${c}</span>`).join(""); $("iceCards").hidden=true; $("iceShow").textContent="Show the cards";
+  iceStop(); iceT=30; $("iceTv").textContent="0:30"; $("iceStart").textContent="Start 30 s"; $("iceTmr").classList.remove("run","end");
+}
+document.querySelectorAll(".icemode button").forEach(b=>b.onclick=()=>{
+  iceK=+b.dataset.k; document.querySelectorAll(".icemode button").forEach(x=>x.setAttribute("aria-pressed",String(x===b))); iceDraw();
+});
+$("iceNext").onclick=iceDraw;
+$("iceShow").onclick=()=>{ const c=$("iceCards"); c.hidden=!c.hidden; $("iceShow").textContent=c.hidden?"Show the cards":"Hide the cards"; };
+let iceT=30, iceIv=null;
+function iceStop(){ clearInterval(iceIv); iceIv=null; $("iceTmr").classList.remove("run"); }
+$("iceStart").onclick=()=>{
+  if(iceIv){ iceStop(); $("iceStart").textContent="Resume"; return; }
+  if(iceT<=0) iceT=30;
+  $("iceTmr").classList.add("run"); $("iceTmr").classList.remove("end"); $("iceStart").textContent="Pause";
+  iceIv=setInterval(()=>{ iceT--; $("iceTv").textContent=fmtT(Math.max(0,iceT)); if(iceT<=0){ iceStop(); $("iceTmr").classList.add("end"); $("iceStart").textContent="Again"; } },1000);
+};
+$("iceReset").onclick=()=>{ iceStop(); iceT=30; $("iceTv").textContent="0:30"; $("iceStart").textContent="Start 30 s"; $("iceTmr").classList.remove("end"); };
+$("iceCards").innerHTML=iceSet.map(c=>`<span>${c}</span>`).join("");
+
+// Lego game for groups of 5: build, remove colours, filter to one colour, takeaways
+function fmtT(s){ return Math.floor(s/60)+":"+String(s%60).padStart(2,"0"); }
+const COLOURS=[
+ {n:"Red",h:"#D7263D",d:"Complaints"},{n:"Blue",h:"#1E5AA8",d:"Cups sold"},{n:"Yellow",h:"#F2C811",d:"Social media likes"},
+ {n:"Green",h:"#2E9E44",d:"Staff hours"},{n:"White",h:"#F4F4F4",d:"Blank receipts"},{n:"Black",h:"#26292E",d:"Old stock records"},
+ {n:"Orange",h:"#F57C00",d:"Promo vouchers"},{n:"Grey",h:"#9AA1A8",d:"Test entries"}
+];
+let have=["Red","Blue","Yellow","Green","White"];
+try{ const s=JSON.parse(localStorage.getItem("dwc-colours")||"null"); if(Array.isArray(s)&&s.length>=3) have=s; }catch(e){}
+const saveHave=()=>{ try{ localStorage.setItem("dwc-colours",JSON.stringify(have)); }catch(e){} };
+const col=n=>COLOURS.find(c=>c.n===n);
+let removed=null, keep=null;
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+function drawRemoved(){
+  const pool=have.slice(); const k=pool.length>=5?2:1; removed=[];
+  while(removed.length<k){ const c=pick(pool); pool.splice(pool.indexOf(c),1); removed.push(c); }
+  keep=null;
+}
+function drawKeep(){ const left=have.filter(c=>!removed.includes(c)); keep=pick(left); }
+function swatch(n,x){ const c=col(n); return `<div class="sw${x?" x":""}"><i style="background:${c.h}${n==="White"?";box-shadow:inset 0 0 0 2px #c9cfd8,inset 0 -6px 0 rgba(0,0,0,.12)":""}">${x?"<em>×</em>":""}</i>${esc(n)}</div>`; }
+function renderPalette(){
+  $("palette").innerHTML=COLOURS.map(c=>`<label><input type="checkbox" value="${c.n}" ${have.includes(c.n)?"checked":""}><i style="background:${c.h}"></i>${c.n}</label>`).join("");
+}
+$("palette").addEventListener("change",e=>{
+  const on=[...$("palette").querySelectorAll("input:checked")].map(i=>i.value);
+  if(on.length<3){ e.target.checked=true; return; }
+  have=on; saveHave(); removed=null; keep=null; renderLevel();
+});
+const PBI=[
+ {t:"Install Power BI Desktop",d:"Free from Microsoft, Windows only",u:"https://www.microsoft.com/en-us/download/details.aspx?id=58494"},
+ {t:"Or sign in to Power BI online",d:"app.powerbi.com with your work email (Mac users)",u:"https://app.powerbi.com"},
+ {t:"Get the dataset",d:"Microsoft's Financial Sample workbook",u:"https://learn.microsoft.com/en-us/power-bi/create-reports/sample-financial-download"},
+ {t:"Start building the dashboard",d:"Module 2 on the board: load, clean, then chart",u:"#columns"}
+];
+const LEVELS=[
+ {n:"Start",t:"Form your groups",min:2,c:"--mn",
+  do:"Form <b>groups of 5</b>. Each group takes <b>one mixed bag</b> of Lego and sits together at one table.",
+  say:"Every brick in your bag is a piece of Kopi Kita's data. Different colours, different kinds of data, all mixed up.",
+  lesson:"<b>What is data?</b> Facts recorded every time something happens. Right now it is just a bag of bricks."},
+ {n:"Step 1",t:"Build a tower",min:3,c:"--m1",pts:"+1",badge:"Tower stands",
+  do:"Use <b>any bricks you like</b>, every colour, and build the <b>tallest tower</b> your group can. It must stand on its own.",
+  say:"Three minutes. Everyone in the group builds. Go!",
+  lesson:"This tower is <b>raw, unstructured data</b>: everything collected, all mixed together. Big, but can anyone read an answer from it?"},
+ {n:"Step 2",t:"Remove these colours",min:2,c:"--m2",pts:"+2",badge:"Fastest clean-up",rev:"rm",
+  do:"Kak Mira just found out some data is wrong or not needed. Take <b>every brick of these colours</b> out of your tower.",
+  say:"These colours are bad data. Pull them out without letting the tower fall!",
+  lesson:"That is <b>cleaning</b>: remove what is wrong, duplicated or not needed before you trust the numbers."},
+ {n:"Step 3",t:"Only this colour",min:3,c:"--m2",pts:"+2",badge:"Fastest filter · Tallest tower",rev:"keep",
+  do:"Kak Mira's question only needs one kind of data. Rebuild a tower using <b>only this colour</b>.",
+  say:"Her question is about this colour only. Everything else stays on the table.",
+  lesson:"That is <b>filtering</b>: keep only the data that answers the question. The tower is smaller, but now it means something."},
+ {n:"Moral",t:"Why we clean data",min:1,c:"--m3",
+  do:"Imagine you have a set of <b>unstructured data</b>. You can't build a useful report from all of it. You <b>restrict</b> it to what the question needs and <b>clean</b> out what is wrong. Then you build.",
+  lesson:"<b>Why reporting dashboards matter:</b> a dashboard built on clean, filtered data gives a manager one answer they can trust. That is why we don't build the dashboard straight away."},
+ {n:"Share",t:"Key takeaways",min:3,c:"--m4",pts:"+3",badge:"Best takeaway",
+  do:"Each group has <b>30 seconds</b> to tell the room <b>one key takeaway</b>. Then the room votes for the sharpest one.",
+  list:["What happened to your tower when the colours came out?","Why was the one-colour tower more useful?","Where at work do you have a big, mixed tower of data?"],
+  lesson:"Write the best takeaways in the Miro board's Parking lot so we can come back to them."},
+ {n:"Next",t:"Now we go to Power BI",min:1,c:"--m1",next:true,
+  do:"Same steps, real tool: get Power BI, get a dataset, and start building the dashboard.",
+  lesson:"From here on, every click in Power BI is a brick move: load the data, clean it, filter it, then build."}
+];
+let lv=0;
+let gt={left:LEVELS[0].min*60,iv:null,lvl:0};
+function stopT(){ clearInterval(gt.iv); gt.iv=null; }
+function revealHtml(L){
+  if(L.rev==="rm"){
+    if(!removed) return `<div class="reveal"><small>Hidden until you click</small><b>Which colours are bad data?</b><div class="rb"><button type="button" id="revBtn">Reveal the colours to remove</button></div></div>`;
+    return `<div class="reveal"><small>Remove every brick of</small><div class="swatches">${removed.map(n=>swatch(n,true)).join("")}</div><p class="small">${removed.map(n=>`${esc(n)} = ${esc(col(n).d)}`).join(" · ")}</p><div class="rb"><button type="button" class="alt" id="revAgain">Pick again</button></div></div>`;
+  }
+  if(!removed) return `<div class="reveal"><small>Do Step 2 first</small><div class="rb"><button type="button" id="revBack">Back to Step 2</button></div></div>`;
+  if(!keep) return `<div class="reveal"><small>Hidden until you click</small><b>Which colour answers Kak Mira's question?</b><div class="rb"><button type="button" id="revBtn">Reveal the colour to keep</button></div></div>`;
+  return `<div class="reveal"><small>Build again with only</small><div class="swatches">${swatch(keep,false)}</div><p class="small">${esc(keep)} = ${esc(col(keep).d)}. Kak Mira asks: “How are we doing on ${esc(col(keep).d.toLowerCase())}?”</p><div class="rb"><button type="button" class="alt" id="revAgain">Pick again</button></div></div>`;
+}
+function renderLevel(){
+  const L=LEVELS[lv];
+  if(gt.lvl!==lv){ stopT(); gt={left:L.min*60,iv:null,lvl:lv}; }
+  $("lvTabs").innerHTML=LEVELS.map((x,i)=>`<button type="button" role="tab" aria-selected="${i===lv}" class="${i<lv?"done":""}" data-i="${i}"><i>${i}</i>${esc(x.t)}</button>`).join("");
+  const el=$("lvl"); el.style.setProperty("--lc",`var(${L.c})`);
+  el.innerHTML=`<div>
+    <div class="ln">${L.n} · ${L.min} min</div><h2>${esc(L.t)}</h2>
+    ${L.do?`<p class="do">${L.do}</p>`:""}
+    ${L.rev?revealHtml(L):""}
+    ${L.list?`<ul>${L.list.map(q=>`<li>${esc(q)}</li>`).join("")}</ul>`:""}
+    ${L.next?`<div class="next">${PBI.map((p,i)=>`<a href="${p.u}"${p.u[0]==="#"?"":' target="_blank" rel="noopener"'}><span>${i+1}</span><div>${esc(p.t)}<em>${esc(p.d)}</em></div></a>`).join("")}</div>`:""}
+    ${L.say?`<div class="say">Say: “${esc(L.say)}”</div>`:""}
+    <div class="lesson">${L.lesson}</div>
+   </div>
+   <div class="lvside">
+    ${L.pts?`<div class="ptsbig"><b>${L.pts}</b><span>${esc(L.badge)}<em>Tap the points on the scoreboard</em></span></div>`:""}
+    <div class="tmr${gt.iv?" run":""}${gt.left<=0?" end":""}"><span class="tv" id="gtv">${fmtT(Math.max(0,gt.left))}</span><button type="button" class="tbtn" id="gtStart">${gt.iv?"Pause":gt.left<L.min*60&&gt.left>0?"Resume":"Start"}</button><button type="button" class="treset" id="gtReset">Reset</button></div>
+    <div class="lvnav"><button type="button" class="btn gh" id="lvPrev" ${lv===0?"disabled":""}>Back</button><button type="button" class="btn" id="lvNext">${lv===LEVELS.length-1?"Finish":"Next step"}</button></div>
+   </div>`;
+  const rb=$("revBtn"); if(rb) rb.onclick=()=>{ if(L.rev==="rm") drawRemoved(); else drawKeep(); renderLevel(); };
+  const ra=$("revAgain"); if(ra) ra.onclick=()=>{ if(L.rev==="rm") drawRemoved(); else drawKeep(); renderLevel(); };
+  const bk=$("revBack"); if(bk) bk.onclick=()=>{ lv=2; renderLevel(); };
+  $("gtStart").onclick=()=>{
+    if(gt.iv){ stopT(); renderLevel(); return; }
+    if(gt.left<=0) gt.left=L.min*60;
+    gt.iv=setInterval(()=>{ gt.left--; const v=$("gtv"); if(v) v.textContent=fmtT(Math.max(0,gt.left)); if(gt.left<=0){ stopT(); renderLevel(); } },1000);
+    renderLevel();
+  };
+  $("gtReset").onclick=()=>{ stopT(); gt.left=L.min*60; renderLevel(); };
+  $("lvPrev").onclick=()=>{ if(lv>0){ lv--; renderLevel(); } };
+  $("lvNext").onclick=()=>{ if(lv<LEVELS.length-1){ lv++; renderLevel(); } else location.hash="brainstorm"; };
+}
+$("lvTabs").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; lv=+b.dataset.i; renderLevel(); });
+renderPalette(); renderLevel();
+
+// Scoreboard (kept on this laptop)
+let players=[];
+try{ players=JSON.parse(localStorage.getItem("dwc-score")||"[]"); }catch(e){ players=[]; }
+const saveP=()=>{ try{ localStorage.setItem("dwc-score",JSON.stringify(players)); }catch(e){} };
+function renderScore(){
+  const sorted=players.map((p,i)=>({...p,i})).sort((a,b)=>b.s-a.s||a.n.localeCompare(b.n));
+  $("sbList").innerHTML=sorted.map(p=>`<li><span class="nm">${esc(p.n)}</span><span class="tot">${p.s}</span><span class="pts"><button type="button" class="p" data-i="${p.i}" data-d="1">+1</button><button type="button" class="p" data-i="${p.i}" data-d="2">+2</button><button type="button" class="p" data-i="${p.i}" data-d="3">+3</button><button type="button" data-i="${p.i}" data-d="-1" aria-label="Minus one for ${esc(p.n)}">−1</button></span></li>`).join("");
+  $("sbEmpty").hidden=players.length>0;
+}
+$("sbForm").addEventListener("submit",e=>{
+  e.preventDefault(); const v=$("sbName").value.trim(); if(!v) return;
+  v.split(/[,\n]/).map(x=>x.trim()).filter(Boolean).forEach(n=>players.push({n,s:0}));
+  $("sbName").value=""; saveP(); renderScore(); $("sbName").focus();
+});
+$("sbList").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  const p=players[+b.dataset.i]; p.s=Math.max(0,p.s+ +b.dataset.d); saveP(); renderScore();
+});
+let resetArm=false;
+$("sbReset").onclick=()=>{
+  if(!resetArm){ resetArm=true; $("sbReset").textContent="Tap again to clear all"; setTimeout(()=>{ resetArm=false; $("sbReset").textContent="Reset scores"; },3000); return; }
+  players=[]; saveP(); renderScore(); resetArm=false; $("sbReset").textContent="Reset scores";
+};
+$("sbQuick").onclick=()=>{ for(let i=1;i<=6;i++){ const n="Group "+i; if(!players.some(p=>p.n===n)) players.push({n,s:0}); } saveP(); renderScore(); };
+renderScore();
+
+// Miro brainstorm: link saved on this laptop, QR to join, embed where the host allows it.
+function miroUrl(){ let u=""; try{ u=localStorage.getItem("dwc-miro")||""; }catch(e){} return u||MIRO_DEFAULT; }
+let miroDrawn="";
+function renderMiro(){
+  const u=miroUrl(); const ok=/^https:\/\/(www\.)?miro\.com\//.test(u);
+  $("miroOn").hidden=!ok; $("miroOff").hidden=ok;
+  if($("miroUrl").value==="" && u) $("miroUrl").value=u;
+  if(!ok){ $("miroEmbed").hidden=true; return; }
+  $("miroOpen").href=u; $("miroLink").textContent=u;
+  if(miroDrawn!==u){
+    miroDrawn=u; $("miroQr").innerHTML="";
+    if(window.QRCode){ new QRCode($("miroQr"),{text:u,width:220,height:220,correctLevel:QRCode.CorrectLevel.M}); }
+    else { $("miroQr").hidden=true; }
+    const id=(u.match(/\/board\/([^/?#]+)/)||[])[1];
+    const embeddable=location.protocol==="file:"||/github\.io$/.test(location.hostname);
+    if(id && embeddable){ $("miroEmbed").innerHTML=`<iframe title="Miro board" src="https://miro.com/app/live-embed/${encodeURIComponent(id)}/?embedMode=view_only_without_ui" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>`; $("miroEmbed").hidden=false; }
+  }
+}
+$("miroSave").onclick=()=>{
+  const v=$("miroUrl").value.trim();
+  try{ if(v) localStorage.setItem("dwc-miro",v); else localStorage.removeItem("dwc-miro"); }catch(e){}
+  miroDrawn=""; renderMiro();
+};
+
+// Feedback QR
+$("fbQr").src=FEEDBACK_QR;
+
+// Live status.
+const START=Date.UTC(2026,10,28,1,0,0); // 28 Nov 2026, 9:00 AM MYT
+const SESS=COLS.filter(c=>c.start!==null);
+$("segs").innerHTML=SESS.map(c=>`<i style="flex:${c.end-c.start}"></i>`).join("");
+function tick(){
+  const m=(Date.now()-START)/60000;
+  document.querySelectorAll(".col.live,details.st.live").forEach(el=>el.classList.remove("live"));
+  document.querySelectorAll(".livepill,.bdg.now").forEach(el=>el.remove());
+  const segs=[...$("segs").children];
+  const pct=Math.max(0,Math.min(100,m/240*100));
+  $("cP").textContent=Math.round(pct)+"%"; $("cBar").style.width=pct+"%";
+  $("cF").textContent=`${Math.round(Math.max(0,Math.min(240,m)))} of 240 minutes`;
+  if(m<0){
+    const mins=-m, d=Math.floor(mins/1440), h=Math.floor(mins%1440/60), mi=Math.floor(mins%60);
+    $("aL").textContent="Starts in"; $("aT").textContent=d?`${d} day${d>1?"s":""} ${h} h`:`${h} h ${mi} min`;
+    $("aS").textContent="Saturday 28 Nov, 9:00 AM MYT. Prep kit is in the first column.";
+    $("bT").textContent=SESS[0].title; $("bS").textContent=`${fmt(SESS[0].start)} · ${SESS[0].end-SESS[0].start} min`;
+    segs.forEach(s=>s.className=""); return;
+  }
+  if(m>=240){
+    $("aL").textContent="Status"; $("aT").textContent="Session complete"; $("aS").textContent="Feedback and next steps are in the last column.";
+    $("bT").textContent="Keep going"; $("bS").textContent="Microsoft Learn and PL-300";
+    segs.forEach(s=>s.className="d"); return;
+  }
+  const i=SESS.findIndex(c=>m>=c.start&&m<c.end), col=SESS[i], nxt=SESS[i+1];
+  let step=null; FLOW.forEach(b=>b.steps.forEach(s=>{ if(m>=s.m&&m<s.m+s.d) step=s; }));
+  $("aL").textContent="Live now · "+fmt(Math.floor(m));
+  $("aT").textContent=col.title;
+  $("aS").textContent=step?`${step.t}, until ${fmt(step.m+step.d)}.`:"";
+  $("bT").textContent=nxt?nxt.title:"Wrap-up"; $("bS").textContent=nxt?`${fmt(nxt.start)} · ${nxt.end-nxt.start} min`:"1:00 PM";
+  segs.forEach((s,j)=>s.className=j<i?"d":j===i?"n":"");
+  const el=document.querySelector(`[data-col="${col.id}"]`);
+  el.classList.add("live"); el.querySelector(".t").insertAdjacentHTML("beforeend",'<span class="livepill">LIVE</span>');
+  document.querySelectorAll("details.st").forEach(d=>{
+    if(m>=+d.dataset.start&&m<+d.dataset.end){ d.classList.add("live"); d.querySelector(".badges").insertAdjacentHTML("afterbegin",'<span class="bdg now">Now</span>'); }
+  });
+}
+
+// Fan the hero card stack out once (stays piled for reduced motion).
+const stackHero=$("hero");
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches){ stackHero.classList.add("pile"); requestAnimationFrame(()=>requestAnimationFrame(()=>stackHero.classList.remove("pile"))); }
+
+renderBoard(); renderFlow(); route(); tick(); setInterval(tick,30000);
+</script>
+</body></html>
