@@ -37,6 +37,8 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:va
 .links a,.mn a{font-size:.875rem;font-weight:500;color:var(--tm);text-decoration:none;padding:8px 0}
 .links a:hover,.mn a:hover{color:var(--tx)}.links a.on,.mn a.on{color:var(--tx);font-weight:600}
 @media(min-width:1080px){.links{display:flex}}
+@media(min-width:1080px) and (max-width:1340px){.links{gap:12px}.links a{font-size:.8125rem}}
+.logo,.logo *{white-space:nowrap}
 .mn{display:flex;overflow-x:auto;gap:24px;padding:0 0 10px}@media(min-width:1080px){.mn{display:none}}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 28px;border:0;border-radius:8px;font:500 .875rem var(--font);background:var(--pri);color:var(--onpri);text-decoration:none;cursor:pointer;transition:background .1s,transform .1s;white-space:nowrap}
 .btn:hover{background:var(--prih)}.btn:active{transform:scale(.98)}
@@ -427,6 +429,36 @@ body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-i
 .pimg{display:block;margin-top:12px;border-radius:10px;overflow:hidden;box-shadow:0 0 0 1px var(--bd)}.pimg img{display:block;width:100%;height:auto}
 
 /* Opening slides */
+/* gallery */
+.gbar{background:var(--m3t);color:var(--m3x);border-radius:12px;padding:12px 16px;font-size:.875rem;margin-bottom:16px}
+.glay{display:grid;gap:20px;align-items:start}@media(min-width:960px){.glay{grid-template-columns:360px 1fr}.gform{position:sticky;top:96px}}
+.gform form{display:grid;gap:6px}
+.fld small{font-weight:400;color:var(--ts)}
+.gin{height:46px;border-radius:10px;border:1px solid var(--bd);background:var(--mut);color:var(--tx);padding:0 14px;font:400 .9375rem var(--font);width:100%}
+.ghelp{font-size:.8125rem;color:var(--tm);margin:2px 0 4px}.ghelp summary{cursor:pointer;color:var(--pri);font-weight:600}.ghelp ol{margin:6px 0 0;padding-left:18px;display:grid;gap:4px}
+.gdrop{display:grid;place-items:center;min-height:120px;border:2px dashed var(--bd);border-radius:12px;background:var(--mut);cursor:pointer;color:var(--tm);font-size:.875rem;overflow:hidden;position:relative}
+.gdrop input{position:absolute;opacity:0;width:1px;height:1px}
+.gdrop img{width:100%;max-height:220px;object-fit:contain}
+.gdrop:focus-within{outline:3px solid var(--acc);outline-offset:2px}
+.gform .btn{margin-top:8px;width:100%}
+.gwh{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.gwh h2{margin:0;font-size:1.25rem}
+.ggrid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.gempty{color:var(--ts);background:var(--sur);border:2px dashed var(--bd);border-radius:16px;padding:40px 20px;text-align:center;grid-column:1/-1}
+.gcard{background:var(--sur);border-radius:16px;box-shadow:0 0 0 1px var(--bd),var(--sh1);overflow:hidden;text-align:left;border:0;padding:0;cursor:pointer;font:inherit;color:var(--tx);display:flex;flex-direction:column;transition:transform .2s var(--ease),box-shadow .2s}
+.gcard:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--bd),var(--sh2)}
+.gthumb{aspect-ratio:16/9;background:linear-gradient(135deg,var(--ink),#1677FF);display:grid;place-items:center;color:#F2C811;position:relative}
+.gthumb img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.gthumb svg{width:48px;height:48px}
+.gtag{position:absolute;left:10px;top:10px;background:rgba(10,35,80,.85);color:#fff;font-size:.6875rem;font-weight:600;padding:3px 8px;border-radius:999px;z-index:1}
+.gmeta{padding:12px 14px;display:grid;gap:2px}.gmeta b{font-size:.9375rem;line-height:1.3}.gmeta span{font-size:.8125rem;color:var(--ts)}
+.gview{position:fixed;inset:0;z-index:90;background:rgba(3,11,32,.985);backdrop-filter:blur(6px);display:flex;flex-direction:column}
+.gvbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;color:#fff}
+.gvbar b{display:block;font-size:1rem}.gvbar span{font-size:.8125rem;opacity:.75}
+.gvbtn{display:flex;gap:8px;align-items:center;flex-shrink:0}
+.gvbtn button,.gvbtn a{height:40px;min-width:40px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font:600 .875rem var(--font);display:grid;place-items:center;padding:0 12px;text-decoration:none;cursor:pointer}
+.gvbody{flex:1;padding:0 16px 16px;display:grid;min-height:0}
+.gvbody iframe,.gvbody img{width:100%;height:100%;border:0;border-radius:12px;background:#fff;object-fit:contain}
+.gvbody img{background:transparent}
 /* bonus */
 .bnl{color:var(--tm);margin-bottom:22px}
 .bn3{display:grid;gap:16px}@media(min-width:960px){.bn3{grid-template-columns:repeat(3,minmax(0,1fr))}}
@@ -648,11 +680,11 @@ body.present .reg{display:none}
   <a class="logo" href="#board" aria-label="Dashboards Without Code, session board">
    <svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true"><rect x="2" y="2" width="36" height="24" rx="6" fill="#0A2350"/><rect x="9" y="14" width="5" height="7" rx="1.2" fill="#1677FF"/><rect x="17.5" y="10" width="5" height="11" rx="1.2" fill="#5A9DFF"/><rect x="26" y="6" width="5" height="15" rx="1.2" fill="#F2C811"/></svg>
    <span>Dashboards Without Code<small>Aventra Group · Session board</small></span></a>
-  <nav class="links" aria-label="Main"><a href="#board" data-p="board">Board</a><a href="#trainer" data-p="trainer">Intro</a><a href="#ground-rules" data-p="ground-rules">Ground rules</a><a href="#ice-breaker" data-p="ice-breaker">Ice breaker</a><a href="#lego" data-p="lego">Lego game</a><a href="#brainstorm" data-p="brainstorm">Brainstorm</a><a href="#feedback" data-p="feedback">Feedback</a><a href="#run-sheet" data-p="run-sheet">Run sheet</a></nav>
+  <nav class="links" aria-label="Main"><a href="#board" data-p="board">Board</a><a href="#trainer" data-p="trainer">Intro</a><a href="#ground-rules" data-p="ground-rules">Ground rules</a><a href="#ice-breaker" data-p="ice-breaker">Ice breaker</a><a href="#lego" data-p="lego">Lego game</a><a href="#brainstorm" data-p="brainstorm">Brainstorm</a><a href="#gallery" data-p="gallery">Gallery</a><a href="#feedback" data-p="feedback">Feedback</a><a href="#run-sheet" data-p="run-sheet">Run sheet</a></nav>
   <span class="hi" id="hi">Hi, <b id="hiName"></b><button type="button" id="hiOut">Not you?</button></span>
   <button class="btn dk" type="button" id="present" aria-pressed="false">Present</button>
  </div>
- <nav class="mn" aria-label="Main mobile"><a href="#board" data-p="board">Board</a><a href="#trainer" data-p="trainer">Intro</a><a href="#ground-rules" data-p="ground-rules">Ground rules</a><a href="#ice-breaker" data-p="ice-breaker">Ice breaker</a><a href="#lego" data-p="lego">Lego game</a><a href="#brainstorm" data-p="brainstorm">Brainstorm</a><a href="#feedback" data-p="feedback">Feedback</a><a href="#run-sheet" data-p="run-sheet">Run sheet</a></nav>
+ <nav class="mn" aria-label="Main mobile"><a href="#board" data-p="board">Board</a><a href="#trainer" data-p="trainer">Intro</a><a href="#ground-rules" data-p="ground-rules">Ground rules</a><a href="#ice-breaker" data-p="ice-breaker">Ice breaker</a><a href="#lego" data-p="lego">Lego game</a><a href="#brainstorm" data-p="brainstorm">Brainstorm</a><a href="#gallery" data-p="gallery">Gallery</a><a href="#feedback" data-p="feedback">Feedback</a><a href="#run-sheet" data-p="run-sheet">Run sheet</a></nav>
 </div></header>
 
 <main>
@@ -1013,6 +1045,40 @@ body.present .reg{display:none}
  </div>
 </section>
 
+<section class="pg" id="pg-gallery">
+ <div class="w">
+  <div class="pgh"><div><div class="eyebrow m4e">Module 4 · Capstone</div><h1>Dashboard Gallery</h1><p>Finished your dashboard? Share it here. Everyone in the room sees every dashboard, live.</p></div></div>
+  <div class="gbar" id="gMode" hidden></div>
+  <div class="glay">
+   <article class="card gform">
+    <div class="k">Submit your dashboard</div>
+    <form id="gF" novalidate>
+     <label class="fld" for="gTitle">Dashboard title</label>
+     <input class="gin" id="gTitle" type="text" maxlength="80" placeholder="e.g. HR Workforce: turnover by department" required>
+     <label class="fld" for="gLink">Power BI link <small>(optional)</small></label>
+     <input class="gin" id="gLink" type="url" placeholder="https://app.powerbi.com/view?r=…" autocomplete="off">
+     <details class="ghelp"><summary>How do I get a link?</summary>
+      <ol><li>Open your report in <b>app.powerbi.com</b>.</li><li><b>File → Embed report → Publish to web (public)</b>, then copy the link. It shows live inside this page.</li><li>No Publish to web? Use <b>Share → Copy link</b>. It opens in a new tab for people with access.</li></ol>
+     </details>
+     <label class="fld" for="gImg">Screenshot <small>(recommended)</small></label>
+     <label class="gdrop" for="gImg"><input id="gImg" type="file" accept="image/*"><span id="gDropT">📷 Tap to add a screenshot</span><img id="gPrev" alt="" hidden></label>
+     <p class="rerr" id="gErr" role="alert"></p>
+     <button type="submit" class="btn" id="gBtn">Submit to the gallery</button>
+    </form>
+   </article>
+   <div class="gwall">
+    <div class="gwh"><h2><span id="gCount">0</span> dashboards submitted</h2><button type="button" class="btn gh" id="gRef">Refresh</button></div>
+    <div class="ggrid" id="gGrid"><p class="gempty">No dashboards yet. Be the first to submit!</p></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<div class="gview" id="gView" hidden role="dialog" aria-modal="true" aria-labelledby="gvT">
+ <div class="gvbar"><div><b id="gvT"></b><span id="gvN"></span></div><div class="gvbtn"><button type="button" id="gvPrev" aria-label="Previous">‹</button><button type="button" id="gvNext" aria-label="Next">›</button><a id="gvOpen" target="_blank" rel="noopener">Open ↗</a><button type="button" id="gvX" aria-label="Close">✕</button></div></div>
+ <div class="gvbody" id="gvBody"></div>
+</div>
+
 <section class="pg" id="pg-bonus">
  <div class="w slide">
   <div class="eyebrow m4e">Bonus · 12:35 PM · 5 min</div>
@@ -1129,12 +1195,12 @@ const COLS = [
   {tag:"activity",title:"Design the background in Canva",body:"Open the Canva template, change the colours if you like, then Share, Download, PNG. In Power BI: Format page, Canvas background, Image, Fit, transparency 0%. Place your visuals on the white panels and switch off their own backgrounds.",img:"https://yushabdullah.github.io/DWC/data/HR_Dashboard_Background.png",alt:"Empty HR dashboard background with header, four KPI cards and six panels",href:CANVA_HR,hrefText:"Open the Canva template"},
   {tag:"activity",title:"Template 2: sidebar layout",body:"Prefer a menu on the left? Use this template instead: page buttons and two slicers in the sidebar, two charts on top, a wide table below. The dashed squares are where your icons go.",img:"https://yushabdullah.github.io/DWC/data/HR_Template_Sidebar.png",alt:"Sidebar dashboard template with header, left menu, two panels and one wide panel",href:"https://yushabdullah.github.io/DWC/data/HR_Template_Sidebar_Blank.png",hrefText:"Download the blank version"},
   {tag:"link",title:"Free SVG icons",body:"Search SVG Repo for simple icons (try: employee, chart, filter, calendar), download the SVG and add it in Power BI with Insert, Image. Pick one style and one colour for all your icons, and check each icon's licence before using it at work.",href:"https://www.svgrepo.com",hrefText:"Open SVG Repo"},
-  {tag:"checkpoint",title:"Dashboard checkpoint",body:"One HR page with four KPI cards, three slicers and at least three charts on the Canva background."}
+  {tag:"checkpoint",title:"Dashboard checkpoint",body:"One HR page with four KPI cards, three slicers and at least three charts on the Canva background. Then submit it to the gallery.",page:"gallery",pageText:"Submit to the gallery"}
  ]},
  {id:"m4",mc:"4",time:"11:50 – 1:00 · 70 min",title:"Module 4 · Interpreting and presenting insights",desc:"Separate signal from noise, then recommend one action.",start:170,end:240,posts:[
   {tag:"note",title:"Real issue or noise?",list:["Is the change bigger than normal month-to-month swings?","Did it last more than one period?","Is the base number big enough to matter?","Did the definition or data source change?"]},
   {tag:"note",title:"One-slide recommendation",body:"What happened (the number) → why it matters (impact) → what we should do (one action) → what we need (owner, date)."},
-  {tag:"activity",title:"Capstone: present your dashboard",body:"Two minutes each in small groups: your dashboard and one evidence-based recommendation. Peers give one strength and one question.",meta:"30 min"},
+  {tag:"activity",title:"Capstone: present your dashboard",body:"Two minutes each in small groups: your dashboard and one evidence-based recommendation. Peers give one strength and one question.",meta:"30 min",page:"gallery",pageText:"Open the Dashboard Gallery"},
   {tag:"activity",title:"Bonus: read, connect and ask Copilot",body:"Five minutes after the presentations: how to read analytics, how Power BI connects to your data, and what to ask Copilot.",meta:"5 min · trainer demo",page:"bonus",pageText:"Open the bonus"},
   {tag:"link",title:"Microsoft Learn: Power BI learning paths",body:"Free next steps after today.",href:L("https://learn.microsoft.com/en-us/training/powerplatform/power-bi")},
   {tag:"link",title:"PL-300 Power BI Data Analyst certification",body:"The certification to aim for.",href:L("https://learn.microsoft.com/en-us/credentials/certifications/data-analyst-associate/")},
@@ -1177,7 +1243,7 @@ const FLOW = [
  {title:"Module 4 · Interpreting and presenting insights",mc:"4",m:170,d:70,lo:"Outcomes (e) and (f)",steps:[
   {m:170,d:15,t:"Reading trends: real problems vs noise",tr:"Four questions test on two example charts. Group discussion.",pa:"Apply the four questions to their own dashboard.",mat:"Example charts"},
   {m:185,d:10,t:"Data storytelling: one recommendation",tr:"Model the four-part structure: what happened, why it matters, what to do, what we need. Reuse the best Lego takeaway as the example.",pa:"Draft their recommendation.",mat:"Story template"},
-  {m:195,d:30,t:"Capstone presentations",tr:"Groups of 4, 2 min each plus 1 min feedback. Trainer rotates.",pa:"Present; give one strength and one question.",mat:"Feedback guide",cp:"Every participant presents one evidence-based recommendation."},
+  {m:195,d:30,t:"Capstone presentations",tr:"Everyone submits to the Dashboard Gallery first (link or screenshot). Put the Gallery on screen, then groups of 4 present, 2 min each plus 1 min feedback. Trainer rotates.",pa:"Present; give one strength and one question.",mat:"Feedback guide",cp:"Every participant presents one evidence-based recommendation."},
   {m:225,d:5,t:"Bonus: read analytics, connect BI, use Copilot",tr:"Open the Bonus page. Read one KPI with What, When, Where, So what. Walk the five-step connection flow. Show two Copilot prompts (or screenshots if Copilot is not enabled).",pa:"Pick one Copilot question to try at work.",mat:"Bonus page"},
   {m:230,d:5,t:"Back-to-work action plan",tr:"Show Microsoft Learn paths and PL-300. Give the 30-day prompt.",pa:"Write three next steps with dates.",mat:"Action plan template",cp:"Each participant leaves with a recommendation and an action plan."},
   {m:235,d:5,t:"Wrap-up, questions and feedback",tr:"Three takeaways, open Q&A, then put the Feedback page on screen.",pa:"Scan the QR and submit feedback.",mat:"Feedback page (QR)"}
@@ -1300,8 +1366,8 @@ const OPEN=Date.UTC(2026,10,12,0,55,0);
 const FREE=["trainer","roadmap","objectives"];
 function isTrainer(){ try{ if(new URLSearchParams(location.search).has("trainer")) return true; const u=JSON.parse(localStorage.getItem("dwc-user")||"null"); return !!(u&&u.trainer); }catch(e){ return false; } }
 const isLocked=()=>!isTrainer() && Date.now()<OPEN;
-const PAGES={"lock":"pg-lock","trainer":"pg-trainer","roadmap":"pg-roadmap","objectives":"pg-objectives","reality":"pg-reality","run-sheet":"pg-run","ice-breaker":"pg-ice","ground-rules":"pg-rules","lego":"pg-lego","brainstorm":"pg-brain","bonus":"pg-bonus","feedback":"pg-feedback"};
-const ORDER=["board","trainer","roadmap","objectives","ground-rules","ice-breaker","lego","reality","brainstorm","bonus","feedback"];
+const PAGES={"lock":"pg-lock","trainer":"pg-trainer","roadmap":"pg-roadmap","objectives":"pg-objectives","reality":"pg-reality","run-sheet":"pg-run","ice-breaker":"pg-ice","ground-rules":"pg-rules","lego":"pg-lego","brainstorm":"pg-brain","bonus":"pg-bonus","gallery":"pg-gallery","feedback":"pg-feedback"};
+const ORDER=["board","trainer","roadmap","objectives","ground-rules","ice-breaker","lego","reality","brainstorm","gallery","bonus","feedback"];
 const NAVKEY={roadmap:"trainer",objectives:"trainer",reality:"lego"};
 let current="board";
 function route(){
@@ -1605,7 +1671,9 @@ renderBoard(); renderFlow(); route(); tick(); setInterval(tick,30000);
 })();
 
 // Registration: no account needed. Saved on this device; sent to the trainer's Google Sheet when REG_URL is set.
-const REG_URL="";
+// One Google Apps Script web app handles registrations and the gallery. Paste its /exec URL here.
+const SHEET_URL="";
+const REG_URL=SHEET_URL;
 let me=null;
 try{ me=JSON.parse(localStorage.getItem("dwc-user")||"null"); }catch(e){ me=null; }
 try{ const q=new URLSearchParams(location.search); if(q.has("trainer")){ me={trainer:true}; localStorage.setItem("dwc-user",JSON.stringify(me)); } if(q.has("register")){ me=null; localStorage.removeItem("dwc-user"); } }catch(e){}
@@ -1657,5 +1725,45 @@ function lt(){const lk=isLocked();
   $("lkHi").textContent=u&&u.name?"Hi "+first(u.name)+", you are registered.":"You are registered. See you soon.";}
  if(was!==lk){was=lk;route();}}
 lt();setInterval(lt,1000);})();
+
+/* Dashboard Gallery */
+(function(){const G=$("gGrid");if(!G)return;const LS="dwc-gallery";let items=[],imgData="",vi=0;
+const okPBI=u=>/^https:\/\/app\.powerbi\.com\//.test(u||"");
+const embeddable=u=>okPBI(u)&&(/\/view\?r=/.test(u)||/reportEmbed/.test(u));
+const thumb=it=>it.img?(String(it.img).startsWith("data:image/")?it.img:"https://drive.google.com/thumbnail?id="+encodeURIComponent(it.img)+"&sz=w1600"):"";
+const ago=t=>{const d=new Date(t);return isNaN(d)?"":d.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})};
+const local=()=>{try{return JSON.parse(localStorage.getItem(LS)||"[]")}catch(e){return[]}};
+if(!SHEET_URL){$("gMode").hidden=false;$("gMode").textContent="Preview mode: submissions stay on this device until the trainer connects the Google Sheet.";}
+function draw(){ $("gCount").textContent=items.length;
+ if(!items.length){G.innerHTML='<p class="gempty">No dashboards yet. Be the first to submit!</p>';return;}
+ G.innerHTML=items.map((it,i)=>{const t=thumb(it);return `<button type="button" class="gcard" data-i="${i}"><div class="gthumb">${embeddable(it.link)?'<span class="gtag">Live Power BI</span>':""}${t?`<img src="${esc(t)}" alt="" loading="lazy">`:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="12" width="4" height="8" rx="1"/><rect x="10" y="7" width="4" height="13" rx="1"/><rect x="17" y="3" width="4" height="17" rx="1"/></svg>'}</div><div class="gmeta"><b>${esc(it.title||"Untitled dashboard")}</b><span>${esc(first(it.name)||"Participant")}${ago(it.at)?" · "+ago(it.at):""}</span></div></button>`}).join("");}
+async function load(){ if(!SHEET_URL){items=local().slice().reverse();draw();return;}
+ try{const r=await fetch(SHEET_URL+"?action=gallery",{cache:"no-store"});const v=await r.json();if(Array.isArray(v)){items=v.filter(x=>x&&(x.title||x.link||x.img)).reverse();draw();}}catch(e){} }
+G.addEventListener("click",e=>{const c=e.target.closest(".gcard");if(c)openV(+c.dataset.i);});
+function openV(i){vi=(i+items.length)%items.length;const it=items[vi];$("gvT").textContent=it.title||"Untitled dashboard";$("gvN").textContent=(first(it.name)||"Participant")+" · "+(vi+1)+" of "+items.length;
+ const b=$("gvBody");b.innerHTML="";
+ if(embeddable(it.link)){const f=document.createElement("iframe");f.src=it.link;f.title=it.title||"Power BI report";f.allowFullscreen=true;b.appendChild(f);}
+ else if(thumb(it)){const im=document.createElement("img");im.src=thumb(it);im.alt=it.title||"Dashboard screenshot";b.appendChild(im);}
+ else{b.innerHTML='<p style="color:#fff;margin:auto">No preview. Use Open ↗.</p>';}
+ const o=$("gvOpen");if(okPBI(it.link)){o.href=it.link;o.hidden=false;}else o.hidden=true;
+ $("gView").hidden=false;document.documentElement.style.overflow="hidden";}
+function closeV(){$("gView").hidden=true;$("gvBody").innerHTML="";document.documentElement.style.overflow="";}
+$("gvX").onclick=closeV;$("gvPrev").onclick=()=>openV(vi-1);$("gvNext").onclick=()=>openV(vi+1);
+addEventListener("keydown",e=>{if($("gView").hidden)return;if(e.key==="Escape")closeV();if(e.key==="ArrowRight"){e.stopImmediatePropagation();openV(vi+1);}if(e.key==="ArrowLeft"){e.stopImmediatePropagation();openV(vi-1);}},true);
+$("gImg").addEventListener("change",e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,1600/im.width);const c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);imgData=c.toDataURL("image/jpeg",0.82);$("gPrev").src=imgData;$("gPrev").hidden=false;$("gDropT").hidden=true;};im.src=rd.result;};rd.readAsDataURL(f);});
+$("gF").addEventListener("submit",async e=>{e.preventDefault();const title=$("gTitle").value.trim(),link=$("gLink").value.trim(),err=$("gErr");
+ if(title.length<3){err.textContent="Please give your dashboard a title.";$("gTitle").focus();return;}
+ if(link&&!okPBI(link)){err.textContent="The link should start with https://app.powerbi.com/";$("gLink").focus();return;}
+ if(!link&&!imgData){err.textContent="Add a Power BI link or a screenshot.";return;}
+ err.textContent="";let u=null;try{u=JSON.parse(localStorage.getItem("dwc-user")||"null")}catch(x){}
+ const rec={action:"submit",name:(u&&u.name)||"Trainer",title,link,img:imgData,at:new Date().toISOString()};
+ $("gBtn").disabled=true;$("gBtn").textContent="Submitting…";
+ if(SHEET_URL){try{await fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:new URLSearchParams(rec)});}catch(x){err.textContent="Could not send. Check your connection and try again.";$("gBtn").disabled=false;$("gBtn").textContent="Submit to the gallery";return;}}
+ else{const l=local();l.push(rec);try{localStorage.setItem(LS,JSON.stringify(l))}catch(x){}}
+ $("gF").reset();imgData="";$("gPrev").hidden=true;$("gDropT").hidden=false;$("gBtn").disabled=false;$("gBtn").textContent="Submitted ✓ Submit another";
+ setTimeout(load,SHEET_URL?2500:0);});
+$("gRef").onclick=load;
+addEventListener("hashchange",()=>{if(location.hash==="#gallery")load();});
+load();setInterval(()=>{if(location.hash==="#gallery"&&$("gView").hidden)load();},20000);})();
 </script>
 </body></html>
