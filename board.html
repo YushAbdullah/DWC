@@ -38,6 +38,7 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:va
 .links a:hover,.mn a:hover{color:var(--tx)}.links a.on,.mn a.on{color:var(--tx);font-weight:600}
 @media(min-width:1080px){.links{display:flex}}
 @media(min-width:1080px) and (max-width:1340px){.links{gap:12px}.links a{font-size:.8125rem}}
+@media(min-width:1080px) and (max-width:1400px){body.trainer .links{gap:9px}body.trainer .links a{font-size:.78rem}}
 .logo,.logo *{white-space:nowrap}
 .mn{display:flex;overflow-x:auto;gap:24px;padding:0 0 10px}@media(min-width:1080px){.mn{display:none}}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 28px;border:0;border-radius:8px;font:500 .875rem var(--font);background:var(--pri);color:var(--onpri);text-decoration:none;cursor:pointer;transition:background .1s,transform .1s;white-space:nowrap}
@@ -686,6 +687,17 @@ body.present .lkpill{display:none}
 @media(min-width:1100px){.hi.on{display:inline-flex}}
 .hello{display:inline-flex;align-items:center;gap:8px;background:var(--yel);color:var(--onyel);font-weight:600;font-size:.9375rem;border-radius:9999px;padding:6px 14px;margin-bottom:14px}
 body.present .reg{display:none}
+.gwrap{position:relative;display:flex}.gwrap>.gcard{flex:1;min-width:0}.delx{position:absolute;top:8px;right:8px;z-index:3;width:30px;height:30px;border-radius:50%;border:0;background:rgba(15,23,42,.72);color:#fff;font-family:inherit;font-size:18px;font-weight:600;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0}.delx:hover,.delx:focus-visible{background:#dc2626;outline:2px solid #fff}.bwp{position:relative}.bwp .delx{top:0;right:6px;width:26px;height:26px;font-size:16px}.bwp header{position:static;background:none;z-index:auto;padding-right:30px;min-height:26px}
+.tonly{display:none!important}body.trainer .tonly{display:revert!important}
+.inkpi{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:16px}@media(min-width:900px){.inkpi{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.inkpi .card{padding:18px 20px}.inkpi b{display:block;font-size:2.25rem;line-height:1.1;font-weight:700;color:var(--tx);margin-top:6px;font-variant-numeric:tabular-nums}.inkpi span{font-size:.8125rem;color:var(--tm)}
+.ingrid{display:grid;gap:16px;margin-bottom:16px}@media(min-width:900px){.ingrid{grid-template-columns:1fr 1fr}}
+.inbars{display:grid;gap:10px;margin-top:12px}.inbar{display:grid;grid-template-columns:minmax(90px,140px) 1fr 34px;gap:10px;align-items:center;font-size:.875rem}
+.inbar i{display:block;height:14px;border-radius:0 4px 4px 0;background:var(--pri);min-width:2px;transition:width .4s}.inbar em{font-style:normal;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.intw{overflow-x:auto;margin-top:6px}.intab{width:100%;border-collapse:collapse;font-size:.875rem;min-width:560px}.intab th{text-align:left;font-size:.6875rem;letter-spacing:.06em;text-transform:uppercase;color:var(--tm);padding:8px 10px;border-bottom:1px solid var(--bd)}
+.intab td{padding:10px;border-bottom:1px solid var(--bd);vertical-align:top}.intab td small{display:block;color:var(--tm);font-size:.75rem}
+.yes{color:#15803d;font-weight:600}.no{color:var(--tm)}
+.inact{display:flex;gap:10px;flex-wrap:wrap}
 </style>
 
 </head><body><div class="shell">
@@ -722,12 +734,12 @@ body.present .reg{display:none}
  <div class="nav">
   <a class="logo" href="#board" aria-label="Dashboards Without Code, session board">
    <svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true"><rect x="2" y="2" width="36" height="24" rx="6" fill="#0A2350"/><rect x="9" y="14" width="5" height="7" rx="1.2" fill="#1677FF"/><rect x="17.5" y="10" width="5" height="11" rx="1.2" fill="#5A9DFF"/><rect x="26" y="6" width="5" height="15" rx="1.2" fill="#F2C811"/></svg>
-   <span>Dashboards Without Code<small>Aventra Group · Session board</small></span></a>
-  <nav class="links" aria-label="Main"><a href="#board" data-p="board">Board</a><a href="#trainer" data-p="trainer">Intro</a><a href="#ground-rules" data-p="ground-rules">Ground rules</a><a href="#ice-breaker" data-p="ice-breaker">Ice breaker</a><a href="#lego" data-p="lego">Lego game</a><a href="#brainstorm" data-p="brainstorm">Brainstorm</a><a href="#gallery" data-p="gallery">Gallery</a><a href="#feedback" data-p="feedback">Feedback</a><a href="#run-sheet" data-p="run-sheet">Run sheet</a></nav>
+   <span>Dashboards Without Code<small>Yusri Abdullah · Session board</small></span></a>
+  <nav class="links" aria-label="Main"><a href="#board" data-p="board">Board</a><a href="#trainer" data-p="trainer">Intro</a><a href="#ground-rules" data-p="ground-rules">Ground rules</a><a href="#ice-breaker" data-p="ice-breaker">Ice breaker</a><a href="#lego" data-p="lego">Lego game</a><a href="#brainstorm" data-p="brainstorm">Brainstorm</a><a href="#gallery" data-p="gallery">Gallery</a><a href="#insights" data-p="insights" class="tonly">Insights</a><a href="#feedback" data-p="feedback">Feedback</a><a href="#run-sheet" data-p="run-sheet">Run sheet</a></nav>
   <span class="hi" id="hi">Hi, <b id="hiName"></b><button type="button" id="hiOut">Not you?</button></span>
   <button class="btn dk" type="button" id="present" aria-pressed="false">Present</button>
  </div>
- <nav class="mn" aria-label="Main mobile"><a href="#board" data-p="board">Board</a><a href="#trainer" data-p="trainer">Intro</a><a href="#ground-rules" data-p="ground-rules">Ground rules</a><a href="#ice-breaker" data-p="ice-breaker">Ice breaker</a><a href="#lego" data-p="lego">Lego game</a><a href="#brainstorm" data-p="brainstorm">Brainstorm</a><a href="#gallery" data-p="gallery">Gallery</a><a href="#feedback" data-p="feedback">Feedback</a><a href="#run-sheet" data-p="run-sheet">Run sheet</a></nav>
+ <nav class="mn" aria-label="Main mobile"><a href="#board" data-p="board">Board</a><a href="#trainer" data-p="trainer">Intro</a><a href="#ground-rules" data-p="ground-rules">Ground rules</a><a href="#ice-breaker" data-p="ice-breaker">Ice breaker</a><a href="#lego" data-p="lego">Lego game</a><a href="#brainstorm" data-p="brainstorm">Brainstorm</a><a href="#gallery" data-p="gallery">Gallery</a><a href="#insights" data-p="insights" class="tonly">Insights</a><a href="#feedback" data-p="feedback">Feedback</a><a href="#run-sheet" data-p="run-sheet">Run sheet</a></nav>
 </div></header>
 
 <main>
@@ -1079,7 +1091,7 @@ body.present .reg{display:none}
    <p class="small" style="margin-top:12px">This table becomes your dashboard: each KPI is a card or a chart, and each column is a field you drag in Power BI.</p>
   </article>
   <article class="card bwall">
-   <div class="gwh"><div><div class="k">The Big Why wall</div><h2><span id="bwCount">0</span> posts</h2></div><button type="button" class="btn gh" id="bwRef">Refresh</button></div>
+   <div class="gwh"><div><div class="k">The Big Why wall</div><h2><span id="bwCount">0 posts</span></h2></div><button type="button" class="btn gh" id="bwRef">Refresh</button></div>
    <div class="bwchips" role="group" aria-label="Filter by function"><button type="button" aria-pressed="true" data-f="">All</button><button type="button" aria-pressed="false" data-f="Operations">Operations</button><button type="button" aria-pressed="false" data-f="Finance">Finance</button><button type="button" aria-pressed="false" data-f="Sales">Sales</button><button type="button" aria-pressed="false" data-f="HR">HR</button><button type="button" aria-pressed="false" data-f="Other">Other</button></div>
    <div class="gbar" id="bwMode" hidden></div>
    <div class="bwgrid" id="bwGrid"><p class="gempty">No posts yet. Be the first!</p></div>
@@ -1231,6 +1243,28 @@ MIN(HRDataset_v14[Salary])</code></pre><div class="dxf"><small>Check: 204,954 in
  </div>
 </section>
 
+<section class="pg" id="pg-insights">
+ <div class="w">
+  <div class="pgh"><div><div class="eyebrow">Trainer only</div><h1>Session insights</h1><p>Who registered, who posted a Big Why and who submitted a dashboard. Updates every 20 seconds.</p></div>
+   <div class="inact"><button type="button" class="btn gh" id="inRef">Refresh</button><button type="button" class="btn" id="inCsv">Download CSV</button></div></div>
+  <div class="gbar" id="inMode" hidden></div>
+  <div class="inkpi">
+   <div class="card"><div class="k">Registered</div><b id="inReg">0</b><span>participants</span></div>
+   <div class="card"><div class="k">Big Why</div><b id="inBw">0</b><span id="inBwS">posts</span></div>
+   <div class="card"><div class="k">Dashboards</div><b id="inG">0</b><span id="inGS">submitted</span></div>
+   <div class="card"><div class="k">Did both</div><b id="inBoth">0</b><span id="inBothS">of registered</span></div>
+  </div>
+  <div class="ingrid">
+   <article class="card"><div class="k">Power BI experience</div><div class="inbars" id="inPbi"></div></article>
+   <article class="card"><div class="k">Big Why by function</div><div class="inbars" id="inFn"></div></article>
+  </div>
+  <article class="card">
+   <div class="gwh"><div><div class="k">Participants</div><h2 id="inListH">0 people</h2></div></div>
+   <div class="bwchips" id="inChips"><button type="button" data-f="" aria-pressed="true">All</button><button type="button" data-f="nobw" aria-pressed="false">No Big Why yet</button><button type="button" data-f="nog" aria-pressed="false">No dashboard yet</button><button type="button" data-f="done" aria-pressed="false">Did both</button></div>
+   <div class="intw"><table class="intab"><thead><tr><th>Name</th><th>Power BI experience</th><th>Registered</th><th>Big Why</th><th>Dashboard</th></tr></thead><tbody id="inBody"></tbody></table></div>
+  </article>
+ </div>
+</section>
 <section class="pg" id="pg-feedback">
  <div class="w">
   <div class="fb">
@@ -1247,7 +1281,7 @@ MIN(HRDataset_v14[Salary])</code></pre><div class="dxf"><small>Check: 204,954 in
  <div><a class="logo" href="#board"><svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true"><rect x="2" y="2" width="36" height="24" rx="6" fill="#14336E"/><rect x="9" y="14" width="5" height="7" rx="1.2" fill="#1677FF"/><rect x="17.5" y="10" width="5" height="11" rx="1.2" fill="#5A9DFF"/><rect x="26" y="6" width="5" height="15" rx="1.2" fill="#F2C811"/></svg><span>Dashboards Without Code</span></a><p class="dtl">12 Nov 2026 · 9:00 AM to 1:00 PM MYT</p><p>Trainer: Muhammad Yusri Abdullah</p></div>
  <div><h4>Board</h4><a href="#columns">Session columns</a><a href="#ground-rules">Ground rules</a><a href="#ice-breaker">Ice breaker</a><a href="#lego">Lego game</a><a href="#brainstorm">Brainstorm</a><a href="#feedback">Feedback</a><a href="#run-sheet">Trainer run sheet</a><a href="https://app.powerbi.com" target="_blank" rel="noopener">Power BI Service</a></div>
  <div><h4>Keep learning</h4><a href="https://learn.microsoft.com/en-us/training/powerplatform/power-bi" target="_blank" rel="noopener">Microsoft Learn: Power BI</a><a href="https://learn.microsoft.com/en-us/credentials/certifications/data-analyst-associate/" target="_blank" rel="noopener">PL-300 certification</a><a href="https://www.linkedin.com/in/yushabdullah" target="_blank" rel="noopener">LinkedIn</a></div>
- <p style="grid-column:1/-1;margin-top:8px">© 2026 Muhammad Yusri Abdullah · Aventra Group · Skills today, a brighter tomorrow.</p>
+ <p style="grid-column:1/-1;margin-top:8px">© 2026 Yusri Abdullah · Skills today, a brighter tomorrow.</p>
 </div></footer>
 </div>
 
@@ -1470,9 +1504,9 @@ $("jump").onclick=()=>{
 // Pre-session lock: participants see only the intro slides until 8:55 AM MYT, 12 Nov 2026.
 const OPEN=Date.UTC(2026,10,12,0,55,0);
 const FREE=["trainer","roadmap","objectives"];
-function isTrainer(){ try{ if(new URLSearchParams(location.search).has("trainer")) return true; const u=JSON.parse(localStorage.getItem("dwc-user")||"null"); return !!(u&&u.trainer); }catch(e){ return false; } }
+function isTrainer(){ try{ return new URLSearchParams(location.search).has("trainer"); }catch(e){ return false; } }
 const isLocked=()=>!isTrainer() && Date.now()<OPEN;
-const PAGES={"lock":"pg-lock","trainer":"pg-trainer","roadmap":"pg-roadmap","objectives":"pg-objectives","reality":"pg-reality","run-sheet":"pg-run","ice-breaker":"pg-ice","ground-rules":"pg-rules","lego":"pg-lego","brainstorm":"pg-brain","bonus":"pg-bonus","gallery":"pg-gallery","dax":"pg-dax","no-code":"pg-dax","feedback":"pg-feedback"};
+const PAGES={"lock":"pg-lock","trainer":"pg-trainer","roadmap":"pg-roadmap","objectives":"pg-objectives","reality":"pg-reality","run-sheet":"pg-run","ice-breaker":"pg-ice","ground-rules":"pg-rules","lego":"pg-lego","brainstorm":"pg-brain","bonus":"pg-bonus","gallery":"pg-gallery","dax":"pg-dax","no-code":"pg-dax","feedback":"pg-feedback","insights":"pg-insights"};
 const ORDER=["board","trainer","roadmap","objectives","ground-rules","ice-breaker","lego","reality","brainstorm","dax","gallery","bonus","feedback"];
 const NAVKEY={roadmap:"trainer",objectives:"trainer",reality:"lego"};
 let current="board";
@@ -1482,6 +1516,7 @@ function route(){
   const lk=isLocked(); document.body.classList.toggle("locked",lk);
   if(lk && !FREE.includes(key)) key="lock";
   if(!lk && key==="lock") key="board";
+  if(key==="insights" && !isTrainer()) key="board";
   const lp=document.getElementById("lkPill"); if(lp) lp.hidden=!(lk && key!=="lock");
   const changed=key!==current; current=key;
   document.querySelectorAll(".pg").forEach(p=>p.classList.toggle("on", p.id===(PAGES[key]||"pg-board")));
@@ -1757,7 +1792,7 @@ const SHEET_URL="";
 const REG_URL=SHEET_URL;
 let me=null;
 try{ me=JSON.parse(localStorage.getItem("dwc-user")||"null"); }catch(e){ me=null; }
-try{ const q=new URLSearchParams(location.search); if(q.has("trainer")){ me={trainer:true}; localStorage.setItem("dwc-user",JSON.stringify(me)); } if(q.has("register")){ me=null; localStorage.removeItem("dwc-user"); } }catch(e){}
+try{ const q=new URLSearchParams(location.search); if(q.has("trainer")){ me={trainer:true}; } else if(me&&me.trainer){ me=null; localStorage.removeItem("dwc-user"); } if(q.has("register")){ me=null; localStorage.removeItem("dwc-user"); } }catch(e){}
 const first=n=>String(n||"").trim().split(/\s+/)[0];
 function showMe(){
   const named=me && me.name;
@@ -1777,6 +1812,7 @@ $("regF").addEventListener("submit",async e=>{
   err.textContent=""; $("rBtn").disabled=true; $("rBtn").textContent="Registering…";
   const rec={name,email,pbi:pick.value,at:new Date().toISOString()};
   if(REG_URL){ try{ await fetch(REG_URL,{method:"POST",mode:"no-cors",body:new URLSearchParams(rec)}); }catch(x){} }
+  if(!REG_URL){ try{ const l=JSON.parse(localStorage.getItem("dwc-regs")||"[]"); l.push({name,pbi:rec.pbi,at:rec.at}); localStorage.setItem("dwc-regs",JSON.stringify(l)); }catch(x){} }
   me=rec; try{ localStorage.setItem("dwc-user",JSON.stringify(me)); }catch(x){}
   $("rHi").textContent=first(name); $("regForm").hidden=true; $("regDone").hidden=false; $("rGo").focus();
 });
@@ -1807,6 +1843,15 @@ function lt(){const lk=isLocked();
  if(was!==lk){was=lk;route();}}
 lt();setInterval(lt,1000);})();
 
+/* Own posts + delete */
+const MINE="dwc-mine";const mine=()=>{try{return JSON.parse(localStorage.getItem(MINE)||"[]")}catch(e){return[]}};
+const addMine=id=>{const m=mine();m.push(id);try{localStorage.setItem(MINE,JSON.stringify(m))}catch(e){}};
+const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+const canDel=x=>!!x&&(isTrainer()||(!!x.id&&mine().includes(String(x.id))));
+const delBtn=(x,i,what)=>canDel(x)?`<button type="button" class="delx" data-del="${i}" aria-label="Delete this ${what}" title="Delete">×</button>`:"";
+async function delItem(LS,tab,x){if(SHEET_URL){try{await fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:new URLSearchParams({action:"delete",tab,id:x.id||"",at:x.at||""})});}catch(e){alert("Could not delete. Check your connection and try again.");return false;}}
+ else{let l=[];try{l=JSON.parse(localStorage.getItem(LS)||"[]")}catch(e){}l=l.filter(y=>!(x.id?y.id===x.id:(y.at===x.at&&y.name===x.name)));try{localStorage.setItem(LS,JSON.stringify(l))}catch(e){}}return true;}
+
 /* Dashboard Gallery */
 (function(){const G=$("gGrid");if(!G)return;const LS="dwc-gallery";let items=[],imgData="",vi=0;
 const okPBI=u=>/^https:\/\/app\.powerbi\.com\//.test(u||"");
@@ -1817,10 +1862,10 @@ const local=()=>{try{return JSON.parse(localStorage.getItem(LS)||"[]")}catch(e){
 if(!SHEET_URL){$("gMode").hidden=false;$("gMode").textContent="Preview mode: submissions stay on this device until the trainer connects the Google Sheet.";}
 function draw(){ $("gCount").textContent=items.length;
  if(!items.length){G.innerHTML='<p class="gempty">No dashboards yet. Be the first to submit!</p>';return;}
- G.innerHTML=items.map((it,i)=>{const t=thumb(it);return `<button type="button" class="gcard" data-i="${i}"><div class="gthumb">${embeddable(it.link)?'<span class="gtag">Live Power BI</span>':""}${t?`<img src="${esc(t)}" alt="" loading="lazy">`:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="12" width="4" height="8" rx="1"/><rect x="10" y="7" width="4" height="13" rx="1"/><rect x="17" y="3" width="4" height="17" rx="1"/></svg>'}</div><div class="gmeta"><b>${esc(it.title||"Untitled dashboard")}</b><span>${esc(first(it.name)||"Participant")}${ago(it.at)?" · "+ago(it.at):""}</span></div></button>`}).join("");}
+ G.innerHTML=items.map((it,i)=>{const t=thumb(it);return `<div class="gwrap">${delBtn(it,i,"dashboard")}<button type="button" class="gcard" data-i="${i}"><div class="gthumb">${embeddable(it.link)?'<span class="gtag">Live Power BI</span>':""}${t?`<img src="${esc(t)}" alt="" loading="lazy">`:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="12" width="4" height="8" rx="1"/><rect x="10" y="7" width="4" height="13" rx="1"/><rect x="17" y="3" width="4" height="17" rx="1"/></svg>'}</div><div class="gmeta"><b>${esc(it.title||"Untitled dashboard")}</b><span>${esc(first(it.name)||"Participant")}${ago(it.at)?" · "+ago(it.at):""}</span></div></button></div>`}).join("");}
 async function load(){ if(!SHEET_URL){items=local().slice().reverse();draw();return;}
  try{const r=await fetch(SHEET_URL+"?action=gallery",{cache:"no-store"});const v=await r.json();if(Array.isArray(v)){items=v.filter(x=>x&&(x.title||x.link||x.img)).reverse();draw();}}catch(e){} }
-G.addEventListener("click",e=>{const c=e.target.closest(".gcard");if(c)openV(+c.dataset.i);});
+G.addEventListener("click",async e=>{const d=e.target.closest(".delx");if(d){e.stopPropagation();const it=items[+d.dataset.del];if(!it||!confirm("Delete \""+(it.title||"this dashboard")+"\" from the gallery?"))return;if(await delItem(LS,"gallery",it)){items=items.filter(y=>y!==it);draw();if(SHEET_URL)setTimeout(load,2500);}return;}const c=e.target.closest(".gcard");if(c)openV(+c.dataset.i);});
 function openV(i){vi=(i+items.length)%items.length;const it=items[vi];$("gvT").textContent=it.title||"Untitled dashboard";$("gvN").textContent=(first(it.name)||"Participant")+" · "+(vi+1)+" of "+items.length;
  const b=$("gvBody");b.innerHTML="";
  if(embeddable(it.link)){const f=document.createElement("iframe");f.src=it.link;f.title=it.title||"Power BI report";f.allowFullscreen=true;b.appendChild(f);}
@@ -1837,7 +1882,7 @@ $("gF").addEventListener("submit",async e=>{e.preventDefault();const title=$("gT
  if(link&&!okPBI(link)){err.textContent="The link should start with https://app.powerbi.com/";$("gLink").focus();return;}
  if(!link&&!imgData){err.textContent="Add a Power BI link or a screenshot.";return;}
  err.textContent="";let u=null;try{u=JSON.parse(localStorage.getItem("dwc-user")||"null")}catch(x){}
- const rec={action:"submit",name:(u&&u.name)||"Trainer",title,link,img:imgData,at:new Date().toISOString()};
+ const rec={action:"submit",id:newId(),name:(u&&u.name)||"Trainer",title,link,img:imgData,at:new Date().toISOString()};addMine(rec.id);
  $("gBtn").disabled=true;$("gBtn").textContent="Submitting…";
  if(SHEET_URL){try{await fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:new URLSearchParams(rec)});}catch(x){err.textContent="Could not send. Check your connection and try again.";$("gBtn").disabled=false;$("gBtn").textContent="Submit to the gallery";return;}}
  else{const l=local();l.push(rec);try{localStorage.setItem(LS,JSON.stringify(l))}catch(x){}}
@@ -1851,23 +1896,58 @@ load();setInterval(()=>{if(location.hash==="#gallery"&&$("gView").hidden)load();
 (function(){const W=$("bwGrid");if(!W)return;const LS="dwc-bigwhy";let items=[],flt="";
 const local=()=>{try{return JSON.parse(localStorage.getItem(LS)||"[]")}catch(e){return[]}};
 if(!SHEET_URL){$("bwMode").hidden=false;$("bwMode").textContent="Preview mode: posts stay on this device until the trainer connects the Google Sheet.";}
-function draw(){const v=items.filter(x=>!flt||x.fn===flt);$("bwCount").textContent=items.length;
- W.innerHTML=v.length?v.map(x=>`<div class="bwp"><header><b>${esc(first(x.name)||"Participant")}</b>${x.fn?`<span>${esc(x.fn)}</span>`:""}</header><p><small>Decision</small>${esc(x.decision||"")}</p><p><small>Number</small>${esc(x.number||"")}</p><p><small>KPI</small>${esc(x.kpi||"")}</p><p><small>Data</small>${esc(x.data||"")}</p></div>`).join(""):'<p class="gempty">'+(items.length?"No posts for this function yet.":"No posts yet. Be the first!")+"</p>";}
+function draw(){const v=items.filter(x=>!flt||x.fn===flt);$("bwCount").textContent=items.length+(items.length===1?" post":" posts");
+ W.innerHTML=v.length?v.map(x=>`<div class="bwp">${delBtn(x,items.indexOf(x),"post")}<header><b>${esc(first(x.name)||"Participant")}</b>${x.fn?`<span>${esc(x.fn)}</span>`:""}</header><p><small>Decision</small>${esc(x.decision||"")}</p><p><small>Number</small>${esc(x.number||"")}</p><p><small>KPI</small>${esc(x.kpi||"")}</p><p><small>Data</small>${esc(x.data||"")}</p></div>`).join(""):'<p class="gempty">'+(items.length?"No posts for this function yet.":"No posts yet. Be the first!")+"</p>";}
 async function load(){if(!SHEET_URL){items=local().slice().reverse();draw();return;}
  try{const r=await fetch(SHEET_URL+"?action=bigwhy",{cache:"no-store"});const v=await r.json();if(Array.isArray(v)){items=v.filter(x=>x&&x.decision).reverse();draw();}}catch(e){}}
+W.addEventListener("click",async e=>{const d=e.target.closest(".delx");if(!d)return;const x=items[+d.dataset.del];if(!x||!confirm("Delete this Big Why post?"))return;if(await delItem(LS,"bigwhy",x)){items=items.filter(y=>y!==x);draw();if(SHEET_URL)setTimeout(load,2500);}});
 document.querySelectorAll(".bwchips button").forEach(b=>b.onclick=()=>{flt=b.dataset.f;document.querySelectorAll(".bwchips button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));draw();});
 $("bwF").addEventListener("submit",async e=>{e.preventDefault();const g=id=>$(id).value.trim(),err=$("bwErr");
  const rec={action:"bigwhy",fn:g("bwFn"),decision:g("bwD"),number:g("bwN"),kpi:g("bwK"),data:g("bwS")};
  if(!rec.fn){err.textContent="Please choose your function.";$("bwFn").focus();return;}
  for(const [k,id,l] of [["decision","bwD","decision"],["number","bwN","number"],["kpi","bwK","KPI"],["data","bwS","data source"]]) if(!rec[k]){err.textContent="Please fill in the "+l+" sticky.";$(id).focus();return;}
  err.textContent="";let u=null;try{u=JSON.parse(localStorage.getItem("dwc-user")||"null")}catch(x){}
- rec.name=(u&&u.name)||"Trainer";rec.at=new Date().toISOString();
+ rec.id=newId();addMine(rec.id);rec.name=(u&&u.name)||"Trainer";rec.at=new Date().toISOString();
  $("bwBtn").disabled=true;$("bwBtn").textContent="Posting…";
  if(SHEET_URL){try{await fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:new URLSearchParams(rec)});}catch(x){err.textContent="Could not send. Check your connection and try again.";$("bwBtn").disabled=false;$("bwBtn").textContent="Post to the wall";return;}}
  else{const l=local();l.push(rec);try{localStorage.setItem(LS,JSON.stringify(l))}catch(x){}}
  $("bwF").reset();$("bwBtn").disabled=false;$("bwBtn").textContent="Posted ✓ Post another";setTimeout(load,SHEET_URL?2000:0);});
 $("bwRef").onclick=load;addEventListener("hashchange",()=>{if(location.hash==="#brainstorm")load();});
 load();setInterval(()=>{if(location.hash==="#brainstorm")load();},15000);})();
+
+
+/* Trainer insights */
+(function(){if(!$("pg-insights"))return;document.body.classList.toggle("trainer",isTrainer());
+let regs=[],bw=[],gal=[],flt="",rows=[];
+const ls=k=>{try{return JSON.parse(localStorage.getItem(k)||"[]")}catch(e){return[]}};
+const key=n=>String(n||"").trim().toLowerCase().replace(/\s+/g," ");
+const tm=t=>{const d=new Date(t);return isNaN(d)?"":d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})};
+const pct=(a,b)=>b?Math.round(a/b*100)+"% of registered":"of registered";
+if(!SHEET_URL){$("inMode").hidden=false;$("inMode").textContent="Preview mode: showing only what was entered on this device. Connect the Google Sheet to see everyone.";}
+async function get(a){const r=await fetch(SHEET_URL+"?action="+a,{cache:"no-store"});const v=await r.json();return Array.isArray(v)?v:[];}
+function bars(el,cats,vals){const mx=Math.max(1,...vals);$(el).innerHTML=cats.map((c,i)=>`<div class="inbar"><span>${esc(c)}</span><i style="width:${vals[i]/mx*100}%"></i><em>${vals[i]}</em></div>`).join("");}
+function draw(){const people=new Map();
+ regs.forEach(r=>{const k=key(r.name);if(k&&!people.has(k))people.set(k,{name:r.name,pbi:r.pbi||"",at:r.at,bw:0,g:0,reg:true});});
+ const touch=(x,f)=>{const k=key(x.name);if(!k||k==="trainer")return;if(!people.has(k))people.set(k,{name:x.name,pbi:"",at:"",bw:0,g:0,reg:false});people.get(k)[f]++;};
+ bw.forEach(x=>touch(x,"bw"));gal.forEach(x=>touch(x,"g"));
+ rows=[...people.values()].sort((a,b)=>{const x=String(a.at||"~"),y=String(b.at||"~");return x<y?-1:x>y?1:0;});
+ const R=regs.length,reg=rows.filter(p=>p.reg),nbw=reg.filter(p=>p.bw).length,ng=reg.filter(p=>p.g).length,nb=reg.filter(p=>p.bw&&p.g).length;
+ $("inReg").textContent=R;$("inBw").textContent=bw.length;$("inBwS").textContent=(bw.length===1?"post":"posts")+" · "+pct(nbw,R);
+ $("inG").textContent=gal.length;$("inGS").textContent="submitted · "+pct(ng,R);$("inBoth").textContent=nb;$("inBothS").textContent=pct(nb,R);
+ const P=["First time","Heard of it","Used it"];bars("inPbi",["First time","Heard of it","Used it before"],P.map(c=>regs.filter(r=>r.pbi===c).length));
+ const F=["Operations","Finance","Sales","HR","Other"];bars("inFn",F,F.map(c=>bw.filter(x=>x.fn===c).length));
+ const v=rows.filter(p=>!flt||(flt==="nobw"&&!p.bw)||(flt==="nog"&&!p.g)||(flt==="done"&&p.bw&&p.g));
+ $("inListH").textContent=v.length+(v.length===1?" person":" people");
+ const mark=n=>n?`<span class="yes">✓${n>1?" "+n:""}</span>`:'<span class="no">Not yet</span>';
+ $("inBody").innerHTML=v.length?v.map(p=>`<tr><td><b>${esc(p.name)}</b>${p.reg?"":"<small>Not registered on this sheet</small>"}</td><td>${esc(p.pbi==="Used it"?"Used it before":p.pbi||"—")}</td><td>${esc(tm(p.at)||"—")}</td><td>${mark(p.bw)}</td><td>${mark(p.g)}</td></tr>`).join(""):'<tr><td colspan="5" class="no">Nobody here yet.</td></tr>';}
+async function load(){if(!SHEET_URL){regs=ls("dwc-regs");bw=ls("dwc-bigwhy");gal=ls("dwc-gallery");draw();return;}
+ try{const [a,b,c]=await Promise.all([get("registrations"),get("bigwhy"),get("gallery")]);regs=a.filter(x=>x&&x.name);bw=b.filter(x=>x&&x.decision);gal=c.filter(x=>x&&(x.title||x.link||x.img));draw();}catch(e){}}
+$("inChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{flt=b.dataset.f;$("inChips").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));draw();});
+$("inRef").onclick=load;
+$("inCsv").onclick=()=>{const q=v=>'"'+String(v??"").replace(/"/g,'""')+'"';const L=[["Name","Power BI experience","Registered at","Big Why posts","Dashboards submitted"]].concat(rows.map(p=>[p.name,p.pbi,p.at,p.bw,p.g]));
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+L.map(r=>r.map(q).join(",")).join("\r\n")],{type:"text/csv"}));a.download="dwc-session-insights.csv";document.body.appendChild(a);a.click();a.remove();};
+addEventListener("hashchange",()=>{if(location.hash==="#insights")load();});
+load();setInterval(()=>{if(location.hash==="#insights")load();},20000);})();
 
 /* DAX copy buttons */
 document.querySelectorAll(".dxcp").forEach(b=>b.onclick=async()=>{const t=b.closest(".dxc").querySelector("code").textContent;
