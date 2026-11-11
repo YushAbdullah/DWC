@@ -174,6 +174,7 @@ h1,h2,h3{font-weight:700;letter-spacing:-.025em}
 .eyebrow{font-size:.8125rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--ink);margin-bottom:12px}
 :root:not([data-theme="light"]) .eyebrow{color:var(--tx)}
 .eyebrow.m1e{color:var(--m1x)}
+.eyebrow.m4e{color:var(--m4x)}
 h1.pt{font-size:clamp(3rem,7.5vw,5.25rem);line-height:1.02;font-weight:800;letter-spacing:-.035em;color:var(--ink)}
 h1.pt span{display:block;color:var(--acc)}
 .ptsub{font-size:clamp(1.25rem,2.4vw,1.75rem);line-height:1.3;color:var(--tx);margin:14px 0 0;font-weight:400}
@@ -426,6 +427,25 @@ body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-i
 .pimg{display:block;margin-top:12px;border-radius:10px;overflow:hidden;box-shadow:0 0 0 1px var(--bd)}.pimg img{display:block;width:100%;height:auto}
 
 /* Opening slides */
+/* bonus */
+.bnl{color:var(--tm);margin-bottom:22px}
+.bn3{display:grid;gap:16px}@media(min-width:960px){.bn3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.bnc{background:var(--sur);border-radius:20px;box-shadow:0 0 0 1px var(--bd),var(--sh1);border-top:6px solid var(--c);padding:22px;display:flex;flex-direction:column;gap:14px}
+.bnh{display:flex;gap:14px;align-items:center}
+.bni{flex:0 0 52px;height:52px;border-radius:14px;background:var(--ct);color:var(--cx);display:grid;place-items:center}
+.bni svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bnh small{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cx)}
+.bnh h2{margin:0;font-size:1.25rem;line-height:1.25}
+.bnsteps,.bnflow,.bnask{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.bnsteps li{display:grid;grid-template-columns:78px 1fr;gap:10px;align-items:baseline;padding:10px 12px;background:var(--mut);border-radius:12px}
+.bnsteps b{color:var(--cx)}.bnsteps span,.bnflow span{font-size:.875rem;color:var(--tm)}
+.bnflow{counter-reset:f;gap:0}
+.bnflow li{counter-increment:f;position:relative;padding:8px 0 14px 44px;display:grid;gap:1px}
+.bnflow li::before{content:counter(f);position:absolute;left:0;top:6px;width:30px;height:30px;border-radius:50%;background:var(--c);color:#fff;font-weight:700;font-size:.8125rem;display:grid;place-items:center}
+.bnflow li:not(:last-child)::after{content:"";position:absolute;left:14px;top:38px;bottom:-4px;border-left:3px dotted var(--c)}
+.bnask li{background:var(--ct);color:var(--cx);border-radius:14px 14px 14px 4px;padding:10px 14px;font-weight:500;font-size:.9375rem}
+.bnhow li{grid-template-columns:58px 1fr}
+.bntip{margin:auto 0 0;font-size:.8125rem;color:var(--ts);border-top:1px dashed var(--bd);padding-top:12px}
 /* pre-session lock */
 .lockw{text-align:center;align-items:center}
 .lkl{max-width:620px;margin:0 auto 26px;color:var(--tm)}
@@ -993,6 +1013,52 @@ body.present .reg{display:none}
  </div>
 </section>
 
+<section class="pg" id="pg-bonus">
+ <div class="w slide">
+  <div class="eyebrow m4e">Bonus · 12:35 PM · 5 min</div>
+  <h1 class="sh1">Beyond today: read, connect, ask</h1>
+  <p class="lead bnl">Three things to try back at work, once your dashboard is live.</p>
+  <div class="bn3">
+   <article class="bnc" style="--c:var(--m1);--ct:var(--m1t);--cx:var(--m1x)">
+    <div class="bnh"><span class="bni"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5M8 13v-2M11 13V9M14 13v-3"/></svg></span><div><small>1 · Read</small><h2>How to read analytics</h2></div></div>
+    <ol class="bnsteps">
+     <li><b>What?</b><span>Read the KPI card against its target or last period.</span></li>
+     <li><b>When?</b><span>Check the trend line. Is it a pattern or one spike?</span></li>
+     <li><b>Where?</b><span>Click a bar to cross-filter, or drill down by department.</span></li>
+     <li><b>So what?</b><span>Turn it into one sentence and one action.</span></li>
+    </ol>
+    <p class="bntip">Tip: hover any visual for the tooltip, and use <b>Focus mode</b> to read one chart full screen.</p>
+   </article>
+   <article class="bnc" style="--c:var(--m2);--ct:var(--m2t);--cx:var(--m2x)">
+    <div class="bnh"><span class="bni"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="6" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="12" r="2.5"/><path d="M7.5 6.5l9 4.5M7.5 17.5l9-4.5"/></svg></span><div><small>2 · Connect</small><h2>How BI is connected</h2></div></div>
+    <ol class="bnflow">
+     <li><b>Sources</b><span>Excel, SharePoint, SQL, HR or ERP systems</span></li>
+     <li><b>Get data</b><span>Power Query cleans and combines</span></li>
+     <li><b>Semantic model</b><span>Tables, relationships, measures</span></li>
+     <li><b>Report and dashboard</b><span>Published to Power BI Service</span></li>
+     <li><b>Refresh and share</b><span>Scheduled refresh, then Teams, mobile or email</span></li>
+    </ol>
+    <p class="bntip">Data on your own servers needs an <b>on-premises gateway</b> for scheduled refresh.</p>
+   </article>
+   <article class="bnc" style="--c:var(--m4);--ct:var(--m4t);--cx:var(--m4x)">
+    <div class="bnh"><span class="bni"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8z"/></svg></span><div><small>3 · Ask</small><h2>Using Copilot in Power BI</h2></div></div>
+    <ul class="bnask">
+     <li>"Summarise this report page in three bullet points."</li>
+     <li>"Why did turnover go up in the Sales department?"</li>
+     <li>"Create a page showing headcount by department and hire year."</li>
+    </ul>
+    <ol class="bnsteps bnhow">
+     <li><b>Open</b><span>your report in Power BI Service or Desktop.</span></li>
+     <li><b>Click</b><span>the Copilot button on the ribbon.</span></li>
+     <li><b>Ask</b><span>in plain English, then refine the answer.</span></li>
+    </ol>
+    <p class="bntip">Copilot needs a paid Fabric capacity (F2 or higher) or Premium, switched on by your admin. Always check its answer against the visuals.</p>
+   </article>
+  </div>
+  <div class="snav"><a href="#board">← Session board</a><a href="#feedback">Feedback →</a></div>
+ </div>
+</section>
+
 <section class="pg" id="pg-feedback">
  <div class="w">
   <div class="fb">
@@ -1069,6 +1135,7 @@ const COLS = [
   {tag:"note",title:"Real issue or noise?",list:["Is the change bigger than normal month-to-month swings?","Did it last more than one period?","Is the base number big enough to matter?","Did the definition or data source change?"]},
   {tag:"note",title:"One-slide recommendation",body:"What happened (the number) → why it matters (impact) → what we should do (one action) → what we need (owner, date)."},
   {tag:"activity",title:"Capstone: present your dashboard",body:"Two minutes each in small groups: your dashboard and one evidence-based recommendation. Peers give one strength and one question.",meta:"30 min"},
+  {tag:"activity",title:"Bonus: read, connect and ask Copilot",body:"Five minutes after the presentations: how to read analytics, how Power BI connects to your data, and what to ask Copilot.",meta:"5 min · trainer demo",page:"bonus",pageText:"Open the bonus"},
   {tag:"link",title:"Microsoft Learn: Power BI learning paths",body:"Free next steps after today.",href:L("https://learn.microsoft.com/en-us/training/powerplatform/power-bi")},
   {tag:"link",title:"PL-300 Power BI Data Analyst certification",body:"The certification to aim for.",href:L("https://learn.microsoft.com/en-us/credentials/certifications/data-analyst-associate/")},
   {tag:"checkpoint",title:"Feedback before you leave",body:"Scan the QR code on screen and give your feedback. It takes two minutes.",page:"feedback",pageText:"Show the feedback QR"}
@@ -1111,7 +1178,8 @@ const FLOW = [
   {m:170,d:15,t:"Reading trends: real problems vs noise",tr:"Four questions test on two example charts. Group discussion.",pa:"Apply the four questions to their own dashboard.",mat:"Example charts"},
   {m:185,d:10,t:"Data storytelling: one recommendation",tr:"Model the four-part structure: what happened, why it matters, what to do, what we need. Reuse the best Lego takeaway as the example.",pa:"Draft their recommendation.",mat:"Story template"},
   {m:195,d:30,t:"Capstone presentations",tr:"Groups of 4, 2 min each plus 1 min feedback. Trainer rotates.",pa:"Present; give one strength and one question.",mat:"Feedback guide",cp:"Every participant presents one evidence-based recommendation."},
-  {m:225,d:10,t:"Back-to-work action plan",tr:"Show Microsoft Learn paths and PL-300. Give the 30-day prompt.",pa:"Write three next steps with dates.",mat:"Action plan template",cp:"Each participant leaves with a recommendation and an action plan."},
+  {m:225,d:5,t:"Bonus: read analytics, connect BI, use Copilot",tr:"Open the Bonus page. Read one KPI with What, When, Where, So what. Walk the five-step connection flow. Show two Copilot prompts (or screenshots if Copilot is not enabled).",pa:"Pick one Copilot question to try at work.",mat:"Bonus page"},
+  {m:230,d:5,t:"Back-to-work action plan",tr:"Show Microsoft Learn paths and PL-300. Give the 30-day prompt.",pa:"Write three next steps with dates.",mat:"Action plan template",cp:"Each participant leaves with a recommendation and an action plan."},
   {m:235,d:5,t:"Wrap-up, questions and feedback",tr:"Three takeaways, open Q&A, then put the Feedback page on screen.",pa:"Scan the QR and submit feedback.",mat:"Feedback page (QR)"}
  ]}
 ];
@@ -1232,8 +1300,8 @@ const OPEN=Date.UTC(2026,10,12,0,55,0);
 const FREE=["trainer","roadmap","objectives"];
 function isTrainer(){ try{ if(new URLSearchParams(location.search).has("trainer")) return true; const u=JSON.parse(localStorage.getItem("dwc-user")||"null"); return !!(u&&u.trainer); }catch(e){ return false; } }
 const isLocked=()=>!isTrainer() && Date.now()<OPEN;
-const PAGES={"lock":"pg-lock","trainer":"pg-trainer","roadmap":"pg-roadmap","objectives":"pg-objectives","reality":"pg-reality","run-sheet":"pg-run","ice-breaker":"pg-ice","ground-rules":"pg-rules","lego":"pg-lego","brainstorm":"pg-brain","feedback":"pg-feedback"};
-const ORDER=["board","trainer","roadmap","objectives","ground-rules","ice-breaker","lego","reality","brainstorm","feedback"];
+const PAGES={"lock":"pg-lock","trainer":"pg-trainer","roadmap":"pg-roadmap","objectives":"pg-objectives","reality":"pg-reality","run-sheet":"pg-run","ice-breaker":"pg-ice","ground-rules":"pg-rules","lego":"pg-lego","brainstorm":"pg-brain","bonus":"pg-bonus","feedback":"pg-feedback"};
+const ORDER=["board","trainer","roadmap","objectives","ground-rules","ice-breaker","lego","reality","brainstorm","bonus","feedback"];
 const NAVKEY={roadmap:"trainer",objectives:"trainer",reality:"lego"};
 let current="board";
 function route(){
