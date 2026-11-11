@@ -216,10 +216,10 @@ details.st.live{box-shadow:0 0 0 2px var(--acc),var(--sh2)}
 .rules{list-style:none;margin:0 0 24px;padding:0;display:grid;gap:16px;counter-reset:r}
 @media(min-width:700px){.rules{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(min-width:1100px){.rules{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.rules li{counter-increment:r;background:var(--sur);border-radius:20px;box-shadow:var(--sh1);padding:22px;display:flex;flex-direction:column;gap:8px;border-top:5px solid var(--c)}
-.rules li::before{content:counter(r);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--c);color:#fff;font-weight:700;font-size:1.125rem}
-.rules li:nth-child(4n+3)::before{color:var(--onyel)}
-.rules b{font-size:1.125rem;line-height:1.3}
+.rules li{background:var(--sur);border-radius:14px;box-shadow:0 0 0 1px var(--bd),var(--sh1);padding:24px 24px 24px 26px;display:flex;flex-direction:column;gap:6px;position:relative;overflow:hidden}
+.rules li::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c)}
+.rules em{font-style:normal;font-size:.8125rem;font-weight:700;letter-spacing:.12em;color:var(--c);margin-bottom:10px;padding-bottom:12px;border-bottom:1px solid var(--bd)}
+.rules b{font-size:1.0625rem;line-height:1.35;font-weight:700;letter-spacing:-.005em}
 .rules span{color:var(--tm);font-size:.9375rem}
 .agree{margin-bottom:80px;font-size:1rem}
 /* lego */
@@ -481,18 +481,18 @@ body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-i
 </section>
 <section class="pg" id="pg-rules">
  <div class="w">
-  <div class="pgh"><div><div class="eyebrow">Welcome · 9:08 AM</div><h1>Ground rules</h1><p>Eight rules for a hands-on morning. We agree them together before we start building.</p></div></div>
+  <div class="pgh"><div><div class="eyebrow">Welcome · 9:08 AM</div><h1>Ground rules</h1><p>Our working agreement for a productive, hands-on session. We confirm it together before we begin.</p></div></div>
   <ol class="rules">
-   <li style="--c:var(--m1);--ct:var(--m1t);--cx:var(--m1x)"><b>Phones on silent, laptops open</b><span>We build today, not just watch. Keep your laptop charged and Power BI open.</span></li>
-   <li style="--c:var(--m2);--ct:var(--m2t);--cx:var(--m2x)"><b>Try first, then ask</b><span>Stuck for two minutes? Raise your hand or ask your neighbour. Nobody gets left behind.</span></li>
-   <li style="--c:var(--m3);--ct:var(--m3t);--cx:var(--m3x)"><b>No silly questions</b><span>If you are wondering about it, someone else in the room is too.</span></li>
-   <li style="--c:var(--m4);--ct:var(--m4t);--cx:var(--m4x)"><b>Synthetic data only</b><span>Use the practice files today. Don't upload real company or personal data (PDPA).</span></li>
-   <li style="--c:var(--m1);--ct:var(--m1t);--cx:var(--m1x)"><b>Watch the timer</b><span>Every activity has a timer on screen. When it ends, we come back together.</span></li>
-   <li style="--c:var(--m2);--ct:var(--m2t);--cx:var(--m2x)"><b>Park it on Miro</b><span>Off-topic or big questions go on the Parking Lot. We answer them before we close.</span></li>
-   <li style="--c:var(--m3);--ct:var(--m3t);--cx:var(--m3x)"><b>Challenge the data, not the person</b><span>Every view is welcome. Ask what the numbers show and where they came from.</span></li>
-   <li style="--c:var(--m4);--ct:var(--m4t);--cx:var(--m4x)"><b>Help your neighbour</b><span>Explaining a step to someone else is the fastest way to learn it yourself.</span></li>
+   <li style="--c:var(--m1)"><em>01</em><b>Be present</b><span>Phones on silent. Laptops open, charged and signed in to Power BI.</span></li>
+   <li style="--c:var(--m2)"><em>02</em><b>Attempt first, then ask</b><span>Stuck for more than two minutes? Raise your hand or check with a colleague.</span></li>
+   <li style="--c:var(--m3)"><em>03</em><b>Every question is welcome</b><span>If you are asking, others in the room are likely wondering the same.</span></li>
+   <li style="--c:var(--m4)"><em>04</em><b>Protect confidential data</b><span>Use only the practice datasets provided. Do not upload company or personal data (PDPA 2010).</span></li>
+   <li style="--c:var(--m1)"><em>05</em><b>Respect the time</b><span>Every activity is timed on screen. When time is up, we regroup.</span></li>
+   <li style="--c:var(--m2)"><em>06</em><b>Use the Parking Lot</b><span>Post off-topic or larger questions on Miro. We address them before we close.</span></li>
+   <li style="--c:var(--m3)"><em>07</em><b>Challenge the data, not the person</b><span>Question the source and the numbers. Respect every perspective.</span></li>
+   <li style="--c:var(--m4)"><em>08</em><b>Learn together</b><span>Explaining a step to a colleague is the fastest way to master it.</span></li>
   </ol>
-  <div class="panel agree">Agree with a thumbs up. Anything to add? Tell us now and it goes on the list.</div>
+  <div class="panel agree">Agreed? Show a thumbs up. Anything to add, raise it now and we will include it.</div>
  </div>
 </section>
 
@@ -688,7 +688,7 @@ const COLS = [
  ]},
  {id:"welcome",mc:"n",time:"9:00 – 9:30 · 30 min",title:"Welcome & ice breaker",desc:"Meet, agree the ground rules, get everyone signed in.",start:0,end:30,posts:[
   {tag:"note",title:"Everyone has data. Few can use it.",body:"60% of enterprise leaders report a data skills gap, yet only 42% train at scale (DataCamp, 2026). 49.2% of Malaysian employees say data analysis and visualisation is a must-have skill (Economist Impact)."},
-  {tag:"checkpoint",title:"Ground rules",body:"Eight rules for a hands-on morning: phones on silent, try first then ask, synthetic data only, and the rest.",page:"ground-rules",pageText:"Open the ground rules"},
+  {tag:"checkpoint",title:"Ground rules",body:"Our eight-point working agreement: be present, attempt first then ask, protect confidential data, and more.",page:"ground-rules",pageText:"Open the ground rules"},
   {tag:"activity",title:"Number Line-Up",body:"Ten people hold A4 cards numbered 1 to 10. A random number appears, like 1023. Its card holders line up in order, introduce themselves and call out their number set.",meta:"10 min · ice breaker",page:"ice-breaker",pageText:"Open the ice breaker"},
   {tag:"note",title:"By the end you will be able to",list:["Define the metrics that matter","Prepare and clean data","Build a dashboard, no code","Interpret real issues vs noise","Present a recommendation","Protect confidential data"]},
   {tag:"checkpoint",title:"Signed in to Power BI Service",body:"Every participant can open app.powerbi.com and see My workspace before we move on.",meta:"5 min"}
