@@ -449,6 +449,16 @@ body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-i
 .bwp p small{display:block;font-size:.625rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.6}
 .bwp p:nth-of-type(1){background:#FFE97A}.bwp p:nth-of-type(2){background:#BFD9FF}.bwp p:nth-of-type(3){background:#C6EDC9}.bwp p:nth-of-type(4){background:#F6C7E4}
 /* dax */
+.nctgt{margin:0 0 22px;background:var(--sur);border-radius:16px;box-shadow:0 0 0 1px var(--bd),var(--sh1);overflow:hidden}
+.nctgt img{display:block;width:100%;height:auto;aspect-ratio:16/9}.nctgt figcaption{padding:10px 16px;font-size:.8125rem;color:var(--ts)}
+.ncgrid{display:grid;gap:14px;margin-bottom:24px}@media(min-width:900px){.ncgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ncs{background:var(--sur);border-radius:16px;box-shadow:0 0 0 1px var(--bd),var(--sh1);padding:16px 18px;display:flex;gap:14px;align-items:flex-start}
+.ncs em{flex:0 0 36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;font-style:normal;font-weight:700;display:grid;place-items:center}
+.ncs>div{flex:1;min-width:0}.dxh2{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:4px}
+.ncs p{margin:0 0 6px;font-size:.9375rem;color:var(--tx);line-height:1.5}.ncs small{color:var(--m2x);font-weight:600;font-size:.8125rem}
+.dxopt{margin-bottom:80px}.dxopt summary{cursor:pointer;font-weight:600;color:var(--pri);padding:12px 0}
+.dxopt .dxgrid{margin-bottom:0}
+
 .eyebrow.m3e{color:var(--m3x)}
 .dxhow{display:grid;gap:12px;margin-bottom:20px}@media(min-width:900px){.dxhow{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .dxhow div{background:var(--sur);border-radius:14px;box-shadow:0 0 0 1px var(--bd);padding:14px 16px;display:grid;gap:4px}
@@ -1079,12 +1089,25 @@ body.present .reg{display:none}
 
 <section class="pg" id="pg-dax">
  <div class="w">
-  <div class="pgh"><div><div class="eyebrow m3e">Module 3 · Basic DAX</div><h1>Basic DAX for the HR dashboard</h1><p>Eight short formulas for the staff performance dashboard. Copy one, paste it, check the number.</p></div></div>
-  <div class="dxhow">
-   <div><b>Measure</b><span>Home → <b>New measure</b>. A number that changes with the slicers (cards, gauge, table).</span></div>
-   <div><b>Column</b><span>Table tools → <b>New column</b>. A label for every row (Absence Category, Salary Group). Use it on an axis or a slicer.</span></div>
-   <div><b>Table name</b><span>Your table must be called <code>HRDataset_v14</code>. If yours has another name, change it in the formula.</span></div>
+  <div class="pgh"><div><div class="eyebrow m3e">Module 3 · Build it without code</div><h1>Build the HR dashboard, no code</h1><p>Fourteen clicks-only steps using HRDataset_v14. Every step has a number to check, so you know it worked.</p></div></div>
+  <figure class="nctgt"><img width="1920" height="1080" src="https://yushabdullah.github.io/DWC/data/HR_Pro_Dashboard_Target.png" alt="Finished HR Staff Performance dashboard: four KPI cards, salary group, satisfaction gauge, attendance, performance and salary by department" loading="lazy"><figcaption>The finished example. Build yours on the blank background in the board's Module 3 column.</figcaption></figure>
+  <div class="ncgrid">
+   <article class="ncs"><em>1</em><div><div class="dxh2"><b>Load the data</b><span class="dxk">Get data</span></div><p>Home → <b>Get data</b> → Excel → choose <b>HRDataset_v14</b> → <b>Transform data</b>.</p><small>Check: 311 rows, 36 columns</small></div></article>
+   <article class="ncs"><em>2</em><div><div class="dxh2"><b>Tidy the text</b><span class="dxk">Power Query</span></div><p>Select <b>Department</b> and <b>Sex</b> → Transform → Format → <b>Trim</b>. Removes the hidden spaces.</p><small>Check: Production, not “Production   ”</small></div></article>
+   <article class="ncs"><em>3</em><div><div class="dxh2"><b>Absence Category</b><span class="dxk">Power Query</span></div><p>Add Column → <b>Conditional Column</b>. Name: Absence Category. If <b>Absences</b> is greater than <b>15</b>, output <b>BAD</b>. Else <b>GOOD</b>.</p><small>Check: GOOD 235 · BAD 76</small></div></article>
+   <article class="ncs"><em>4</em><div><div class="dxh2"><b>Salary Group</b><span class="dxk">Power Query</span></div><p>Add Column → <b>Conditional Column</b>. If <b>Salary</b> ≤ 60340 → <b>Bottom 40</b>. Add clause: ≤ 75188 → <b>Middle 40</b>. Else <b>Top 20</b>. Then <b>Close &amp; Apply</b>.</p><small>Check: Bottom 40: 125 · Middle 40: 124 · Top 20: 62</small></div></article>
+   <article class="ncs"><em>5</em><div><div class="dxh2"><b>Count of Employees</b><span class="dxk">Card</span></div><p>Card visual → drag <b>EmpID</b> → click the arrow on the field → <b>Count (Distinct)</b>. Put it in the blue box, top right.</p><small>Check: 311</small></div></article>
+   <article class="ncs"><em>6</em><div><div class="dxh2"><b>Average cards</b><span class="dxk">Card</span></div><p>Two cards: <b>Salary</b> → Average, and <b>Absences</b> → Average. Format → Callout value: display units Thousands for salary.</p><small>Check: 69.02K · 10.24</small></div></article>
+   <article class="ncs"><em>7</em><div><div class="dxh2"><b>GOOD and BAD cards</b><span class="dxk">Card + filter</span></div><p>Card with <b>Count of EmpID</b>. In the Filters pane add <b>Absence Category</b> = GOOD. Copy it, change the filter to BAD. Add an arrow from Insert → Shapes.</p><small>Check: 235 · 76</small></div></article>
+   <article class="ncs"><em>8</em><div><div class="dxh2"><b>Satisfaction gauge</b><span class="dxk">Gauge</span></div><p>Gauge visual → <b>EmpSatisfaction</b> → Average. Format → Gauge axis: Min <b>1</b>, Max <b>5</b>.</p><small>Check: 3.89</small></div></article>
+   <article class="ncs"><em>9</em><div><div class="dxh2"><b>Salary Group chart</b><span class="dxk">Column chart</span></div><p>Clustered column: X-axis <b>Salary Group</b>, Y-axis <b>EmpID</b> (Count). Turn on Data labels.</p><small>Check: 125 · 124 · 62</small></div></article>
+   <article class="ncs"><em>10</em><div><div class="dxh2"><b>Attendance Status chart</b><span class="dxk">Bar chart</span></div><p>Clustered bar: Y-axis <b>Absence Category</b>, X-axis <b>EmpID</b> (Count). Colours: green GOOD, red BAD.</p><small>Check: 235 · 76</small></div></article>
+   <article class="ncs"><em>11</em><div><div class="dxh2"><b>Performance chart</b><span class="dxk">Column chart</span></div><p>Clustered column: X-axis <b>PerformanceScore</b>, Y-axis <b>EmpID</b> (Count). Sort by count.</p><small>Check: 243 · 37 · 18 · 13</small></div></article>
+   <article class="ncs"><em>12</em><div><div class="dxh2"><b>Salary by Department table</b><span class="dxk">Table + quick measure</span></div><p>Table: <b>Department</b>, then <b>Salary</b> three times set to Average, Maximum and Minimum. For Salary Range: <b>New quick measure</b> → Subtraction → Max of Salary minus Min of Salary. Power BI writes it for you.</p><small>Check: Total range 204,954</small></div></article>
+   <article class="ncs"><em>13</em><div><div class="dxh2"><b>Slicers</b><span class="dxk">Slicer</span></div><p>Three slicers: <b>Sex</b>, <b>MaritalDesc</b>, <b>RecruitmentSource</b>. Format → Slicer settings → Style: <b>Vertical list</b>. Place them in the left panel.</p><small>Check: Click F: count changes to 176</small></div></article>
+   <article class="ncs"><em>14</em><div><div class="dxh2"><b>Background and finish</b><span class="dxk">Format page</span></div><p>Format page → Canvas background → Image: the <b>blank background</b>, Image fit: <b>Fit</b>, Transparency <b>0%</b>. Turn off each visual's own background so the panels show through.</p><small>Check: Looks like the target picture</small></div></article>
   </div>
+  <details class="dxopt"><summary>Prefer formulas? The same results in DAX (optional)</summary>
   <div class="dxgrid">
    <article class="dxc"><div class="dxh"><b>1. Count of Employees</b><span class="dxk ">Measure</span></div><pre><code>Count of Employees =
 COUNT(HRDataset_v14[EmpID])</code></pre><div class="dxf"><small>Check: 311 · yellow card</small><button type="button" class="dxcp">Copy</button></div></article>
@@ -1124,6 +1147,7 @@ SWITCH(
 MAX(HRDataset_v14[Salary]) -
 MIN(HRDataset_v14[Salary])</code></pre><div class="dxf"><small>Check: 204,954 in total · per department in the table</small><button type="button" class="dxcp">Copy</button></div></article>
   </div>
+  </details>
  </div>
 </section>
 
@@ -1271,14 +1295,13 @@ const COLS = [
   {tag:"link",title:"Visualization types in Power BI",body:"Reference for every built-in chart.",href:L("https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-types-for-reports-and-q-and-a")},
   {tag:"link",title:"Card visuals",body:"Build the headline KPI tiles.",href:L("https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-card")},
   {tag:"link",title:"Slicers",body:"Let each audience filter by month, region or team.",href:L("https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-slicers")},
-  {tag:"activity",title:"Build the HR Staff Performance dashboard",body:"Follow this layout: three slicers on the left (Sex, MaritalDesc, RecruitmentSource), Count of Employees in the yellow box, cards for Average Salary and Average Absences, GOOD vs BAD staff, a satisfaction gauge, Salary Group and Absence Category charts, PerformanceScore chart and a salary table by department.",img:"https://yushabdullah.github.io/DWC/data/HR_Staff_Layout.png"},
-  {tag:"activity",title:"Empty background to edit",body:"Download this blank 1920 × 1080 background. In Power BI: Format page, Canvas background, Image, Fit, transparency 0%. Place your visuals on the white area and switch their own backgrounds off. Want other colours? Edit it in Canva or PowerPoint.",img:"https://yushabdullah.github.io/DWC/data/HR_Staff_Background_Empty.png"},
-  {tag:"activity",title:"Blank panels background",body:"Same layout with empty white panels already in place, like the sidebar template. Set it as the canvas background, then drop each visual onto its panel: cards on top, charts in the middle, PerformanceScore chart and salary table at the bottom.",img:"https://yushabdullah.github.io/DWC/data/HR_Staff_Background_Panels.png"},
+  {tag:"activity",title:"Build the HR Staff Performance dashboard",body:"Target: the finished example below. Three slicers on the left (Sex, MaritalDesc, RecruitmentSource), Count of Employees top right, four KPI cards, Salary Group, satisfaction gauge, Attendance Status, PerformanceScore and a salary table by department.",img:"https://yushabdullah.github.io/DWC/data/HR_Pro_Dashboard_Target.png",page:"no-code",pageText:"Step-by-step, no code"},
+  {tag:"activity",title:"Blank background",body:"The same design with empty panels. In Power BI: Format page, Canvas background, Image, Fit, transparency 0%. Drop each visual onto its panel and switch the visual background off.",img:"https://yushabdullah.github.io/DWC/data/HR_Pro_Background_Blank.png"},
   {tag:"link",title:"Logo (transparent PNG)",body:"Put it in the top-left corner of the blue header: Insert, Image. The background is transparent, so it sits cleanly on blue or white.",img:"https://yushabdullah.github.io/DWC/data/HR_Dashboard_Logo.png",href:"https://yushabdullah.github.io/DWC/data/HR_Dashboard_Logo.png"},
-  {tag:"activity",title:"Basic DAX: 8 formulas",body:"Count of Employees, averages, Absence Category, GOOD vs BAD staff, Salary Group and SalaryDifference, each with a Copy button and the number to check.",page:"dax",pageText:"Open Basic DAX"},
+  {tag:"activity",title:"Build it without code: 14 steps",body:"Conditional columns instead of formulas, drag-and-drop cards and charts, and a quick measure for salary range. Each step has the number to check.",page:"no-code",pageText:"Open the no-code steps"},
   {tag:"activity",title:"Template 2: sidebar layout",body:"Prefer a menu on the left? Use this template instead: page buttons and two slicers in the sidebar, two charts on top, a wide table below. The dashed squares are where your icons go.",img:"https://yushabdullah.github.io/DWC/data/HR_Template_Sidebar.png",alt:"Sidebar dashboard template with header, left menu, two panels and one wide panel",href:"https://yushabdullah.github.io/DWC/data/HR_Template_Sidebar_Blank.png",hrefText:"Download the blank version"},
   {tag:"link",title:"Free SVG icons",body:"Search SVG Repo for simple icons (try: employee, chart, filter, calendar), download the SVG and add it in Power BI with Insert, Image. Pick one style and one colour for all your icons, and check each icon's licence before using it at work.",href:"https://www.svgrepo.com",hrefText:"Open SVG Repo"},
-  {tag:"checkpoint",title:"Dashboard checkpoint",body:"One HR Staff Performance page on the empty background: three slicers, the yellow Count of Employees card, the Salary Group and Absence Category columns from Basic DAX, and at least three charts. Then submit it to the gallery.",page:"gallery",pageText:"Submit to the gallery"},
+  {tag:"checkpoint",title:"Dashboard checkpoint",body:"One HR Staff Performance page on the empty background: three slicers, the yellow Count of Employees card, the Salary Group and Absence Category columns (no-code steps), and at least three charts. Then submit it to the gallery.",page:"gallery",pageText:"Submit to the gallery"},
  ]},
  {id:"m4",mc:"4",time:"11:50 – 1:00 · 70 min",title:"Module 4 · Interpreting and presenting insights",desc:"Separate signal from noise, then recommend one action.",start:170,end:240,posts:[
   {tag:"note",title:"Real issue or noise?",list:["Is the change bigger than normal month-to-month swings?","Did it last more than one period?","Is the base number big enough to matter?","Did the definition or data source change?"]},
@@ -1320,8 +1343,8 @@ const FLOW = [
   {m:105,d:10,t:"Dashboard design principles",tr:"Right chart, right analysis, right question. Show a bad and a good dashboard.",pa:"Spot three problems in the bad one.",mat:"Chart selection guide"},
   {m:115,d:20,t:"Hands-on: KPI cards and trend chart",tr:"Build step by step: three cards, one line chart over time.",pa:"Build alongside the trainer.",mat:"Power BI Service"},
   {m:135,d:15,t:"Breakdowns, filters and slicers",tr:"Add a bar chart breakdown and a month or region slicer. Test cross-filtering.",pa:"Add a slicer and test it.",mat:"Slicers link"},
-  {m:150,d:10,t:"Interface design: background, logo and DAX",tr:"Demo: set the empty background as the canvas background, add the transparent logo, then add the Absence Category and Salary Group columns from the Basic DAX page.",pa:"Apply the background and logo, paste the DAX, check the numbers.",mat:"Empty background PNG, logo PNG, Basic DAX page"},
-  {m:160,d:10,t:"Running use case and progress review",tr:"Participants finish the HR Staff Performance dashboard against the layout, using the Basic DAX page; trainer checks each screen against the rubric.",pa:"Finish their page.",mat:"HR layout picture; rubric",cp:"Page has the yellow count card, two KPI cards, three slicers and the DAX columns in charts."}
+  {m:150,d:10,t:"Interface design: background, logo and grouping",tr:"Demo: set the empty background as the canvas background, add the transparent logo, then add Absence Category and Salary Group as conditional columns (no code).",pa:"Apply the background and logo, add the two conditional columns, check the numbers.",mat:"Blank background PNG, logo PNG, no-code steps page"},
+  {m:160,d:10,t:"Running use case and progress review",tr:"Participants finish the HR Staff Performance dashboard against the layout, using the no-code steps page; trainer checks each screen against the rubric.",pa:"Finish their page.",mat:"HR layout picture; rubric",cp:"Page matches the finished example: count, four KPI cards, three slicers, five visuals."}
  ]},
  {title:"Module 4 · Interpreting and presenting insights",mc:"4",m:170,d:70,lo:"Outcomes (e) and (f)",steps:[
   {m:170,d:15,t:"Reading trends: real problems vs noise",tr:"Four questions test on two example charts. Group discussion.",pa:"Apply the four questions to their own dashboard.",mat:"Example charts"},
@@ -1449,7 +1472,7 @@ const OPEN=Date.UTC(2026,10,12,0,55,0);
 const FREE=["trainer","roadmap","objectives"];
 function isTrainer(){ try{ if(new URLSearchParams(location.search).has("trainer")) return true; const u=JSON.parse(localStorage.getItem("dwc-user")||"null"); return !!(u&&u.trainer); }catch(e){ return false; } }
 const isLocked=()=>!isTrainer() && Date.now()<OPEN;
-const PAGES={"lock":"pg-lock","trainer":"pg-trainer","roadmap":"pg-roadmap","objectives":"pg-objectives","reality":"pg-reality","run-sheet":"pg-run","ice-breaker":"pg-ice","ground-rules":"pg-rules","lego":"pg-lego","brainstorm":"pg-brain","bonus":"pg-bonus","gallery":"pg-gallery","dax":"pg-dax","feedback":"pg-feedback"};
+const PAGES={"lock":"pg-lock","trainer":"pg-trainer","roadmap":"pg-roadmap","objectives":"pg-objectives","reality":"pg-reality","run-sheet":"pg-run","ice-breaker":"pg-ice","ground-rules":"pg-rules","lego":"pg-lego","brainstorm":"pg-brain","bonus":"pg-bonus","gallery":"pg-gallery","dax":"pg-dax","no-code":"pg-dax","feedback":"pg-feedback"};
 const ORDER=["board","trainer","roadmap","objectives","ground-rules","ice-breaker","lego","reality","brainstorm","dax","gallery","bonus","feedback"];
 const NAVKEY={roadmap:"trainer",objectives:"trainer",reality:"lego"};
 let current="board";
