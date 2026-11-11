@@ -1370,12 +1370,19 @@ document.querySelectorAll(".icemode button").forEach(b=>b.onclick=()=>{
 $("iceNext").onclick=iceDraw;
 $("iceShow").onclick=()=>{ const c=$("iceCards"); c.hidden=!c.hidden; $("iceShow").textContent=c.hidden?"Show the cards":"Hide the cards"; };
 let iceT=30, iceIv=null;
+// Timer sounds (Web Audio, no files). Unlocked on the Start click so phones allow it.
+let AC=null;
+function sndOn(){ try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); if(AC.state==="suspended") AC.resume(); }catch(e){} }
+function tone(f,t0,d,v){ if(!AC) return; const o=AC.createOscillator(),g=AC.createGain(); o.type="square"; o.frequency.value=f; o.connect(g); g.connect(AC.destination);
+  const t=AC.currentTime+t0; g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(v,t+0.01); g.gain.exponentialRampToValueAtTime(0.0001,t+d); o.start(t); o.stop(t+d+0.02); }
+const tickSnd=()=>tone(660,0,0.08,0.12);
+function alarm(){ sndOn(); for(let r=0;r<3;r++){ tone(1046,r*0.6,0.14,0.3); tone(1046,r*0.6+0.2,0.14,0.3); } if(navigator.vibrate) try{navigator.vibrate([200,100,200,100,200])}catch(e){} }
 function iceStop(){ clearInterval(iceIv); iceIv=null; $("iceTmr").classList.remove("run"); }
 $("iceStart").onclick=()=>{
   if(iceIv){ iceStop(); $("iceStart").textContent="Resume"; return; }
   if(iceT<=0) iceT=30;
   $("iceTmr").classList.add("run"); $("iceTmr").classList.remove("end"); $("iceStart").textContent="Pause";
-  iceIv=setInterval(()=>{ iceT--; $("iceTv").textContent=fmtT(Math.max(0,iceT)); if(iceT<=0){ iceStop(); $("iceTmr").classList.add("end"); $("iceStart").textContent="Again"; } },1000);
+  sndOn(); iceIv=setInterval(()=>{ iceT--; $("iceTv").textContent=fmtT(Math.max(0,iceT)); if(iceT>0&&iceT<=3) tickSnd(); if(iceT<=0){ iceStop(); alarm(); $("iceTmr").classList.add("end"); $("iceStart").textContent="Again"; } },1000);
 };
 $("iceReset").onclick=()=>{ iceStop(); iceT=30; $("iceTv").textContent="0:30"; $("iceStart").textContent="Start 30 s"; $("iceTmr").classList.remove("end"); };
 $("iceCards").innerHTML=iceSet.map(c=>`<span>${c}</span>`).join("");
@@ -1478,7 +1485,7 @@ function renderLevel(){
   $("gtStart").onclick=()=>{
     if(gt.iv){ stopT(); renderLevel(); return; }
     if(gt.left<=0) gt.left=L.min*60;
-    gt.iv=setInterval(()=>{ gt.left--; const v=$("gtv"); if(v) v.textContent=fmtT(Math.max(0,gt.left)); if(gt.left<=0){ stopT(); renderLevel(); } },1000);
+    sndOn(); gt.iv=setInterval(()=>{ gt.left--; const v=$("gtv"); if(v) v.textContent=fmtT(Math.max(0,gt.left)); if(gt.left>0&&gt.left<=3) tickSnd(); if(gt.left<=0){ stopT(); alarm(); renderLevel(); } },1000);
     renderLevel();
   };
   $("gtReset").onclick=()=>{ stopT(); gt.left=L.min*60; renderLevel(); };
