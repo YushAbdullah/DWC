@@ -14,7 +14,7 @@
 html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 100px);scroll-behavior:smooth}
 body{margin:0;background:var(--back);color:var(--tx);font:400 16px/1.5 var(--font)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--mut);z-index:30}
-.shell{background:var(--mut);position:relative;overflow:hidden;min-height:100vh}
+.shell{background:var(--mut);position:relative;overflow:hidden;overflow:clip;min-height:100vh}
 @media(min-width:1440px){.shell{max-width:1440px;margin:24px auto;border-radius:40px;min-height:0}}
 .glow{position:absolute;border-radius:50%;background:var(--tint);opacity:.55;filter:blur(90px);pointer-events:none}
 .blob{position:absolute;top:-70px;right:-70px;width:220px;height:220px;pointer-events:none}
@@ -429,6 +429,25 @@ body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-i
 .pimg{display:block;margin-top:12px;border-radius:10px;overflow:hidden;box-shadow:0 0 0 1px var(--bd)}.pimg img{display:block;width:100%;height:auto}
 
 /* Opening slides */
+/* big why wall */
+.bwform form{display:grid;gap:6px}
+.bwstk{display:grid;gap:10px;margin-top:6px}
+.bwstk label{background:var(--sb);border-radius:4px;padding:10px 12px;box-shadow:var(--sh1);display:grid;gap:4px;color:#1a1a1a}
+.bwstk label:nth-child(odd){transform:rotate(-.6deg)}.bwstk label:nth-child(even){transform:rotate(.5deg)}
+.bwstk small{font-size:.6875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:.7}
+.bwstk textarea{border:0;background:rgba(255,255,255,.45);border-radius:4px;padding:6px 8px;font:500 .9375rem var(--font);color:#1a1a1a;resize:vertical;min-height:44px}
+.bwstk textarea::placeholder{color:rgba(0,0,0,.45)}
+.bwform .btn{margin-top:8px;width:100%}
+.bwchips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 14px}
+.bwchips button{border:1px solid var(--bd);background:var(--sur);color:var(--tm);border-radius:999px;padding:6px 14px;font:600 .8125rem var(--font);cursor:pointer}
+.bwchips button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.bwgrid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.bwp{display:grid;gap:6px;align-content:start}
+.bwp header{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.8125rem}
+.bwp header b{font-size:.9375rem}.bwp header span{background:var(--tint);color:var(--pri);border-radius:999px;padding:2px 9px;font-weight:600;font-size:.6875rem}
+.bwp p{margin:0;border-radius:3px;padding:8px 10px;font-size:.875rem;line-height:1.35;color:#1a1a1a;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.bwp p small{display:block;font-size:.625rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.6}
+.bwp p:nth-of-type(1){background:#FFE97A}.bwp p:nth-of-type(2){background:#BFD9FF}.bwp p:nth-of-type(3){background:#C6EDC9}.bwp p:nth-of-type(4){background:#F6C7E4}
 /* gallery */
 .gbar{background:var(--m3t);color:var(--m3x);border-radius:12px;padding:12px 16px;font-size:.875rem;margin-bottom:16px}
 .glay{display:grid;gap:20px;align-items:start}@media(min-width:960px){.glay{grid-template-columns:360px 1fr}.gform{position:sticky;top:96px}}
@@ -985,7 +1004,7 @@ body.present .reg{display:none}
 
 <section class="pg" id="pg-brain">
  <div class="w">
-  <div class="pgh"><div><div class="eyebrow m1e">Module 1 · 9:53 AM · 9 min</div><h1>The Big Why</h1><p>Start from a decision, not from the data. Everyone posts on one shared Miro board.</p></div></div>
+  <div class="pgh"><div><div class="eyebrow m1e">Module 1 · 9:53 AM · 9 min</div><h1>The Big Why</h1><p>Start from a decision, not from the data. Everyone posts straight into this page, no sign-up needed.</p></div></div>
   <div class="lg2">
    <article class="card">
     <div class="k">Four sticky notes each</div>
@@ -997,22 +1016,22 @@ body.present .reg{display:none}
     </ol>
     <p class="small">Read it top to bottom: decision first, data last. If you cannot name the column, that is your first data gap.</p>
    </article>
-   <article class="card miro" id="miroCard">
-    <div class="k">Shared Miro board · scan to join</div>
-    <div id="miroOn" hidden>
-     <div class="qrwrap"><div id="miroQr" class="qr" aria-label="QR code for the Miro board"></div></div>
-     <a class="btn" id="miroOpen" href="#" target="_blank" rel="noopener">Open the Miro board ↗</a>
-     <p class="small" id="miroLink"></p>
-    </div>
-    <div id="miroOff">
-     <h3>Add your Miro board link</h3>
-     <p class="small">Create a board in Miro, set Share to <b>Anyone with the link · Can edit</b>, then paste the link here. It is saved on this laptop.</p>
-    </div>
-    <label class="fld" for="miroUrl">Miro board link</label>
-    <div class="row3"><input id="miroUrl" type="url" placeholder="https://miro.com/app/board/…" autocomplete="off"><button type="button" class="btn gh" id="miroSave">Save</button></div>
+   <article class="card bwform">
+    <div class="k">Post your Big Why</div>
+    <form id="bwF" novalidate>
+     <label class="fld" for="bwFn">Your function</label>
+     <select class="gin" id="bwFn"><option value="">Choose one…</option><option>Operations</option><option>Finance</option><option>Sales</option><option>HR</option><option>Other</option></select>
+     <div class="bwstk">
+      <label style="--sb:#FFE97A"><small>Yellow · Decision</small><textarea id="bwD" rows="2" maxlength="160" placeholder="One decision I make every month is…"></textarea></label>
+      <label style="--sb:#BFD9FF"><small>Blue · Number</small><textarea id="bwN" rows="2" maxlength="160" placeholder="The number that would change it is…"></textarea></label>
+      <label style="--sb:#C6EDC9"><small>Green · KPI</small><textarea id="bwK" rows="2" maxlength="160" placeholder="I would track it as this KPI…"></textarea></label>
+      <label style="--sb:#F6C7E4"><small>Pink · Data</small><textarea id="bwS" rows="2" maxlength="160" placeholder="The data lives in… (file, sheet, column)"></textarea></label>
+     </div>
+     <p class="rerr" id="bwErr" role="alert"></p>
+     <button type="submit" class="btn" id="bwBtn">Post to the wall</button>
+    </form>
    </article>
   </div>
-  <div id="miroEmbed" class="embed" hidden></div>
   <article class="card">
    <div class="k">How we map the data</div>
    <h3 class="maph">From a decision to the column that answers it</h3>
@@ -1035,12 +1054,11 @@ body.present .reg{display:none}
    </div>
    <p class="small" style="margin-top:12px">This table becomes your dashboard: each KPI is a card or a chart, and each column is a field you drag in Power BI.</p>
   </article>
-  <article class="card">
-   <div class="k">What is on the Miro board</div>
-   <div class="frames">
-    <div style="--c:var(--m1);--ct:var(--m1t);--cx:var(--m1x)"><b>Frame 1 · The Big Why</b><span>One column per person: decision, number, KPI and data, top to bottom.</span></div>
-    <div style="--c:var(--m2);--ct:var(--m2t);--cx:var(--m2x)"><b>Frame 2 · KPI wall</b><span>Group the KPIs by function: Operations, Finance, Sales, HR, Other. Circle the ones the HR file can answer today.</span></div>
-   </div>
+  <article class="card bwall">
+   <div class="gwh"><div><div class="k">The Big Why wall</div><h2><span id="bwCount">0</span> posts</h2></div><button type="button" class="btn gh" id="bwRef">Refresh</button></div>
+   <div class="bwchips" role="group" aria-label="Filter by function"><button type="button" aria-pressed="true" data-f="">All</button><button type="button" aria-pressed="false" data-f="Operations">Operations</button><button type="button" aria-pressed="false" data-f="Finance">Finance</button><button type="button" aria-pressed="false" data-f="Sales">Sales</button><button type="button" aria-pressed="false" data-f="HR">HR</button><button type="button" aria-pressed="false" data-f="Other">Other</button></div>
+   <div class="gbar" id="bwMode" hidden></div>
+   <div class="bwgrid" id="bwGrid"><p class="gempty">No posts yet. Be the first!</p></div>
   </article>
  </div>
 </section>
@@ -1149,17 +1167,15 @@ body.present .reg{display:none}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 const FEEDBACK_QR="data:image/png;base64,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";
-const MIRO_DEFAULT="https://miro.com/app/board/uXjVEP4jFNc=/"; // shared brainstorm board
 
 const L = (href) => href;
 const CANVA_HR="https://canva.link/uv5ss1yxncj7p9t";
 // mc = module colour key (matches the poster: 1 blue, 2 green, 3 yellow, 4 purple)
 const COLS = [
  {id:"prep",mc:"n",time:"Before the day",title:"Start here",desc:"Get set up before the day so nobody loses build time.",start:null,posts:[
-  {tag:"checkpoint",title:"Prep kit checklist",list:["Work or school email (Power BI Service will not accept Gmail or Yahoo)","Free Miro account","Free Canva account","Laptop with Chrome or Edge, charger","Basic Excel familiarity helps; no coding needed"]},
+  {tag:"checkpoint",title:"Prep kit checklist",list:["Work or school email (Power BI Service will not accept Gmail or Yahoo)","Free Canva account","Laptop with Chrome or Edge, charger","Basic Excel familiarity helps; no coding needed"]},
   {tag:"link",title:"Sign up for Power BI (free)",body:"Self-service sign-up with a work or school email.",href:L("https://learn.microsoft.com/en-us/power-bi/fundamentals/service-self-service-signup-for-power-bi")},
   {tag:"link",title:"Open Power BI Service",body:"Where we build the dashboard on the day.",href:L("https://app.powerbi.com")},
-  {tag:"link",title:"Miro",body:"Used for the KPI brainstorm in Module 1.",href:L("https://miro.com")},
   {tag:"link",title:"Canva",body:"Used for dashboard backgrounds and buttons in Module 3.",href:L("https://www.canva.com")},
   {tag:"note",title:"Pre-course check",body:"A short pre-assessment goes to the participant group before the day, so the trainer knows everyone's starting level."}
  ]},
@@ -1174,8 +1190,8 @@ const COLS = [
  {id:"m1",mc:"1",time:"9:30 – 10:05 · 35 min",title:"Module 1 · Identify data for better decisions",desc:"Why data matters, and why we don't build the dashboard straight away.",start:30,end:65,posts:[
   {tag:"activity",title:"The Data Brick Challenge",body:"Groups of 5 build one tower from every colour. Then the screen reveals which colours to remove, and which single colour to rebuild with. Each group shares a key takeaway.",meta:"15 min · groups of 5",page:"lego",pageText:"Open the Lego game"},
   {tag:"note",title:"From data chaos to data value",body:"About 90% of enterprise data is unstructured, and 58% of leaders say big decisions use inaccurate data most of the time (SoftServe, 2025)."},
-  {tag:"activity",title:"The Big Why: KPI brainstorm on Miro",body:"Start from one decision you make every month. Which number would change that decision? Map it: decision, number, KPI, then the sheet and column that feed it. Post it on the shared board.",meta:"9 min · individual",page:"brainstorm",pageText:"Open the brainstorm"},
-  {tag:"checkpoint",title:"One decision mapped to data on Miro",body:"Each participant has posted a decision, its number, the KPI and the column that feeds it."},
+  {tag:"activity",title:"The Big Why: KPI brainstorm",body:"Start from one decision you make every month. Which number would change that decision? Map it: decision, number, KPI, then the sheet and column that feed it. Post it on the Big Why wall in this app.",meta:"9 min · individual",page:"brainstorm",pageText:"Open the brainstorm"},
+  {tag:"checkpoint",title:"One decision mapped to data on the wall",body:"Each participant has posted a decision, its number, the KPI and the column that feeds it."},
   {tag:"link",title:"What is Power BI?",body:"Connect, clean, model, visualise and share in one workflow.",href:L("https://learn.microsoft.com/en-us/power-bi/fundamentals/power-bi-overview")}
  ]},
  {id:"m2",mc:"2",time:"10:05 – 10:45 · 40 min",title:"Module 2 · Preparing data for analysis",desc:"Combine and clean data, then check quality and privacy.",start:65,end:105,posts:[
@@ -1224,7 +1240,7 @@ const FLOW = [
   {m:30,d:15,t:"The Data Brick Challenge (Lego game)",tr:"Run the steps on the Lego page: groups 2, build a tower 3, reveal colours to remove 2, reveal one colour to rebuild 3, moral 1, key takeaways 3, next step into Power BI 1. Tap points on the group scoreboard.",pa:"Groups of 5 build, remove the banned colours, rebuild with one colour, and share one takeaway.",mat:"One mixed box of bricks per group, Lego page on screen",say:"Imagine this tower is a set of unstructured data. How do you get an answer out of it? You restrict it and you clean it."},
   {m:45,d:4,t:"The data gap: having data vs being data-driven",tr:"Mini-lecture with the DataCamp and Economist Impact numbers. Link back to Round 1 chaos.",pa:"Share one example from work.",mat:"Everyone has data slide (the spotlight)"},
   {m:49,d:4,t:"Why stored data is not yet an asset",tr:"Unstructured, messy, ungoverned data. Quick article discussion.",pa:"Discuss in pairs: which of these is on your desk?",mat:"Everyone has data slide (the reality desk)"},
-  {m:53,d:9,t:"Choosing the right KPIs: the Big Why",tr:"Model one row of the mapping: decision → number → KPI → data column (HR example: turnover from Status and Leave Reason). Show the Miro QR.",pa:"Post four stickies on Miro: decision, number, KPI and data source.",mat:"Brainstorm page, Miro board",cp:"Each participant posts three role-specific KPIs."},
+  {m:53,d:9,t:"Choosing the right KPIs: the Big Why",tr:"Model one row of the mapping: decision → number → KPI → data column (HR example: turnover from Status and Leave Reason). Open the Big Why wall on screen.",pa:"Post four stickies on the Big Why wall: decision, number, KPI and data source.",mat:"Brainstorm page (Big Why wall)",cp:"Each participant posts three role-specific KPIs."},
   {m:62,d:3,t:"Why Power BI?",tr:"Compare with Excel PivotTables, Tableau and custom web apps in one table.",pa:"Ask questions.",mat:"Comparison slide"}
  ]},
  {title:"Module 2 · Preparing data for analysis",mc:"2",m:65,d:40,lo:"Outcomes (b) and (g)",steps:[
@@ -1381,7 +1397,6 @@ function route(){
   document.querySelectorAll(".pg").forEach(p=>p.classList.toggle("on", p.id===(PAGES[key]||"pg-board")));
   document.querySelectorAll(".links a,.mn a").forEach(a=>a.classList.toggle("on", a.dataset.p===(NAVKEY[key]||key) && !(key==="board" && h==="columns" && false)));
   if(PAGES[key] && changed) window.scrollTo(0,0);
-  if(key==="brainstorm") renderMiro();
 }
 window.addEventListener("hashchange",route);
 
@@ -1587,30 +1602,6 @@ $("sbReset").onclick=()=>{
 $("sbQuick").onclick=()=>{ for(let i=1;i<=6;i++){ const n="Group "+i; if(!players.some(p=>p.n===n)) players.push({n,s:0}); } saveP(); renderScore(); };
 renderScore();
 
-// Miro brainstorm: link saved on this laptop, QR to join, embed where the host allows it.
-function miroUrl(){ let u=""; try{ u=localStorage.getItem("dwc-miro")||""; }catch(e){} return u||MIRO_DEFAULT; }
-let miroDrawn="";
-function renderMiro(){
-  const u=miroUrl(); const ok=/^https:\/\/(www\.)?miro\.com\//.test(u);
-  $("miroOn").hidden=!ok; $("miroOff").hidden=ok;
-  if($("miroUrl").value==="" && u) $("miroUrl").value=u;
-  if(!ok){ $("miroEmbed").hidden=true; return; }
-  $("miroOpen").href=u; $("miroLink").textContent=u;
-  if(miroDrawn!==u){
-    miroDrawn=u; $("miroQr").innerHTML="";
-    if(window.QRCode){ new QRCode($("miroQr"),{text:u,width:220,height:220,correctLevel:QRCode.CorrectLevel.M}); }
-    else { $("miroQr").hidden=true; }
-    const id=(u.match(/\/board\/([^/?#]+)/)||[])[1];
-    const embeddable=location.protocol==="file:"||/github\.io$/.test(location.hostname);
-    if(id && embeddable){ $("miroEmbed").innerHTML=`<iframe title="Miro board" src="https://miro.com/app/live-embed/${encodeURIComponent(id)}/?embedMode=view_only_without_ui" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>`; $("miroEmbed").hidden=false; }
-  }
-}
-$("miroSave").onclick=()=>{
-  const v=$("miroUrl").value.trim();
-  try{ if(v) localStorage.setItem("dwc-miro",v); else localStorage.removeItem("dwc-miro"); }catch(e){}
-  miroDrawn=""; renderMiro();
-};
-
 // Feedback QR
 $("fbQr").src=FEEDBACK_QR;
 
@@ -1765,5 +1756,27 @@ $("gF").addEventListener("submit",async e=>{e.preventDefault();const title=$("gT
 $("gRef").onclick=load;
 addEventListener("hashchange",()=>{if(location.hash==="#gallery")load();});
 load();setInterval(()=>{if(location.hash==="#gallery"&&$("gView").hidden)load();},20000);})();
+
+/* Big Why wall */
+(function(){const W=$("bwGrid");if(!W)return;const LS="dwc-bigwhy";let items=[],flt="";
+const local=()=>{try{return JSON.parse(localStorage.getItem(LS)||"[]")}catch(e){return[]}};
+if(!SHEET_URL){$("bwMode").hidden=false;$("bwMode").textContent="Preview mode: posts stay on this device until the trainer connects the Google Sheet.";}
+function draw(){const v=items.filter(x=>!flt||x.fn===flt);$("bwCount").textContent=items.length;
+ W.innerHTML=v.length?v.map(x=>`<div class="bwp"><header><b>${esc(first(x.name)||"Participant")}</b>${x.fn?`<span>${esc(x.fn)}</span>`:""}</header><p><small>Decision</small>${esc(x.decision||"")}</p><p><small>Number</small>${esc(x.number||"")}</p><p><small>KPI</small>${esc(x.kpi||"")}</p><p><small>Data</small>${esc(x.data||"")}</p></div>`).join(""):'<p class="gempty">'+(items.length?"No posts for this function yet.":"No posts yet. Be the first!")+"</p>";}
+async function load(){if(!SHEET_URL){items=local().slice().reverse();draw();return;}
+ try{const r=await fetch(SHEET_URL+"?action=bigwhy",{cache:"no-store"});const v=await r.json();if(Array.isArray(v)){items=v.filter(x=>x&&x.decision).reverse();draw();}}catch(e){}}
+document.querySelectorAll(".bwchips button").forEach(b=>b.onclick=()=>{flt=b.dataset.f;document.querySelectorAll(".bwchips button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));draw();});
+$("bwF").addEventListener("submit",async e=>{e.preventDefault();const g=id=>$(id).value.trim(),err=$("bwErr");
+ const rec={action:"bigwhy",fn:g("bwFn"),decision:g("bwD"),number:g("bwN"),kpi:g("bwK"),data:g("bwS")};
+ if(!rec.fn){err.textContent="Please choose your function.";$("bwFn").focus();return;}
+ for(const [k,id,l] of [["decision","bwD","decision"],["number","bwN","number"],["kpi","bwK","KPI"],["data","bwS","data source"]]) if(!rec[k]){err.textContent="Please fill in the "+l+" sticky.";$(id).focus();return;}
+ err.textContent="";let u=null;try{u=JSON.parse(localStorage.getItem("dwc-user")||"null")}catch(x){}
+ rec.name=(u&&u.name)||"Trainer";rec.at=new Date().toISOString();
+ $("bwBtn").disabled=true;$("bwBtn").textContent="Posting…";
+ if(SHEET_URL){try{await fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:new URLSearchParams(rec)});}catch(x){err.textContent="Could not send. Check your connection and try again.";$("bwBtn").disabled=false;$("bwBtn").textContent="Post to the wall";return;}}
+ else{const l=local();l.push(rec);try{localStorage.setItem(LS,JSON.stringify(l))}catch(x){}}
+ $("bwF").reset();$("bwBtn").disabled=false;$("bwBtn").textContent="Posted ✓ Post another";setTimeout(load,SHEET_URL?2000:0);});
+$("bwRef").onclick=load;addEventListener("hashchange",()=>{if(location.hash==="#brainstorm")load();});
+load();setInterval(()=>{if(location.hash==="#brainstorm")load();},15000);})();
 </script>
 </body></html>
