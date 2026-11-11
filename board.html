@@ -426,6 +426,24 @@ body.present .pnav{display:flex;position:fixed;right:calc(16px + env(safe-area-i
 .pimg{display:block;margin-top:12px;border-radius:10px;overflow:hidden;box-shadow:0 0 0 1px var(--bd)}.pimg img{display:block;width:100%;height:auto}
 
 /* Opening slides */
+/* pre-session lock */
+.lockw{text-align:center;align-items:center}
+.lkl{max-width:620px;margin:0 auto 26px;color:var(--tm)}
+.lkclock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;width:100%;max-width:620px;margin:0 auto 30px}
+.lkclock div{background:linear-gradient(160deg,#1677FF,#0A2350);color:#fff;border-radius:18px;padding:18px 6px;box-shadow:var(--sh2);display:grid;gap:2px}
+.lkclock b{font-size:clamp(2rem,7vw,3.5rem);font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.lkclock span{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+.lkopen{display:grid;gap:12px;width:100%;max-width:900px;margin:0 auto}@media(min-width:760px){.lkopen{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.lkopen a{background:var(--sur);border-radius:16px;box-shadow:0 0 0 1px var(--bd),var(--sh1);border-top:5px solid var(--c);padding:18px;display:grid;gap:6px;justify-items:start;text-align:left;text-decoration:none;color:var(--tx);transition:transform .2s var(--ease)}
+.lkopen a:hover{transform:translateY(-3px)}
+.lkopen em{font-style:normal;width:32px;height:32px;border-radius:50%;background:var(--ct);color:var(--cx);display:grid;place-items:center;font-weight:700}
+.lkopen span{color:var(--pri);font-weight:600;font-size:.875rem}
+.lklist{margin-top:22px;font-size:.875rem;color:var(--ts)}
+.lkpill{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:40;background:var(--ink);color:#fff;border-radius:999px;padding:10px 18px;font-size:.875rem;box-shadow:var(--sh3);white-space:nowrap}
+.lkpill b{color:#F2C811;font-variant-numeric:tabular-nums}
+body.locked .links a:not([data-p="trainer"]){display:none}
+body.locked .mn a:not([data-p="trainer"])::after{content:" 🔒";font-size:.75em}
+body.present .lkpill{display:none}
 .slide{min-height:calc(100vh - 150px);display:flex;flex-direction:column;justify-content:center;padding-top:24px;padding-bottom:40px}
 .snav{display:flex;justify-content:space-between;gap:12px;margin-top:32px;flex-wrap:wrap}
 .snav a{font-weight:600;font-size:.9375rem;text-decoration:none;color:var(--pri)}
@@ -627,13 +645,13 @@ body.present .reg{display:none}
     <div class="eyebrow">Hands-on training session</div>
     <h1 class="pt">Dashboards <span>Without Code</span></h1>
     <p class="ptsub"><b>Using Microsoft Power BI:</b> From Data to Decisions.</p>
-    <p class="lead"><span class="dt">Saturday 28 Nov 2026</span>, 9:00 AM to 1:00 PM, physical training. Led by Yusri Abdullah. Everything for the session lives on this board.</p>
+    <p class="lead"><span class="dt">Thursday 12 Nov 2026</span>, 9:00 AM to 1:00 PM, physical training. Led by Yusri Abdullah. Everything for the session lives on this board.</p>
     <div class="cta"><a class="btn" href="#columns">Open the board</a><a class="btn gh" href="#ground-rules">Ground rules</a><a class="btn gh" href="#lego">Lego game</a></div>
    </div>
    <div class="stack" id="stack" role="img" aria-label="Session status cards: current block, next block and overall progress">
     <div class="pc a"><small>Session progress</small><strong class="pct" id="cP">0%</strong><div class="pbar dkb"><i id="cBar"></i></div><div class="foot" id="cF">0 of 240 minutes</div></div>
     <div class="pc b rt"><small>Up next</small><strong id="bT">Welcome &amp; ice breaker</strong><p id="bS">9:00 AM · 30 min</p><div class="foot">Followed automatically on the day</div></div>
-    <div class="pc c"><small id="aL">Starts in</small><strong id="aT">Sat 28 Nov, 9:00 AM</strong><p id="aS">Prep kit is in the first column.</p><div class="segs" id="segs" aria-hidden="true"></div><div class="foot" id="aF">9:00 AM – 1:00 PM MYT · 5 blocks</div></div>
+    <div class="pc c"><small id="aL">Starts in</small><strong id="aT">Thu 12 Nov, 9:00 AM</strong><p id="aS">Prep kit is in the first column.</p><div class="segs" id="segs" aria-hidden="true"></div><div class="foot" id="aF">9:00 AM – 1:00 PM MYT · 5 blocks</div></div>
    </div>
   </div>
  </div>
@@ -671,6 +689,25 @@ body.present .reg{display:none}
   <div class="panel">Timing follows the Session Plan exactly: 30 + 35 + 40 + 65 + 70 = 240 minutes, with no break.</div>
  </div>
 </section>
+<section class="pg" id="pg-lock">
+ <div class="w slide lockw">
+  <div class="eyebrow">Opens Thu 12 Nov · 8:55 AM MYT</div>
+  <h1 class="sh1" id="lkHi">You are registered. See you soon.</h1>
+  <p class="lead lkl">The session board unlocks 5 minutes before we start at 9:00 AM Malaysia time. Until then, get to know the trainer and the plan.</p>
+  <div class="lkclock" role="timer" aria-live="off" aria-label="Time until the board opens">
+   <div><b id="lkD">0</b><span>days</span></div><div><b id="lkH">00</b><span>hours</span></div><div><b id="lkM">00</b><span>minutes</span></div><div><b id="lkS">00</b><span>seconds</span></div>
+  </div>
+  <div class="lkopen">
+   <a href="#trainer" style="--c:var(--m1);--ct:var(--m1t);--cx:var(--m1x)"><em>1</em><b>Meet your trainer</b><span>Open now →</span></a>
+   <a href="#roadmap" style="--c:var(--m2);--ct:var(--m2t);--cx:var(--m2x)"><em>2</em><b>4-hour learning roadmap</b><span>Open now →</span></a>
+   <a href="#objectives" style="--c:var(--m4);--ct:var(--m4t);--cx:var(--m4x)"><em>3</em><b>By the end, you will be able to</b><span>Open now →</span></a>
+  </div>
+  <p class="lklist"><span aria-hidden="true">🔒</span> Locked until 8:55 AM: session board, ground rules, ice breaker, Lego game, brainstorm and feedback.</p>
+ </div>
+</section>
+
+<div class="lkpill" id="lkPill" hidden><span aria-hidden="true">🔒</span> Board opens in <b id="lkPT">--</b></div>
+
 <section class="pg" id="pg-trainer">
  <div class="w slide">
   <div class="prof">
@@ -969,7 +1006,7 @@ body.present .reg{display:none}
 </main>
 
 <footer><div class="w">
- <div><a class="logo" href="#board"><svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true"><rect x="2" y="2" width="36" height="24" rx="6" fill="#14336E"/><rect x="9" y="14" width="5" height="7" rx="1.2" fill="#1677FF"/><rect x="17.5" y="10" width="5" height="11" rx="1.2" fill="#5A9DFF"/><rect x="26" y="6" width="5" height="15" rx="1.2" fill="#F2C811"/></svg><span>Dashboards Without Code</span></a><p class="dtl">28 Nov 2026 · 9:00 AM to 1:00 PM MYT</p><p>Trainer: Muhammad Yusri Abdullah</p></div>
+ <div><a class="logo" href="#board"><svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true"><rect x="2" y="2" width="36" height="24" rx="6" fill="#14336E"/><rect x="9" y="14" width="5" height="7" rx="1.2" fill="#1677FF"/><rect x="17.5" y="10" width="5" height="11" rx="1.2" fill="#5A9DFF"/><rect x="26" y="6" width="5" height="15" rx="1.2" fill="#F2C811"/></svg><span>Dashboards Without Code</span></a><p class="dtl">12 Nov 2026 · 9:00 AM to 1:00 PM MYT</p><p>Trainer: Muhammad Yusri Abdullah</p></div>
  <div><h4>Board</h4><a href="#columns">Session columns</a><a href="#ground-rules">Ground rules</a><a href="#ice-breaker">Ice breaker</a><a href="#lego">Lego game</a><a href="#brainstorm">Brainstorm</a><a href="#feedback">Feedback</a><a href="#run-sheet">Trainer run sheet</a><a href="https://app.powerbi.com" target="_blank" rel="noopener">Power BI Service</a></div>
  <div><h4>Keep learning</h4><a href="https://learn.microsoft.com/en-us/training/powerplatform/power-bi" target="_blank" rel="noopener">Microsoft Learn: Power BI</a><a href="https://learn.microsoft.com/en-us/credentials/certifications/data-analyst-associate/" target="_blank" rel="noopener">PL-300 certification</a><a href="https://www.linkedin.com/in/yushabdullah" target="_blank" rel="noopener">LinkedIn</a></div>
  <p style="grid-column:1/-1;margin-top:8px">© 2026 Muhammad Yusri Abdullah · Aventra Group · Skills today, a brighter tomorrow.</p>
@@ -1190,13 +1227,22 @@ $("jump").onclick=()=>{
 };
 
 // Pages
-const PAGES={"trainer":"pg-trainer","roadmap":"pg-roadmap","objectives":"pg-objectives","reality":"pg-reality","run-sheet":"pg-run","ice-breaker":"pg-ice","ground-rules":"pg-rules","lego":"pg-lego","brainstorm":"pg-brain","feedback":"pg-feedback"};
+// Pre-session lock: participants see only the intro slides until 8:55 AM MYT, 12 Nov 2026.
+const OPEN=Date.UTC(2026,10,12,0,55,0);
+const FREE=["trainer","roadmap","objectives"];
+function isTrainer(){ try{ if(new URLSearchParams(location.search).has("trainer")) return true; const u=JSON.parse(localStorage.getItem("dwc-user")||"null"); return !!(u&&u.trainer); }catch(e){ return false; } }
+const isLocked=()=>!isTrainer() && Date.now()<OPEN;
+const PAGES={"lock":"pg-lock","trainer":"pg-trainer","roadmap":"pg-roadmap","objectives":"pg-objectives","reality":"pg-reality","run-sheet":"pg-run","ice-breaker":"pg-ice","ground-rules":"pg-rules","lego":"pg-lego","brainstorm":"pg-brain","feedback":"pg-feedback"};
 const ORDER=["board","trainer","roadmap","objectives","ground-rules","ice-breaker","lego","reality","brainstorm","feedback"];
 const NAVKEY={roadmap:"trainer",objectives:"trainer",reality:"lego"};
 let current="board";
 function route(){
   const h=location.hash.slice(1);
-  const key=PAGES[h]?h:"board";
+  let key=PAGES[h]?h:"board";
+  const lk=isLocked(); document.body.classList.toggle("locked",lk);
+  if(lk && !FREE.includes(key)) key="lock";
+  if(!lk && key==="lock") key="board";
+  const lp=document.getElementById("lkPill"); if(lp) lp.hidden=!(lk && key!=="lock");
   const changed=key!==current; current=key;
   document.querySelectorAll(".pg").forEach(p=>p.classList.toggle("on", p.id===(PAGES[key]||"pg-board")));
   document.querySelectorAll(".links a,.mn a").forEach(a=>a.classList.toggle("on", a.dataset.p===(NAVKEY[key]||key) && !(key==="board" && h==="columns" && false)));
@@ -1428,7 +1474,7 @@ $("miroSave").onclick=()=>{
 $("fbQr").src=FEEDBACK_QR;
 
 // Live status.
-const START=Date.UTC(2026,10,28,1,0,0); // 28 Nov 2026, 9:00 AM MYT
+const START=Date.UTC(2026,10,12,1,0,0); // 12 Nov 2026, 9:00 AM MYT
 const SESS=COLS.filter(c=>c.start!==null);
 $("segs").innerHTML=SESS.map(c=>`<i style="flex:${c.end-c.start}"></i>`).join("");
 function tick(){
@@ -1442,7 +1488,7 @@ function tick(){
   if(m<0){
     const mins=-m, d=Math.floor(mins/1440), h=Math.floor(mins%1440/60), mi=Math.floor(mins%60);
     $("aL").textContent="Starts in"; $("aT").textContent=d?`${d} day${d>1?"s":""} ${h} h`:`${h} h ${mi} min`;
-    $("aS").textContent="Saturday 28 Nov, 9:00 AM MYT. Prep kit is in the first column.";
+    $("aS").textContent="Thursday 12 Nov, 9:00 AM MYT. Prep kit is in the first column.";
     $("bT").textContent=SESS[0].title; $("bS").textContent=`${fmt(SESS[0].start)} · ${SESS[0].end-SESS[0].start} min`;
     segs.forEach(s=>s.className=""); return;
   }
@@ -1525,5 +1571,16 @@ const col=L?getComputedStyle(n).borderRightColor:getComputedStyle(n).borderLeftC
 o+=`<path d="M${sx},${sy} C${mx},${sy} ${mx},${y} ${x},${y}" stroke="${col}"/><circle cx="${x}" cy="${y}" r="6" fill="${col}"/><circle cx="${sx}" cy="${sy}" r="5" fill="${col}"/>`});
 sv.innerHTML=o}
 addEventListener("resize",draw);addEventListener("hashchange",()=>setTimeout(draw,60));new ResizeObserver(draw).observe(m);setTimeout(draw,700);})();
+
+/* pre-session countdown */
+(function(){let was=isLocked();const p2=n=>String(n).padStart(2,"0");
+function lt(){const lk=isLocked();
+ if(lk){const t=Math.max(0,Math.floor((OPEN-Date.now())/1000)),d=Math.floor(t/86400),h=Math.floor(t%86400/3600),m=Math.floor(t%3600/60),s=t%60;
+  $("lkD").textContent=d;$("lkH").textContent=p2(h);$("lkM").textContent=p2(m);$("lkS").textContent=p2(s);
+  $("lkPT").textContent=(d?d+"d ":"")+p2(h)+":"+p2(m)+":"+p2(s);
+  let u=null;try{u=JSON.parse(localStorage.getItem("dwc-user")||"null")}catch(e){}
+  $("lkHi").textContent=u&&u.name?"Hi "+first(u.name)+", you are registered.":"You are registered. See you soon.";}
+ if(was!==lk){was=lk;route();}}
+lt();setInterval(lt,1000);})();
 </script>
 </body></html>
