@@ -1794,6 +1794,12 @@ let me=null;
 try{ me=JSON.parse(localStorage.getItem("dwc-user")||"null"); }catch(e){ me=null; }
 try{ const q=new URLSearchParams(location.search); if(q.has("trainer")){ me={trainer:true}; } else if(me&&me.trainer){ me=null; localStorage.removeItem("dwc-user"); } if(q.has("register")){ me=null; localStorage.removeItem("dwc-user"); } }catch(e){}
 const first=n=>String(n||"").trim().split(/\s+/)[0];
+// Re-send anything saved on this device before the Google Sheet was connected.
+(async function flush(){ if(!SHEET_URL) return; const post=r=>fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:new URLSearchParams(r)});
+ try{ if(me&&me.name&&me.email&&!me.sent){ await post({name:me.name,email:me.email,pbi:me.pbi||""}); me.sent=true; localStorage.setItem("dwc-user",JSON.stringify(me)); } }catch(e){}
+ for(const [k,act] of [["dwc-bigwhy","bigwhy"],["dwc-gallery","submit"]]){ let l=[]; try{ l=JSON.parse(localStorage.getItem(k)||"[]"); }catch(e){} if(!l.length) continue;
+  const left=[]; for(const r of l){ try{ const o=Object.assign({},r,{action:act}); if(!o.id) o.id=Date.now().toString(36)+Math.random().toString(36).slice(2,8); await post(o); try{ const m=JSON.parse(localStorage.getItem("dwc-mine")||"[]"); m.push(o.id); localStorage.setItem("dwc-mine",JSON.stringify(m)); }catch(x){} }catch(e){ left.push(r); } }
+  try{ localStorage.setItem(k+"-sent",JSON.stringify(l)); if(left.length) localStorage.setItem(k,JSON.stringify(left)); else localStorage.removeItem(k); }catch(e){} } })();
 function showMe(){
   const named=me && me.name;
   $("hi").classList.toggle("on",!!named); $("hiName").textContent=named?first(me.name):"";
@@ -1813,6 +1819,7 @@ $("regF").addEventListener("submit",async e=>{
   const rec={name,email,pbi:pick.value,at:new Date().toISOString()};
   if(REG_URL){ try{ await fetch(REG_URL,{method:"POST",mode:"no-cors",body:new URLSearchParams(rec)}); }catch(x){} }
   if(!REG_URL){ try{ const l=JSON.parse(localStorage.getItem("dwc-regs")||"[]"); l.push({name,pbi:rec.pbi,at:rec.at}); localStorage.setItem("dwc-regs",JSON.stringify(l)); }catch(x){} }
+  if(REG_URL) rec.sent=true;
   me=rec; try{ localStorage.setItem("dwc-user",JSON.stringify(me)); }catch(x){}
   $("rHi").textContent=first(name); $("regForm").hidden=true; $("regDone").hidden=false; $("rGo").focus();
 });
