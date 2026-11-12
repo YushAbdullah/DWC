@@ -1788,7 +1788,7 @@ renderBoard(); renderFlow(); route(); tick(); setInterval(tick,30000);
 
 // Registration: no account needed. Saved on this device; sent to the trainer's Google Sheet when REG_URL is set.
 // One Google Apps Script web app handles registrations and the gallery. Paste its /exec URL here.
-const SHEET_URL="";
+const SHEET_URL="https://script.google.com/macros/s/AKfycbx4NwiYpsVYKt8_rjK7tilODAUE7Wr1tYxrMX8xhsXcpBU4te9XbfhpQVu6DFlIih6aAw/exec";
 const REG_URL=SHEET_URL;
 let me=null;
 try{ me=JSON.parse(localStorage.getItem("dwc-user")||"null"); }catch(e){ me=null; }
