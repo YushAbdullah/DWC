@@ -1,0 +1,84 @@
+const FOLDER = "DWC Gallery";
+
+function book() {
+  const a = SpreadsheetApp.getActiveSpreadsheet();
+  if (a) return a;
+  const pr = PropertiesService.getScriptProperties();
+  const id = pr.getProperty("SHEET_ID");
+  if (id) { try { return SpreadsheetApp.openById(id); } catch (x) {} }
+  const n = SpreadsheetApp.create("DWC Session");
+  pr.setProperty("SHEET_ID", n.getId());
+  return n;
+}
+
+function tab(name, head) {
+  const ss = book();
+  let s = ss.getSheetByName(name);
+  if (!s) { s = ss.insertSheet(name); s.appendRow(head); }
+  return s;
+}
+
+function doPost(e) {
+  const p = e.parameter;
+  if (p.action === "delete") {
+    const g = p.tab === "gallery";
+    const s = g ? tab("Gallery", ["Submitted at", "Name", "Title", "Power BI link", "Image ID", "ID"])
+                : tab("Big Why", ["Posted at", "Name", "Function", "Decision", "Number", "KPI", "Data", "ID"]);
+    const col = g ? 5 : 7;
+    const v = s.getDataRange().getValues();
+    for (let i = v.length - 1; i >= 1; i--) {
+      const at = v[i][0] instanceof Date ? v[i][0].toISOString() : String(v[i][0]);
+      if ((p.id && String(v[i][col]) === p.id) || (!p.id && p.at && at === p.at)) {
+        if (g && v[i][4]) { try { DriveApp.getFileById(v[i][4]).setTrashed(true); } catch (x) {} }
+        s.deleteRow(i + 1);
+        break;
+      }
+    }
+    return ContentService.createTextOutput("ok");
+  }
+  if (p.action === "submit") {
+    const s = tab("Gallery", ["Submitted at", "Name", "Title", "Power BI link", "Image ID", "ID"]);
+    let id = "";
+    const m = String(p.img || "").match(/^data:(image\/[a-z]+);base64,(.+)$/);
+    if (m) {
+      const blob = Utilities.newBlob(Utilities.base64Decode(m[2]), m[1], (p.name || "dashboard") + ".jpg");
+      const it = DriveApp.getFoldersByName(FOLDER);
+      const folder = it.hasNext() ? it.next() : DriveApp.createFolder(FOLDER);
+      const file = folder.createFile(blob);
+      file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+      id = file.getId();
+    }
+    s.appendRow([new Date(), p.name, p.title, p.link, id, p.id || ""]);
+    return ContentService.createTextOutput("ok");
+  }
+  if (p.action === "bigwhy") {
+    const b = tab("Big Why", ["Posted at", "Name", "Function", "Decision", "Number", "KPI", "Data", "ID"]);
+    b.appendRow([new Date(), p.name, p.fn, p.decision, p.number, p.kpi, p.data, p.id || ""]);
+    return ContentService.createTextOutput("ok");
+  }
+  const r = tab("Registrations", ["Registered at", "Name", "Email", "Power BI experience"]);
+  r.appendRow([new Date(), p.name, p.email, p.pbi]);
+  return ContentService.createTextOutput("ok");
+}
+
+function doGet(e) {
+  if (e.parameter.action === "registrations") {
+    const r = tab("Registrations", ["Registered at", "Name", "Email", "Power BI experience"]);
+    const rows = r.getDataRange().getValues().slice(1)
+      .map(x => ({ at: x[0], name: x[1], pbi: x[3] }));
+    return ContentService.createTextOutput(JSON.stringify(rows))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+  if (e.parameter.action === "bigwhy") {
+    const b = tab("Big Why", ["Posted at", "Name", "Function", "Decision", "Number", "KPI", "Data", "ID"]);
+    const rows = b.getDataRange().getValues().slice(1)
+      .map(r => ({ at: r[0], name: r[1], fn: r[2], decision: r[3], number: r[4], kpi: r[5], data: r[6], id: r[7] }));
+    return ContentService.createTextOutput(JSON.stringify(rows))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+  const s = tab("Gallery", ["Submitted at", "Name", "Title", "Power BI link", "Image ID", "ID"]);
+  const rows = s.getDataRange().getValues().slice(1)
+    .map(r => ({ at: r[0], name: r[1], title: r[2], link: r[3], img: r[4], id: r[5] }));
+  return ContentService.createTextOutput(JSON.stringify(rows))
+    .setMimeType(ContentService.MimeType.JSON);
+}
